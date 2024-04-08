@@ -101,7 +101,7 @@ export const LoginForm = () => {
                         type="submit"
                         className="w-full"
                     >
-                        Login
+                        Iniciar Sesión
                     </Button>
                 </form>
             </Form>

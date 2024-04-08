@@ -17,7 +17,7 @@ import { CardWrapper } from "@/components/auth/card-wrapper"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { FormError } from "@/components/form-error"
-import { FormSuccess } from "../form-success"
+import { FormSuccess } from "@/components/form-success"
 import { login } from "@/actions/login"
 
 export const RegisterForm = () => {
@@ -47,8 +47,8 @@ export const RegisterForm = () => {
 
     return (
         <CardWrapper
-            headerLabel="Create an Account"
-            backButtonLabel="Already have an account?"
+            headerLabel="¡Únete a nosotros para comenzar tu nueva aventura de lectura!"
+            backButtonLabel="¿Ya tienes una cuenta?"
             backButtonHref="/auth/login"
             showSocial
         >
@@ -58,7 +58,7 @@ export const RegisterForm = () => {
                     className="space-y-6"
                 >
                     <div className="space-y-4">
-                    <FormField
+                        <FormField
                             control={form.control}
                             name="name"
                             render={({ field }) => (
