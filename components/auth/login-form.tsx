@@ -47,7 +47,7 @@ export const LoginForm = () => {
 
     return (
         <CardWrapper
-            headerLabel="Bienvenido de nuevo. ¿Listo para sumergirte en tu próxima lectura?"
+            headerLabel="Bienvenido de nuevo. ¿Listo para sumergirte en tu próxima lecturas?"
             backButtonLabel="¿Aún no tienes una cuenta?"
             backButtonHref="/auth/register"
             showSocial
@@ -98,6 +98,7 @@ export const LoginForm = () => {
                     <FormSuccess message={success} />
                     <FormError message={error} />
                     <Button
+                        disabled={isPending}
                         type="submit"
                         className="w-full"
                     >

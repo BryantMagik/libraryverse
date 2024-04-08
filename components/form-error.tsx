@@ -1,6 +1,4 @@
-"use client"
-
-import { ExclamationTriangleIcon } from "@radix-ui/react-icons"
+import { ExclamationTriangleIcon  } from "@radix-ui/react-icons"
 
 interface FormErrorProps {
     message?: string

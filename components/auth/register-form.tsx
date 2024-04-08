@@ -1,53 +1,56 @@
-"use client"
+"use client";
 
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
-import { useState, useTransition } from "react"
-import { RegisterSchema } from "@/schemas"
+import * as z from "zod";
+import { useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { RegisterSchema } from "@/schemas";
+import { Input } from "@/components/ui/input";
 import {
     Form,
     FormControl,
     FormField,
     FormItem,
     FormLabel,
-    FormMessage
-} from "@/components/ui/form"
+    FormMessage,
+} from "@/components/ui/form";
 import { CardWrapper } from "@/components/auth/card-wrapper"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { FormError } from "@/components/form-error"
-import { FormSuccess } from "@/components/form-success"
-import { login } from "@/actions/login"
+import { Button } from "@/components/ui/button";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
+import { register } from "@/actions/register";
 
 export const RegisterForm = () => {
-
-    const [error, setError] = useState<string | undefined>("")
-    const [success, setSuccess] = useState<string | undefined>("")
-    const [isPending, startTransition] = useTransition()
+    const [error, setError] = useState<string | undefined>("");
+    const [success, setSuccess] = useState<string | undefined>("");
+    const [isPending, startTransition] = useTransition();
 
     const form = useForm<z.infer<typeof RegisterSchema>>({
         resolver: zodResolver(RegisterSchema),
         defaultValues: {
             email: "",
             password: "",
-            name: ""
-        }
-    })
+            name: "",
+        },
+    });
 
     const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+        setError("");
+        setSuccess("");
+
         startTransition(() => {
-            login(values)
+            register(values)
                 .then((data) => {
-                    setError(data.error)
-                    setSuccess(data.success)
-                })
-        })
-    }
+                    setError(data.error);
+                    setSuccess(data.success);
+                });
+        });
+    };
 
     return (
         <CardWrapper
-            headerLabel="¡Únete a nosotros para comenzar tu nueva aventura de lectura!"
+            headerLabel="Crear una cuenta"
             backButtonLabel="¿Ya tienes una cuenta?"
             backButtonHref="/auth/login"
             showSocial
@@ -68,7 +71,7 @@ export const RegisterForm = () => {
                                         <Input
                                             {...field}
                                             disabled={isPending}
-                                            placeholder="Bryan"
+                                            placeholder="John Doe"
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -103,7 +106,7 @@ export const RegisterForm = () => {
                                         <Input
                                             {...field}
                                             disabled={isPending}
-                                            placeholder="*******"
+                                            placeholder="******"
                                             type="password"
                                         />
                                     </FormControl>
@@ -112,9 +115,10 @@ export const RegisterForm = () => {
                             )}
                         />
                     </div>
-                    <FormSuccess message={success} />
                     <FormError message={error} />
+                    <FormSuccess message={success} />
                     <Button
+                        disabled={isPending}
                         type="submit"
                         className="w-full"
                     >
@@ -123,5 +127,5 @@ export const RegisterForm = () => {
                 </form>
             </Form>
         </CardWrapper>
-    )
-}
+    );
+};

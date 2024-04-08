@@ -3,7 +3,7 @@ import Image from "next/image";
 import { cn } from '@/lib/utils'
 import { Button } from "@/components/ui/button"
 import { Poppins } from "next/font/google";
-import { Header } from "@/components/homepage/header"
+// import { Header } from "@/components/homepage/header"
 
 const font = Poppins({
   subsets: ["latin"],
@@ -13,7 +13,7 @@ const font = Poppins({
 export default function Home() {
   return (
     <div>
-      <Header label="" />
+      {/* <Header label="" /> */}
     </div>
     // <main className="flex h-screen flex-col
     // items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400 to-blue-800">
@@ -36,5 +36,5 @@ export default function Home() {
     //     </div>
     //   </div>
     // </main>
-  );
+  )
 }
