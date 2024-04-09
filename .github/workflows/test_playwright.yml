@@ -14,3 +14,4 @@ jobs:
         run: npx playwright test
         env:
           BASE_URL: ${{ github.event.deployment_status.environment_url }}
+          OTHER_ENV_VARIABLE: value
