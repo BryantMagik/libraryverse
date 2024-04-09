@@ -1,4 +1,3 @@
-// Cargar las variables de entorno
 require('dotenv').config();
 
 const { test, expect } = require('@playwright/test');
@@ -12,5 +11,5 @@ test('Prueba de Playwright con variables de entorno', async ({ page }) => {
 
     // Verificar alguna condición en la página
     const title = await page.title();
-    expect(title).toBe('Título esperado de la página');
+    expect(title).toBe('Login – Vercel'); // Ajusta el título esperado aquí
 });
