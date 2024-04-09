@@ -46,8 +46,9 @@ export const LoginForm = () => {
     }
 
     return (
+
         <CardWrapper
-            headerLabel="Bienvenido de nuevo. ¿Listo para sumergirte en tu próxima lecturas?"
+            headerLabel="Inicia sesión"
             backButtonLabel="¿Aún no tienes una cuenta?"
             backButtonHref="/auth/register"
             showSocial
