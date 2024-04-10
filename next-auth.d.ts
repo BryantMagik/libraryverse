@@ -12,7 +12,6 @@ declare module "next-auth" {
 }
 
 import { JWT } from "@/core/jwt"
-import { UserRole } from "@prisma/client";
 
 declare module "next-auth/jwt" {
     interface JWT {

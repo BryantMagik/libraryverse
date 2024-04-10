@@ -19,7 +19,7 @@ export default auth((req) => {
     const isAuthRoute = authRoutes.includes(nextUrl.pathname)
 
     if (isApiAuthRoute) {
-        return
+        return 
     }
     if (isAuthRoute) {
         if (isLoggedIn) {
