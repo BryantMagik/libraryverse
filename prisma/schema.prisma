@@ -1,11 +1,16 @@
 // prisma/schema.prisma
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
+}
+
+enum UserRole{
+  ADMIN
+  USER
 }
 
 model User {
@@ -14,6 +19,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   password      String?
+  role          UserRole  @default(USER)
   accounts      Account[]
 }
 
@@ -30,8 +36,7 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
-

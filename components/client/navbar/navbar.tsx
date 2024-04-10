@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "evergreen-ui";
+import { Button } from "@/components/ui/button";
 import Link from "next/link"
 
 const links = [
