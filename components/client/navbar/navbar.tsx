@@ -12,11 +12,11 @@ export default function Navbar() {
     return (
         <>
             {links.map(link => (
-                <button className="" key={link.href}>
+                <Button className="" key={link.href}>
                     <Link href={link.href} >
                         {link.label}
                     </Link>
-                </button>
+                </Button>
             ))}
         </>
     )
