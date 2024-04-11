@@ -1,10 +1,9 @@
 import NextAuth from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import { getUserById } from "@/data/user"
 import { db } from "@/lib/db"
 import authConfig from "@/auth.config"
-import { UserRole } from "@prisma/client"
-
+import { UserRole } from '@prisma/client'
+import { getUserById } from "@/data/user"
 
 export const {
     handlers: { GET, POST },
@@ -25,7 +24,18 @@ export const {
         }
     },
     callbacks: {
+        async signIn({ user, account }) {
 
+            if (account?.provider !== "credentials") return true
+
+            const existingUser = await getUserById(user.id as string)
+
+            // Previene el inicio de sesión sin el email verificado
+            if (!existingUser?.emailVerified) return false
+
+            // 2FA CHECK
+            return true
+        },
         async session({ token, session }) {
 
             if (token.sub && session.user) {

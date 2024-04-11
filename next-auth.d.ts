@@ -10,11 +10,3 @@ declare module "next-auth" {
         user: ExtendedUser
     }
 }
-
-import { JWT } from "@/core/jwt"
-
-declare module "next-auth/jwt" {
-    interface JWT {
-        role?: "ADMIN" | "USER"
-    }
-}
