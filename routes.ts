@@ -3,17 +3,20 @@
  * @type {string[]}
  */
 export const publicRoutes = [
-    "/"
+    "/",
+    "/auth/new-verification"
 ]
 
 /**
+ * Rutas usadas para la authenticación estas rutas redirigen a los usuarios 
+ * logeados hacia /settings
  * @type {string[]}
  */
-
 export const authRoutes = [
     "/auth/login",
     "/auth/register",
     "/auth/error",
+    "/auth/reset",
 ]
 /**
  * @type {string[]}

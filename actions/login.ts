@@ -11,8 +11,9 @@ import { AuthError } from "next-auth"
 
 import { getUserByEmail } from "@/data/user"
 import { sendVerificationEmail } from "@/lib/mail"
-export const login = async (values: z.infer<typeof LoginSchema>) => {
 
+export const login = async (values: z.infer<typeof LoginSchema>) => {
+    // Validar los campos recibidos
     const validatedFields = LoginSchema.safeParse(values)
 
     if (!validatedFields.success) {
