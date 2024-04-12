@@ -1,5 +1,10 @@
 import * as z from "zod";
-
+// Esquema de Contraseña
+export const NewPasswordSchema = z.object({
+    email: z.string().email({
+        message: "Por favor, introduce un correo electrónico válido.",
+    })
+})
 // Esquema de reseteo
 export const ResetSchema = z.object({
     email: z.string().email({

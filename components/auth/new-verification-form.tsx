@@ -17,10 +17,14 @@ export const NewVerificationForm = () => {
     const token = searchParams.get("token")
 
     const onSubmit = useCallback(() => {
+
+        if (success || error) return
+
         if (!token) {
             setError("No hay token")
             return
         }
+
         newVerification(token)
             .then((data) => {
                 setSuccess(data.success)
@@ -29,7 +33,7 @@ export const NewVerificationForm = () => {
             .catch(() => {
                 setError("Algo ha ido mal")
             })
-    }, [token])
+    }, [token, success, error])
 
     useEffect(() => {
         onSubmit()
@@ -46,7 +50,9 @@ export const NewVerificationForm = () => {
                     <BeatLoader />
                 )}
                 <FormSuccess message={success} />
-                <FormError message={error} />
+                {!success && (
+                    <FormError message={error} />
+                )}
             </div>
         </CardWrapper>
     )

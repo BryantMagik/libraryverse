@@ -18,6 +18,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     }
 
     const { email, password, name } = validatedFields.data;
+    
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const existingUser = await getUserByEmail(email)
@@ -35,10 +36,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     });
 
     const verificationToken = await generateVerificationToken(email);
-    await sendVerificationEmail(
-        verificationToken.email,
-        verificationToken.token,
-    );
+    await sendVerificationEmail(verificationToken.email, verificationToken.token);
 
     return {
         success: "¡Hecho! Correo de confirmación enviado. Revise su bandeja de entrada para activar su cuenta."

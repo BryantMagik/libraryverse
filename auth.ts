@@ -28,10 +28,11 @@ export const {
 
             if (account?.provider !== "credentials") return true
 
-            const existingUser = await getUserById(user.id as string)
+            const existingUser = await getUserById(user.id)
 
-            // Previene el inicio de sesión sin el email verificado
-            if (!existingUser?.emailVerified) return false
+            if (!existingUser || !existingUser.emailVerified) {
+                return false;
+              }
 
             // 2FA CHECK
             return true
