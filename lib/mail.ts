@@ -2,6 +2,19 @@ import { Resend } from "resend"
 
 const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API)
 
+export const sendTwoFactortTokenEmail = async (
+    email: string,
+    token: string,
+) => {
+    await resend.emails.send({
+        from: "onboarding@resend.dev",
+        to: email,
+        subject: "2FA código",
+        html: `<p>Tu 2FA código: ${token}</p>`,
+    })
+
+}
+
 export const sendPasswordResetEmail = async (
     email: string,
     token: string,
@@ -17,17 +30,15 @@ export const sendPasswordResetEmail = async (
 
     })
 }
-
+// MEJORAR --- TAREA 23
 export const sendVerificationEmail = async (
     email: string,
     token: string,
 ) => {
     // CAMBIAR PARA PRODUCCIÓN
 
-
-
     const confirmLink = `http://localhost:3000/auth/new-verification?token=${token}`
-    
+
     const emailHtml = `
     <!DOCTYPE html>
     <html lang="en">
@@ -91,7 +102,6 @@ export const sendVerificationEmail = async (
         </div>
     </body>
     </html>
-
     `;
 
     await resend.emails.send({
@@ -100,5 +110,4 @@ export const sendVerificationEmail = async (
         subject: "Confirmar tu correo electrónico",
         html: emailHtml,
     })
-
 }

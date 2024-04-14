@@ -101,7 +101,7 @@ export const RegisterForm = () => {
                             name="password"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Password</FormLabel>
+                                    <FormLabel>Contraseña</FormLabel>
                                     <FormControl>
                                         <Input
                                             {...field}

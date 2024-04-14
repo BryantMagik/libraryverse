@@ -1,8 +1,8 @@
 import * as z from "zod";
 // Esquema de Contraseña
 export const NewPasswordSchema = z.object({
-    email: z.string().email({
-        message: "Por favor, introduce un correo electrónico válido.",
+    password: z.string().min(6, {
+        message: "La contraseña debe tener al menos 6 caracteres.",
     })
 })
 // Esquema de reseteo
@@ -19,7 +19,8 @@ export const LoginSchema = z.object({
     }),
     password: z.string().min(1, {
         message: "Por favor, introduce tu contraseña.",
-    })
+    }),
+    code: z.optional(z.string())
 })
 
 // Esquema de registro
