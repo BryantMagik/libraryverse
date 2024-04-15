@@ -1,4 +1,4 @@
-import { Header } from "@/components/client/header"
+
 
 function AuthLayout({ children }: { children: React.ReactNode }) {
     return (

@@ -2,13 +2,16 @@ import { LoginButton } from "@/components/auth/login-button";
 import Image from "next/image";
 import { cn } from '@/lib/utils'
 import { Button } from "@/components/ui/button"
-import { Header } from "@/components/client/header"
 
-
+//CONSTRUIR EL HOMEPAGE
 export default function Home() {
   return (
-    <div>
-      <Header />
-    </div>
+    <main className="flex h-full flex-col items-center justify-center bg-sky-950">
+      <LoginButton>
+        <Button variant="secondary" size="lg">
+          Iniciar Sesión
+        </Button>
+      </LoginButton>
+    </main>
   )
 }

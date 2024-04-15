@@ -20,7 +20,6 @@ import { Button } from "@/components/ui/button"
 import { FormError } from "@/components/form-error"
 import { FormSuccess } from "../form-success"
 import { reset } from "@/actions/reset"
-import Link from "next/link"
 
 export const ResetForm = () => {
 

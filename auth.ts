@@ -5,12 +5,9 @@ import authConfig from "@/auth.config"
 import { UserRole } from '@prisma/client'
 import { getUserById } from "@/data/user"
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation"
+import { getAccountByUserId } from "./data/account"
 
-export const {
-    handlers: { GET, POST },
-    auth,
-    signIn,
-    signOut,
+export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update,
 } = NextAuth({
     pages: {
         signIn: "/auth/login",
@@ -41,6 +38,7 @@ export const {
                 if (!twoFactorConfirmation) {
                     return false
                 }
+                // eliminado de two factor para el siguiente login
                 await db.twoFactorConfirmation.delete({
                     where: { id: twoFactorConfirmation.id }
                 })
@@ -53,22 +51,44 @@ export const {
             if (token.sub && session.user) {
                 session.user.id = token.sub
             }
+
             if (token.role && session.user) {
                 session.user.role = token.role as UserRole
             }
+
+            if (session.user) {
+                session.user.twoFactorAuth = token.isTwoFactorEnabled as boolean
+            }
+
+            if (session.user) {
+                session.user.name = token.name
+                session.user.email = token.email as string
+                session.user.isOAuth = token.isOAuth as boolean
+            }
             return session
+
+
         },
         async jwt({ token }) {
+
             if (!token.sub) return token
 
             const existingUser = await getUserById(token.sub)
 
             if (!existingUser) return token
+
+            const existingAccount = await getAccountByUserId(existingUser.id)
+
+            token.isOAuth = !!existingAccount
+            token.name = existingUser.name
+            token.email = existingUser.email
+            token.role = existingUser.role
+            token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled
+
             return token
         },
     },
     adapter: PrismaAdapter(db),
     session: { strategy: "jwt" },
-
     ...authConfig,
 })

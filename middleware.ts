@@ -10,7 +10,6 @@ import NextAuth from "next-auth"
 const { auth } = NextAuth(authConfig)
 
 export default auth((req) => {
-    req.auth
     const { nextUrl } = req
     const isLoggedIn = !!req.auth
 
@@ -19,7 +18,7 @@ export default auth((req) => {
     const isAuthRoute = authRoutes.includes(nextUrl.pathname)
 
     if (isApiAuthRoute) {
-        return 
+        return
     }
     if (isAuthRoute) {
         if (isLoggedIn) {
@@ -32,8 +31,10 @@ export default auth((req) => {
         if (nextUrl.search) {
             callbackUrl += nextUrl.search
         }
-        return
+        const encodedCallbackUrl = encodeURIComponent(callbackUrl);
+        return Response.redirect(new URL(`/auth/login?callBackUrl=${encodedCallbackUrl}`, nextUrl))
     }
+    return
 })
 
 export const config = {
