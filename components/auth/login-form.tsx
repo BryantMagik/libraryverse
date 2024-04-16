@@ -24,15 +24,12 @@ import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 
 export const LoginForm = () => {
-
-
     const searchParams = useSearchParams()
+    const callbackUrl = searchParams.get("callbackUrl")
     const urlError = searchParams.get("error") ===
         "OAuthAccountNotLinked"
         ? "El correo electrónico ya está en uso con otro proveedor!"
         : ""
-
-
     const [showTwoFactor, setShowTwoFactor] = useState(false)
     const [error, setError] = useState<string | undefined>("")
     const [success, setSuccess] = useState<string | undefined>("")
@@ -51,7 +48,7 @@ export const LoginForm = () => {
         setSuccess("")
 
         startTransition(() => {
-            login(values)
+            login(values, callbackUrl)
                 .then((data) => {
                     if (data?.error) {
                         form.reset()

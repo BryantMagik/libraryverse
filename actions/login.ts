@@ -14,7 +14,7 @@ import { sendVerificationEmail, sendTwoFactortTokenEmail } from "@/lib/mail"
 import bcrypt from "bcryptjs"
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation"
 
-export const login = async (values: z.infer<typeof LoginSchema>) => {
+export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: string | null) => {
     // Validar los campos recibidos
     const validatedFields = LoginSchema.safeParse(values)
 
@@ -101,7 +101,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
         await signIn("credentials", {
             email,
             password,
-            redirectTo: DEFAULT_LOGIN_REDIRECT
+            redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT
         })
         return { success: "Login successful" };
     } catch (error) {
