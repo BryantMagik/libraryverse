@@ -15,7 +15,7 @@ import bcrypt from "bcryptjs"
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation"
 
 export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: string | null) => {
-    // Validar los campos recibidos
+    
     const validatedFields = LoginSchema.safeParse(values)
 
     if (!validatedFields.success) {
@@ -52,7 +52,7 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: s
         return { success: "¡Se ha enviado un correo de confirmación! Por favor, verifique su correo electrónico para activar su cuenta." }
     }
 
-    if (existingUser.isTwoFactorEnabled && existingUser.email) {
+    if (existingUser.isTwoFactorEnabled && existingUser.email || null) {
 
         if (code) {
             const twoFactorToken = await getTwoFactorTokenByEmail(existingUser.email)
