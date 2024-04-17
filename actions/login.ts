@@ -52,7 +52,7 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: s
         return { success: "¡Se ha enviado un correo de confirmación! Por favor, verifique su correo electrónico para activar su cuenta." }
     }
 
-    if (existingUser.isTwoFactorEnabled && existingUser.email || null) {
+    if (existingUser.isTwoFactorEnabled && existingUser.email) {
 
         if (code) {
             const twoFactorToken = await getTwoFactorTokenByEmail(existingUser.email)
