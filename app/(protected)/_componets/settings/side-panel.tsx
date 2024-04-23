@@ -17,7 +17,7 @@ export const SettingsSidePanel = () => {
         <Avatar className="z-0">
           <AvatarImage src={session.session?.image || ""} />
           <AvatarFallback className=" border-black dark:text-black z-0">
-            <FaUser size={24} className=""/>
+            <FaUser size={24} className="" />
           </AvatarFallback>
         </Avatar>
         <p className="text-xs">{session.session?.email || "user@mail.org"}</p>
@@ -34,7 +34,6 @@ export const SettingsSidePanel = () => {
               <setting.icon size={22} />
               Usuario
             </span>
-
             <span>
               <IoIosArrowForward />
             </span>

@@ -4,13 +4,13 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
-const DashboardPage = () => {
+const CategoriasPage = () => {
 
     return (
         <>
-            <h1>DASHBOARD PARA API DE BOOKS</h1>
+            <h1>LibraryVerse</h1>
         </>
     )
 }
 
-export default DashboardPage
+export default CategoriasPage
