@@ -36,18 +36,18 @@ export const UserButton = () => {
                     </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-40" align="end">
-                    <LogoutButton>
-                        <DropdownMenuItem>
-                            <ExitIcon className="h-4 w-4 mr-2" />
-                            Cerrar Sesión
-                        </DropdownMenuItem>
-                    </LogoutButton>
                     <SettingsButton>
                         <DropdownMenuItem>
                             <PersonIcon className="h-4 w-4 mr-2" />
                             Cuenta
                         </DropdownMenuItem>
                     </SettingsButton>
+                    <LogoutButton>
+                        <DropdownMenuItem>
+                            <ExitIcon className="h-4 w-4 mr-2" />
+                            Cerrar Sesión
+                        </DropdownMenuItem>
+                    </LogoutButton>
                 </DropdownMenuContent>
             </DropdownMenu>
         </>
