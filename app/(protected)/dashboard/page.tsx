@@ -12,7 +12,7 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
-import { BooksView } from "../_componets/booksView";
+import BooksView from "../_componets/dashboard/booksView";
 
 
 const DashboardPage = () => {
@@ -20,9 +20,9 @@ const DashboardPage = () => {
 
 
     return (
-        <>
-            <BooksView />
-        </>
+        <div>
+            <BooksView/>
+        </div>
     )
 }
 

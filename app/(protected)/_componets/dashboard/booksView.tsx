@@ -1,9 +1,8 @@
-import * as React from "react"
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
+import * as React from 'react';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
 
-export function BooksView() {
-
+const BooksView: React.FC = () => {
     return (
         <div>
             <div className="flex items-center justify-between">
@@ -40,5 +39,7 @@ export function BooksView() {
                 </ScrollArea>
             </div>
         </div>
-    )
-}
+    );
+};
+
+export default BooksView;
