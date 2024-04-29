@@ -3,7 +3,6 @@
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
-import Autoplay from "embla-carousel-autoplay"
 import * as React from "react"
 
 import {
@@ -13,7 +12,7 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
-import { CarouselPlugin } from "../_componets/dashboard";
+import { BooksView } from "../_componets/booksView";
 
 
 const DashboardPage = () => {
@@ -22,7 +21,7 @@ const DashboardPage = () => {
 
     return (
         <>
-            <CarouselPlugin />
+            <BooksView />
         </>
     )
 }

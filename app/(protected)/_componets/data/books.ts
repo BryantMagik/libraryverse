@@ -1,7 +1,7 @@
 export interface Book {
-    title: string;
-    author: string;
-    img: string;
+    title: string
+    author: string
+    img: string
 }
 
 export const library: Book[] = [

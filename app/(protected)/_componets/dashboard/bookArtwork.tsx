@@ -37,5 +37,4 @@ export const BookArtwork: React.FC<BookArtworkProps> = ({ book, aspectRatio, wid
             </div>
         </div>
     )
-
 }

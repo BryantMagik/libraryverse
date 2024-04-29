@@ -2,12 +2,9 @@
 
 import { poppins } from "@/components/ui/font"
 import { ThemeToggle } from "./darkmode/themeToggle"
-import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
 import { UserButton } from "@/components/auth/user-button"
-import Search from "@/components/ui/search"
-import SideNav from "./sideNav"
+import SearchBooks from "@/components/ui/search"
 
 export default function Navbar() {
     const pathname = usePathname()
@@ -18,7 +15,7 @@ export default function Navbar() {
                 <h1 className={`${poppins.className} text-white `}>LibraryVerse</h1>
             </div>
             <div className="">
-                <Search placeholder={"Hola"} />
+                <SearchBooks />
             </div>
             <div className="">
                 <ThemeToggle />
