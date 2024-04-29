@@ -3,6 +3,7 @@ import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,9 +24,9 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang="en">
-        <head>
+        <Head>
           <link rel="icon" href="./favicon.ico" sizes="any" />
-        </head>
+        </Head>
         <body className={inter.className}>{children}</body>
       </html>
     </SessionProvider>
