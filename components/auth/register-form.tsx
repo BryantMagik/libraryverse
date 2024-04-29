@@ -20,11 +20,13 @@ import { Button } from "@/components/ui/button"
 import { FormError } from "@/components/form-error"
 import { FormSuccess } from "@/components/form-success"
 import { register } from "@/actions/register"
+import { useRouter } from "next/navigation"
 
 export const RegisterForm = () => {
     const [error, setError] = useState<string | undefined>("")
     const [success, setSuccess] = useState<string | undefined>("")
     const [isPending, startTransition] = useTransition()
+    const router = useRouter();
 
     const form = useForm<z.infer<typeof RegisterSchema>>({
         resolver: zodResolver(RegisterSchema),
@@ -33,7 +35,7 @@ export const RegisterForm = () => {
             password: "",
             name: "",
         },
-    });
+    })
 
     const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
         setError("")
@@ -42,9 +44,18 @@ export const RegisterForm = () => {
         startTransition(() => {
             register(values)
                 .then((data) => {
-                    setError(data.error)
-                    setSuccess(data.success)
+                    if (data?.error) {
+                        form.reset()
+                        setError(data.error)
+                    }
+                    if (data?.success) {
+                        form.reset()
+                        setSuccess(data.success)
+                        router.replace("/auth/login")
+                        router.refresh()
+                    }
                 })
+
         })
     }
 
@@ -127,5 +138,5 @@ export const RegisterForm = () => {
                 </form>
             </Form>
         </CardWrapper>
-    );
-};
+    )
+}

@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
+import * as React from 'react'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { Separator } from '@/components/ui/separator'
 
 const BooksView: React.FC = () => {
     return (
@@ -39,7 +39,7 @@ const BooksView: React.FC = () => {
                 </ScrollArea>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default BooksView;
+export default BooksView

@@ -67,7 +67,6 @@ export const LoginForm = () => {
     }
 
     return (
-
         <CardWrapper
             headerLabel="Inicia sesión"
             backButtonLabel="¿Aún no tienes una cuenta?"
