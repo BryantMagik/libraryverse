@@ -1,11 +1,13 @@
 "use client"
 
+import Head from "next/head"
+
 export default function VerificationEmailTemplate(confirmLink: string) {
 
     return (
         <html lang="en">
-            <head>
-            </head>
+            <Head children={undefined}>
+            </Head>
             <body>
                 <div className="container">
                     <h1>Welcome to Next-Auth V5</h1>
