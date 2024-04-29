@@ -8,6 +8,7 @@ export default function Home() {
   return (
     <main className="flex h-full flex-col items-center justify-center bg-sky-950">
       <LoginButton mode="modal" asChild>
+        <h1>TEST V1</h1>
         <Button variant="secondary" size="lg">
           Iniciar Sesión
         </Button>
