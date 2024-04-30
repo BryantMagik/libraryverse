@@ -19,19 +19,21 @@ export default function Navbar() {
     const pathname = usePathname()
 
     return (
-        <nav className="flex flex-col  space-y-4 p-4 mt-20">
-            {links.map(({ href, label, Icon }) => (
-                <Link href={href} key={href} passHref>
-                    <Button
-                        variant={pathname === href ? "default" : "outline"}
-                        className={`border-0 mt-4 flex items-start justify-start w-44 space-x-2 py-2 px-4 rounded font-medium ${pathname === href ? "bg-blue-500 text-white" : "bg-emerald-500 hover:bg-gray-200 text-gray-800"
-                            }`}
+        <>
+            {links.map((link) => {
+                return (
+                    <Link href={link.href} key={link.href} passHref
+                        className={`flex h-[48px] grow items-center border-0 justify-center gap-2 rounded-md p-3 font-medium md:flex-none md:justify-start md:p-2 md:px-3 md:w-44`}
                     >
-                        <Icon className="text-white text-lg" />
-                        <span className="text-white">{label}</span>
-                    </Button>
-                </Link>
-            ))}
-        </nav>
-    );
+                        <Button variant={pathname === link.href ? "default" : "outline"}
+                            className={`flex h-[48px] grow items-center border-0 justify-center gap-2 rounded-md p-3 font-medium md:flex-none md:justify-start md:p-2 md:px-3 md:w-44 ${pathname === link.href ? "bg-blue-500 text-white" : "bg-emerald-500 hover:bg-gray-200 text-gray-800"}`}
+                        >
+                            <link.Icon className="text-white text-lg" />
+                            <span className="text-white hidden md:block">{link.label}</span>
+                        </Button>
+                    </Link>
+                )
+            })}
+        </>
+    )
 }

@@ -31,7 +31,6 @@ const LoadingScreen: React.FC = () => {
                 ])
             }, 700)
 
-            // Añadimos otro setTimeout para cambiar la opacidad de 0 a 1
             setTimeout(() => {
                 setIcons((currentIcons) =>
                     currentIcons.map((icon, index) =>
@@ -41,8 +40,8 @@ const LoadingScreen: React.FC = () => {
                               })
                             : icon
                     )
-                );
-            }, 200);  // Este tiempo podría ser ajustado según necesites que el efecto sea más rápido o más lento
+                )
+            }, 200)
 
             return () => clearTimeout(timer);
         } else {

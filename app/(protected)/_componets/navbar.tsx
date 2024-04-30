@@ -10,8 +10,8 @@ export default function Navbar() {
     const pathname = usePathname()
 
     return (
-        <nav className="flex justify-between items-center w-full h-20 px-4 text-white dark:bg-black nav bg-emerald-500 z-5">
-            <div className='flex flex-wrap items-center justify-between px-3 '>
+        <nav className="flex justify-between items-center w-full px-4 text-white dark:bg-black nav bg-emerald-500 sm:flex-none">
+            <div className='flex flex-wrap h-20 items-center justify-between px-3'>
                 <h1 className={`${poppins.className} text-white `}>LibraryVerse</h1>
             </div>
             <div className="">
