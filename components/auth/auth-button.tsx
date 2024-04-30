@@ -21,14 +21,16 @@ export const AuthButton: React.FC<AuthButtonProps> = ({ children, mode = "redire
     }
 
     if (mode === "modal") {
-        <Dialog>
-            <DialogTrigger asChild={asChild}>
-                {children}
-            </DialogTrigger>
-            <DialogContent className="p-0 w-auto bg-transparent border-none">
-                {formType === "login" ? <LoginForm /> : <RegisterForm />}
-            </DialogContent>
-        </Dialog>
+        return (
+            <Dialog>
+                <DialogTrigger asChild={asChild}>
+                    {children}
+                </DialogTrigger>
+                <DialogContent className="p-0 w-auto bg-transparent border-none">
+                    {formType === "login" ? <LoginForm /> : <RegisterForm />}
+                </DialogContent>
+            </Dialog>
+        )
     }
     return (
         <span onClick={onClick} className="cursor-pointer">

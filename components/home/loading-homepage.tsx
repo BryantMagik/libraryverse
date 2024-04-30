@@ -26,10 +26,23 @@ const LoadingScreen: React.FC = () => {
                     React.createElement(iconsComponents[currentIcons.length], {
                         key: currentIcons.length,
                         size: '3em',
-                        style: { opacity: 0, transition: 'opacity 1s' },
+                        style: { opacity: 0, transition: 'opacity 8s' },
                     }),
                 ])
             }, 700)
+
+            // Añadimos otro setTimeout para cambiar la opacidad de 0 a 1
+            setTimeout(() => {
+                setIcons((currentIcons) =>
+                    currentIcons.map((icon, index) =>
+                        index === currentIcons.length - 1
+                            ? React.cloneElement(icon, {
+                                style: { ...icon.props.style, opacity: 1 },
+                              })
+                            : icon
+                    )
+                );
+            }, 200);  // Este tiempo podría ser ajustado según necesites que el efecto sea más rápido o más lento
 
             return () => clearTimeout(timer);
         } else {
@@ -40,20 +53,6 @@ const LoadingScreen: React.FC = () => {
             return () => clearTimeout(fadeOutTimer)
         }
     }, [icons.length])
-
-    useEffect(() => {
-        if (fadeOut) {
-            icons.forEach((icon, index) => {
-                setTimeout(() => {
-                    const newIcons = [...icons];
-                    newIcons[index] = React.cloneElement(icon, { style: { ...icon.props.style, opacity: 0 } })
-                    setIcons(newIcons)
-                }, index * 100)
-            })
-        }
-    }, [fadeOut])
-
-    if (hideScreen) return null
 
     return (
         <div
@@ -66,3 +65,4 @@ const LoadingScreen: React.FC = () => {
 }
 
 export default LoadingScreen
+
