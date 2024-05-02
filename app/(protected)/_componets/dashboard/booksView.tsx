@@ -18,7 +18,7 @@ const BooksView: React.FC = () => {
             <div className="relative">
                 <ScrollArea>
                     <div className="flex space-x-4 pb-4">
-
+                        
                     </div>
                     <ScrollBar orientation='horizontal' />
                 </ScrollArea>
