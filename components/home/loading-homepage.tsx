@@ -48,7 +48,7 @@ const LoadingScreen: React.FC<{ onLoadingComplete: () => void }> = ({ onLoadingC
             timers.forEach((timer) => clearTimeout(timer));
             clearTimeout(fadeOutTimer);
         };
-    }, [])
+    }, [onLoadingComplete])
 
     return (
         <div
