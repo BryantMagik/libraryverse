@@ -19,7 +19,7 @@ export const settings = async (
         return { error: "no valido" }
     }
 
-    const user = await currentUser(); //serverUser
+    const user = await currentUser() //serverUser
 
     if (!user) {
         return { error: "  " }
@@ -55,7 +55,7 @@ export const settings = async (
         await sendVerificationEmail(
             verificationToken.email,
             verificationToken.token,
-        );
+        )
 
         return { success: "Email de verificacion enviado" }
     }

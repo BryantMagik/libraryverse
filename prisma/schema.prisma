@@ -30,6 +30,11 @@ model User {
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
   accounts              Account[]
+  books                 Book[]
+  comments              Comment[]
+  likes                 Like[]
+  follows               Follow[]               @relation("follower")
+  following             Follow[]               @relation("following")
 }
 
 model Account {
@@ -88,12 +93,77 @@ model TwoFactorConfirmation {
 }
 
 model Book {
-  id          String   @id @default(cuid())
-  title       String
-  description String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  authorId    String
+  id            String      @id @default(cuid())
+  title         String
+  description   String      @db.Text
+  coverImage    String?     // Opcional, para una imagen de portada
+  genre         String?     // Opcional, para clasificar el libro
+  tags          String[]    // Opcional, para facilitar la búsqueda por temas específicos
+  status        BookStatus  // Enum para el estado del libro (e.g., Publicado, Borrador, En Pausa)
+  viewCount     Int         @default(0) // Contador de visualizaciones
+  likeCount     Int         @default(0) // Contador de likes, optimiza consultas
+  commentCount  Int         @default(0) // Contador de comentarios, optimiza consultas
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  authorId      String?     // Hacer opcional
+  author        User?       @relation(fields: [authorId], references: [id])
+  chapters      Chapter[]
+  likes         Like[]
+  comments      Comment[]
 
   @@unique([title, authorId])
+}
+
+enum BookStatus {
+  DRAFT
+  PUBLISHED
+  PAUSED
+}
+
+
+
+model Chapter {
+  id          String    @id @default(cuid())
+  title       String
+  content     String    @db.Text // Texto del capítulo
+  order       Int       // Orden del capítulo dentro del libro
+  bookId      String
+  book        Book      @relation(fields: [bookId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  likes       Like[]    // Likes específicos para este capítulo
+  comments    Comment[] // Comentarios específicos para este capítulo
+
+  @@unique([bookId, order])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+  userId    String
+  bookId    String?
+  chapterId String?
+  user      User     @relation(fields: [userId], references: [id])
+  book      Book?    @relation(fields: [bookId], references: [id])
+  chapter   Chapter? @relation(fields: [chapterId], references: [id])
+}
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  bookId    String?
+  chapterId String?
+  user      User     @relation(fields: [userId], references: [id])
+  book      Book?    @relation(fields: [bookId], references: [id])
+  chapter   Chapter? @relation(fields: [chapterId], references: [id])
+}
+
+model Follow {
+  id        String   @id @default(cuid())
+  followerId String
+  followingId String
+  follower  User @relation("follower", fields: [followerId], references: [id])
+  following User @relation("following", fields: [followingId], references: [id])
+
+  @@unique([followerId, followingId])
 }

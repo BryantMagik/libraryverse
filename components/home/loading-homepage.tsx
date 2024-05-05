@@ -11,53 +11,50 @@ const iconsComponents = [
     FaQuran,
     FaBookJournalWhills,
     FaBookTanakh,
-];
+]
 
-const LoadingScreen: React.FC = () => {
+const LoadingScreen: React.FC<{ onLoadingComplete: () => void }> = ({ onLoadingComplete }) => {
     const [icons, setIcons] = useState<JSX.Element[]>([])
     const [fadeOut, setFadeOut] = useState(false)
     const [hideScreen, setHideScreen] = useState(false)
 
     useEffect(() => {
-        if (icons.length < iconsComponents.length) {
-            const timer = setTimeout(() => {
-                setIcons((currentIcons) => [
-                    ...currentIcons,
-                    React.createElement(iconsComponents[currentIcons.length], {
-                        key: currentIcons.length,
-                        size: '3em',
-                        style: { opacity: 0, transition: 'opacity 8s' },
-                    }),
-                ])
-            }, 700)
+        const initialIcons = iconsComponents.map((Icon, index) => (
+            <Icon key={index} size="3em" style={{ opacity: 0, transition: 'opacity 1s' }} />
+        ))
+        setIcons(initialIcons);
 
+        const timers = iconsComponents.map((Icon, index) => (
             setTimeout(() => {
-                setIcons((currentIcons) =>
-                    currentIcons.map((icon, index) =>
-                        index === currentIcons.length - 1
-                            ? React.cloneElement(icon, {
-                                style: { ...icon.props.style, opacity: 1 },
-                              })
-                            : icon
+                setIcons((currentIcons) => {
+                    const updatedIcons = [...currentIcons]
+                    updatedIcons[index] = (
+                        <Icon key={index} size="3em" style={{ opacity: 1, transition: 'opacity 4s' }} />
                     )
-                )
-            }, 200)
+                    return updatedIcons;
+                })
+            }, index * 1000)
+        ))
 
-            return () => clearTimeout(timer);
-        } else {
-            const fadeOutTimer = setTimeout(() => {
-                setFadeOut(true)
-                setTimeout(() => setHideScreen(true), 1000)
-            }, 500);
-            return () => clearTimeout(fadeOutTimer)
-        }
-    }, [icons.length])
+        const fadeOutTimer = setTimeout(() => {
+            setFadeOut(true);
+            setTimeout(() => {
+                setHideScreen(true)
+                onLoadingComplete() // Notificar que la carga ha completado
+            }, iconsComponents.length * 1000 + 500) // Ocultar después de que todos los iconos hayan aparecido y un pequeño tiempo adicional
+        }, (iconsComponents.length - 1) * 1000 + 500) // Asegurar que se oculte después de que todos los iconos hayan aparecido y un pequeño tiempo adicional
+
+        return () => {
+            timers.forEach((timer) => clearTimeout(timer));
+            clearTimeout(fadeOutTimer);
+        };
+    }, [])
 
     return (
         <div
-            className={`flex h-screen w-screen items-center space-x-8 justify-center bg-white transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-100'
+            className={`flex h-screen w-screen items-center space-x-8 justify-center bg-white transition-opacity duration-500 ${fadeOut ? 'opacity-0' : 'opacity-100'
                 }`}
-            style={{ transitionDelay: `${iconsComponents.length * 500}ms`, display: hideScreen ? 'none' : 'flex' }}>
+            style={{ transitionDelay: `${(iconsComponents.length * 1000) + 100}ms`, display: hideScreen ? 'none' : 'flex' }}>
             {icons}
         </div>
     )

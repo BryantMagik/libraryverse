@@ -1,8 +1,16 @@
+
 import * as React from 'react'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
+import { BookArtwork } from './bookArtwork'
+import { db } from '@/lib/db'
+import { Book } from '@/app/types/typeBook'
+import { useEffect, useState } from 'react'
+
 
 const BooksView: React.FC = () => {
+
+
     return (
         <div>
             <div className="flex items-center justify-between">
@@ -18,7 +26,7 @@ const BooksView: React.FC = () => {
             <div className="relative">
                 <ScrollArea>
                     <div className="flex space-x-4 pb-4">
-                        
+
                     </div>
                     <ScrollBar orientation='horizontal' />
                 </ScrollArea>
