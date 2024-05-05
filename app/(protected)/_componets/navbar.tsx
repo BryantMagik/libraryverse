@@ -15,7 +15,7 @@ export default function Navbar() {
                 <h1 className={`${poppins.className} text-white `}>LibraryVerse</h1>
             </div>
             <div className="">
-                <SearchBooks />
+                <SearchBooks placeholder={"Busca tu libro"} />
             </div>
             <div className="">
                 <ThemeToggle />
