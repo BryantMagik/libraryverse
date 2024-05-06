@@ -68,4 +68,23 @@ export const RegisterSchema = z.object({
     name: z.string().min(1, {
         message: "Por favor, introduce tu nombre.",
     }),
-});
+})
+//Esquema de Status
+const BookStatusSchema = z.enum(['DRAFT', 'PUBLISHED', 'PAUSED']);
+
+// Esquema de creación de libros
+export const BookSchema = z.object({
+    title: z.string().min(1, {
+        message: "Por favor, introduce un título."
+    }),
+    description: z.string().min(1, {
+        message: "La descripción no puede estar vacía."
+    }),
+    coverImage: z.string().url().optional(), //URL
+    genre: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    status: BookStatusSchema, 
+    createdAt: z.date().optional(), // These dates are set by the system, so they are optional in the schema
+    updatedAt: z.date().optional(),
+    authorId: z.string().uuid().optional(),
+})

@@ -120,8 +120,6 @@ enum BookStatus {
   PAUSED
 }
 
-
-
 model Chapter {
   id          String    @id @default(cuid())
   title       String

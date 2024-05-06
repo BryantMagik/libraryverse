@@ -1,8 +1,9 @@
 "use client"
 
-import { Admin, ListGuesser, Resource } from "react-admin"
+import { Admin, Resource } from "react-admin"
 import simpleRestProvider from "ra-data-simple-rest"
-import { title } from "process"
+import { Booklist } from "./book/list"
+import { BookCreate } from "./book/create"
 
 const dataProvider = simpleRestProvider("/api")
 
@@ -11,8 +12,9 @@ const App = () => {
         <Admin dataProvider={dataProvider}>
             <Resource
                 name="books"
-                list={ListGuesser}
-                recordRepresentation={title}
+                list={Booklist}
+                create={BookCreate}
+                recordRepresentation="title"
             />
         </Admin>
     )

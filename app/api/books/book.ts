@@ -12,4 +12,11 @@ export default async function handler(
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving books', error });
     }
+    if (req.method === 'POST') {
+        try {
+
+        } catch {
+
+        }
+    }
 }
