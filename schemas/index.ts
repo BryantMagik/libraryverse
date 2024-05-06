@@ -9,7 +9,6 @@ export const SettingsSchema = z.object({
         z.string().email({ message: "Introduce el email correcto" })
     ),
     isTwoFactorEnabled: z.optional(z.boolean()),
-    role: z.enum([UserRole.ADMIN, UserRole.USER]),
     password: z.optional(z.string().min(6)),
     newPassword: z.optional(z.string().min(6)),
 })

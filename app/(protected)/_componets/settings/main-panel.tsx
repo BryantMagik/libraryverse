@@ -44,7 +44,6 @@ export const SettingsMainpanel = () => {
             email: user.session?.email || undefined,
             password: undefined,
             newPassword: undefined,
-            role: user.session?.role,
             isTwoFactorEnabled: user.session?.twoFactorAuth || undefined,
         },
     });
@@ -146,44 +145,6 @@ export const SettingsMainpanel = () => {
                                         </>
                                     )}
                                 </div>
-
-                                {/* Tipo de usuario */}
-                                <FormField
-                                    control={form.control}
-                                    name="role"
-                                    render={({ field }) => (
-                                        <FormItem className="text-xs w-[400px]">
-                                            <FormLabel>Tipo de usuario</FormLabel>
-                                            <FormControl>
-                                                <Select
-                                                    onValueChange={field.onChange}
-                                                    defaultValue={field.value}
-                                                    disabled={isPending}
-                                                >
-                                                    <FormControl>
-                                                        <SelectTrigger className="dark:border-slate-800 w-full text-xs">
-                                                            <SelectValue placeholder="Select a role"></SelectValue>
-                                                        </SelectTrigger>
-                                                    </FormControl>
-                                                    <SelectContent className="dark:bg-slate-950 dark:border-slate-800 dark:text-white">
-                                                        <SelectItem
-                                                            className="dark:hover:bg-slate-800 dark:hover:text-white"
-                                                            value={UserRole.ADMIN}
-                                                        >
-                                                            Administrador
-                                                        </SelectItem>
-                                                        <SelectItem
-                                                            className="dark:hover:bg-slate-800 dark:hover:text-white"
-                                                            value={UserRole.USER}
-                                                        >
-                                                            Usuario
-                                                        </SelectItem>
-                                                    </SelectContent>
-                                                </Select>
-                                            </FormControl>
-                                        </FormItem>
-                                    )}
-                                />
                             </div>
 
                             <Separator className="dark:bg-slate-800 bg-gray-300 " />
