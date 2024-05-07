@@ -1,4 +1,5 @@
 "use client"
+
 import React, { useEffect, useState } from 'react'
 import { FaBookMedical, FaBookDead, FaBible, FaQuran } from 'react-icons/fa'
 import { FaBookAtlas, FaBookJournalWhills, FaBookTanakh } from 'react-icons/fa6'
@@ -22,7 +23,7 @@ const LoadingScreen: React.FC<{ onLoadingComplete: () => void }> = ({ onLoadingC
         const initialIcons = iconsComponents.map((Icon, index) => (
             <Icon key={index} size="3em" style={{ opacity: 0, transition: 'opacity 1s' }} />
         ))
-        setIcons(initialIcons);
+        setIcons(initialIcons)
 
         const timers = iconsComponents.map((Icon, index) => (
             setTimeout(() => {
@@ -45,9 +46,9 @@ const LoadingScreen: React.FC<{ onLoadingComplete: () => void }> = ({ onLoadingC
         }, (iconsComponents.length - 1) * 1000 + 500) // Asegurar que se oculte después de que todos los iconos hayan aparecido y un pequeño tiempo adicional
 
         return () => {
-            timers.forEach((timer) => clearTimeout(timer));
+            timers.forEach((timer) => clearTimeout(timer))
             clearTimeout(fadeOutTimer);
-        };
+        }
     }, [onLoadingComplete])
 
     return (

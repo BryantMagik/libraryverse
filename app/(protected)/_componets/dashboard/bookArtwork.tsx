@@ -40,7 +40,7 @@ export const BookArtwork: React.FC<BookArtworkProps> = ({
                 </ContextMenu>
                 <div className="space-y-1 text-sm">
                     <h3 className="font-medium leading-none">{book.title}</h3>
-                    <p className="text-xs text-muted-foreground">{book.author || "Autor desconocido"}</p>
+                    <p className="text-xs text-muted-foreground">{book.authorId || "Autor desconocido"}</p>
                 </div>
             </div>
         )

@@ -30,7 +30,8 @@ model User {
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
   accounts              Account[]
-  books                 Book[]
+  authoredBooks         Book[]                 @relation("AuthorBooks")
+  bookshelf             UserBook[]             // Lista de libros en el estante del usuario
   comments              Comment[]
   likes                 Like[]
   follows               Follow[]               @relation("follower")
@@ -96,22 +97,33 @@ model Book {
   id            String      @id @default(cuid())
   title         String
   description   String      @db.Text
-  coverImage    String?     // Opcional, para una imagen de portada
-  genre         String?     // Opcional, para clasificar el libro
-  tags          String[]    // Opcional, para facilitar la búsqueda por temas específicos
-  status        BookStatus  // Enum para el estado del libro (e.g., Publicado, Borrador, En Pausa)
-  viewCount     Int         @default(0) // Contador de visualizaciones
-  likeCount     Int         @default(0) // Contador de likes, optimiza consultas
-  commentCount  Int         @default(0) // Contador de comentarios, optimiza consultas
+  coverImage    String?
+  genre         String?
+  tags          String[]
+  status        BookStatus
+  viewCount     Int         @default(0)
+  likeCount     Int         @default(0)
+  commentCount  Int         @default(0)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
-  authorId      String?     // Hacer opcional
-  author        User?       @relation(fields: [authorId], references: [id])
+  authorId      String?     
+  author        User?       @relation("AuthorBooks", fields: [authorId], references: [id])
   chapters      Chapter[]
   likes         Like[]
   comments      Comment[]
+  bookshelfOwners UserBook[]
 
   @@unique([title, authorId])
+}
+
+model UserBook {
+  userId    String
+  bookId    String
+  user      User     @relation(fields: [userId], references: [id])
+  book      Book     @relation(fields: [bookId], references: [id])
+  addedAt   DateTime @default(now()) // Fecha cuando el usuario agregó el libro a su estante
+
+  @@id([userId, bookId])
 }
 
 enum BookStatus {
