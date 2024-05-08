@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server"
 import { db } from "@/lib/db"
-import { Book } from "@/app/types/typeBook"
 import { currentRole } from "@/lib/auth"
 import { getIsAdmin } from "@/lib/admin"
-
 
 export async function GET() {
 

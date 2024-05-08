@@ -1,4 +1,4 @@
-import { SimpleForm, TextInput, SelectField, required, Edit } from "react-admin"
+import { SimpleForm, TextInput, required, Edit } from "react-admin"
 
 export const BookEdit = () => {
 
