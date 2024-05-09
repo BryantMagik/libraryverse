@@ -11,20 +11,24 @@ export async function GET() {
         return new NextResponse("Unauthorized", { status: 401 })
     }
 
-    const data = await db.book.findMany()
+    const data = await db.book.findMany({
+        include:{
+            author: true
+        }
+    })
     return NextResponse.json(data)
 
 }
 
 export const POST = async (req: Request) => {
-    const isAdmin = await currentRole()
+    const isAdmin = await getIsAdmin()
 
     if (!isAdmin) {
         return new NextResponse("Unauthorized", { status: 401 })
 
     }
-    const body = await req.json();
-    const { title, description, coverImage, genre, author } = body;
+    const body = await req.json()
+    const { title, description, coverImage, genre, authorId  } = body
 
     const data = await db.book.create({
         data: {
@@ -32,7 +36,7 @@ export const POST = async (req: Request) => {
             description,
             coverImage,
             genre,
-            author,
+            authorId,
             status: "DRAFT",
         }
     })

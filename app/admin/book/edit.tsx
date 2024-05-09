@@ -1,4 +1,4 @@
-import { SimpleForm, TextInput, required, Edit } from "react-admin"
+import { SimpleForm, TextInput, required, Edit, ReferenceInput, SelectInput } from "react-admin"
 
 export const BookEdit = () => {
 
@@ -11,8 +11,9 @@ export const BookEdit = () => {
                 <TextInput source="coverImage" label="Imagen del libro" />
                 <TextInput source="genre" validate={[required()]} label="Genero" />
                 <TextInput source="tags" label="Tags" />
-                <TextInput source="authorId" label="Nombre del autor" />
-                <TextInput source="author" label="Nombre del autors" />
+                <ReferenceInput source="authorId" reference="users" label="Author">
+                    <SelectInput optionText="name"  />
+                </ReferenceInput>
                 <TextInput source="chapters" />
             </SimpleForm>
         </Edit>

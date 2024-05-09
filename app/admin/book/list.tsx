@@ -1,4 +1,4 @@
-import { Datagrid, ImageField, List, TextField } from "react-admin"
+import { Datagrid, ImageField, List, ReferenceField, TextField } from "react-admin"
 
 export const Booklist = () => {
 
@@ -8,14 +8,15 @@ export const Booklist = () => {
                 <TextField source="id" />
                 <TextField source="title" />
                 <TextField source="description" />
-                <ImageField source="coverImage"/>
+                <ImageField source="coverImage" />
                 <TextField source="genre" />
                 <TextField source="tags" />
                 <TextField source="status" />
                 <TextField source="createdAt" />
                 <TextField source="updatedAt" />
-                <TextField source="authorId" />
-                <TextField source="author" />
+                <ReferenceField source="authorId" reference="users" label="Author">
+                    <TextField source="name" />
+                </ReferenceField>
                 <TextField source="chapters" />
             </Datagrid>
         </List>

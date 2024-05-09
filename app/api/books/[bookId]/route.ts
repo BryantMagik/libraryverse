@@ -20,7 +20,7 @@ export const GET = async (
     const data = await db.book.findFirst({
         where: {
             id: params.bookId
-        }
+            }
     })
 
     if (!data) {
@@ -51,6 +51,9 @@ export const PUT = async (
     const data = await db.book.update({
         where: {
             id: params.bookId
+        },
+        include:{
+            author: true
         },
         data: body
     })

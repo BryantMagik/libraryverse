@@ -20,28 +20,28 @@ export const BookArtwork: React.FC<BookArtworkProps> = ({
 }) => {
     const imageUrl = book.coverImage || '/path/to/default-image.png'
 
-        return(
-            <div className={cn('space-y-3', className)} {...props}>
-                <ContextMenu>
-                    <ContextMenuTrigger>
-                        <div className='overflow-hidden rounded-md'>
-                            <Image
-                                src={imageUrl}
-                                alt={book.title}
-                                width={width}
-                                height={height}
-                                className={cn(
-                                    "h-auto w-auto object-cover transition-all hover:scale-105",
-                                    aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square"
-                                )}
-                            />
-                        </div>
-                    </ContextMenuTrigger>
-                </ContextMenu>
-                <div className="space-y-1 text-sm">
-                    <h3 className="font-medium leading-none">{book.title}</h3>
-                    <p className="text-xs text-muted-foreground">{book.authorId || "Autor desconocido"}</p>
-                </div>
+    return (
+        <div className={cn('space-y-3', className)} {...props}>
+            <ContextMenu>
+                <ContextMenuTrigger>
+                    <div className='overflow-hidden rounded-md'>
+                        <Image
+                            src={imageUrl}
+                            alt={book.title}
+                            width={width}
+                            height={height}
+                            className={cn(
+                                "h-auto w-auto object-cover transition-all hover:scale-105",
+                                aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square"
+                            )}
+                        />
+                    </div>
+                </ContextMenuTrigger>
+            </ContextMenu>
+            <div className="space-y-1 text-sm">
+                <h3 className="font-medium leading-none">{book.title}</h3>
+                <p className="text-xs text-muted-foreground">{book.author.name}</p>
             </div>
-        )
+        </div>
+    )
 }

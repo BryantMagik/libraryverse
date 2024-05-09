@@ -10,7 +10,16 @@ export async function GET() {
         return new NextResponse("Unauthorized", { status: 401 })
     }
 
-    const data = await db.user.findMany()
+    const data = await db.user.findMany({})
     return NextResponse.json(data)
 
+}
+
+export const POST = async (req: Response) => {
+    const isAdmin = await getIsAdmin()
+    if (!isAdmin) {
+        return new NextResponse("Unauthorized", { status: 401 })
+    }
+    const body = await req.json()
+    const {  } = body
 }

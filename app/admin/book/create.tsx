@@ -1,4 +1,4 @@
-import { Create, SimpleForm, TextInput, SelectField, required, ImageInput, ImageField } from "react-admin"
+import { Create, SimpleForm, TextInput, required, ReferenceInput, SelectInput } from "react-admin"
 
 export const BookCreate = () => {
 
@@ -10,7 +10,9 @@ export const BookCreate = () => {
                 <TextInput source="coverImage" label="Imagen del libro" />
                 <TextInput source="genre" validate={[required()]} label="Genero" />
                 <TextInput source="tags" label="Tags" />
-                <TextInput source="authorId" label="Nombre del auto" />
+                <ReferenceInput source="authorId" reference="users">
+                    <SelectInput optionText="name" />
+                </ReferenceInput>
                 <TextInput source="chapters" />
             </SimpleForm>
         </Create>

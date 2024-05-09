@@ -12,7 +12,6 @@ const dataProvider = simpleRestProvider("/api")
 
 const App = () => {
     return (
-        
         <Admin dataProvider={dataProvider}>
             <Resource
                 name="books"

@@ -1,3 +1,5 @@
+import { $Enums, User } from "@prisma/client";
+
 export enum BookStatus {
     DRAFT = "DRAFT",
     PUBLISHED = "PUBLISHED",
@@ -5,15 +7,18 @@ export enum BookStatus {
   }
 
   export interface Book {
-    id: string
-    title: string
-    description: string
-    coverImage: string | null
-    genre: string | null
-    tags: string[]
-    viewCount: number
-    likeCount: number
-    commentCount: number
-    authorId: string | null
-    author?: string
+    id: string;
+    title: string;
+    description: string;
+    coverImage: string | null;
+    genre: string | null;
+    tags: string[];
+    status: $Enums.BookStatus;
+    viewCount: number;
+    likeCount: number;
+    commentCount: number;
+    createdAt: Date;
+    updatedAt: Date;
+    authorId: string;
+    author: User;
 }
