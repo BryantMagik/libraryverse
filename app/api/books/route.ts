@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
 import { db } from "@/lib/db"
-import { currentRole } from "@/lib/auth"
 import { getIsAdmin } from "@/lib/admin"
 
 export async function GET() {
@@ -12,7 +11,7 @@ export async function GET() {
     }
 
     const data = await db.book.findMany({
-        include:{
+        include: {
             author: true
         }
     })
@@ -28,7 +27,7 @@ export const POST = async (req: Request) => {
 
     }
     const body = await req.json()
-    const { title, description, coverImage, genre, authorId  } = body
+    const { title, description, coverImage, genre, authorId } = body
 
     const data = await db.book.create({
         data: {

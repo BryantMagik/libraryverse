@@ -1,4 +1,3 @@
-import { auth } from "@/auth"
 import { currentRole } from "@/lib/auth"
 import { UserRole } from "@prisma/client"
 
