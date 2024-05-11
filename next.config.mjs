@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    reactStrictMode: true,
     async headers() {
         return [
             {
@@ -26,6 +27,7 @@ const nextConfig = {
         ]
     },
     images: {
+        domains: ['covers.openlibrary.org', 'books.google.com', 'cdn-icons-png.flaticon.com' ],
         remotePatterns: [{
             protocol: "https",
             hostname: "res.cloudinary.com"

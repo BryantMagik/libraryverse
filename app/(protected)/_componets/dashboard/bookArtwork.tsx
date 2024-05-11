@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils"
-import { Book } from "@/app/types/typeBook";
+import { Book } from "@/app/types/typesModels"
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu"
 import Image from "next/image"
 
 interface BookArtworkProps extends React.HTMLAttributes<HTMLDivElement> {
-    book: Book;
+    book: Partial<Book>
     aspectRatio?: 'portrait' | 'square'
     width?: number
     height?: number
@@ -19,6 +19,7 @@ export const BookArtwork: React.FC<BookArtworkProps> = ({
     ...props
 }) => {
     const imageUrl = book.coverImage || '/path/to/default-image.png'
+    const altText = book.title || 'Sin titulo'
 
     return (
         <div className={cn('space-y-3', className)} {...props}>
@@ -27,7 +28,7 @@ export const BookArtwork: React.FC<BookArtworkProps> = ({
                     <div className='overflow-hidden rounded-md'>
                         <Image
                             src={imageUrl}
-                            alt={book.title}
+                            alt={altText}
                             width={width}
                             height={height}
                             className={cn(
@@ -40,7 +41,7 @@ export const BookArtwork: React.FC<BookArtworkProps> = ({
             </ContextMenu>
             <div className="space-y-1 text-sm">
                 <h3 className="font-medium leading-none">{book.title}</h3>
-                <p className="text-xs text-muted-foreground">{book.author.name}</p>
+                <p className="text-xs text-muted-foreground">{book.author?.name ?? "Nombre no disponible"}</p>
             </div>
         </div>
     )

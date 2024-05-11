@@ -1,11 +1,23 @@
+"use client"
 import * as React from 'react'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { BookArtwork } from './bookArtwork'
-import { getBooks } from '@/data/queries'
+import { useEffect, useState } from 'react'
+import { Book } from '@/app/types/typesModels'
 
-const BooksView: React.FC = async () => {
-    const data = await getBooks()
+const BooksView: React.FC = () => {
+    const [books, setBooks] = useState<Book[]>([]);
+
+    useEffect(() => {
+        const fetchBooks = async () => {
+            const response = await fetch('/api/books')
+            const data = await response.json()
+            setBooks(data)
+        }
+
+        fetchBooks()
+    }, [])
 
     return (
         <div>
@@ -23,10 +35,11 @@ const BooksView: React.FC = async () => {
             <div className="relative">
                 <ScrollArea>
                     <div className="flex space-x-4 pb-4">
-                        {data.map((book) => (
-                            <BookArtwork key={book.id} book={book} width={300} height={200} />
+                        {books.map((book) => (
+                            <BookArtwork key={book.id.toString()} book={book} width={300} height={200} />
                         ))}
                     </div>
+
                     <ScrollBar orientation='horizontal' />
                 </ScrollArea>
                 <div className='mt-6 space-y-1'>
