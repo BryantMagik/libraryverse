@@ -105,13 +105,14 @@ export const LoginForm = () => {
                                     name="email"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Email</FormLabel>
+                                            <FormLabel className="text-almond-500">Email</FormLabel>
                                             <FormControl>
                                                 <Input
                                                     {...field}
                                                     disabled={isPending}
                                                     placeholder="john.doe@example.com"
                                                     type="email"
+                                                    className="bg-white text-almond-700"
                                                 />
                                             </FormControl>
                                             <FormMessage />
@@ -123,13 +124,14 @@ export const LoginForm = () => {
                                     name="password"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Password</FormLabel>
+                                            <FormLabel className="text-almond-500">Contraseña</FormLabel>
                                             <FormControl>
                                                 <Input
                                                     {...field}
                                                     disabled={isPending}
-                                                    placeholder="*******"
+                                                    placeholder="********"
                                                     type="password"
+                                                    className="bg-white text-almond-700"
                                                 />
                                             </FormControl>
                                             <Button
@@ -137,7 +139,7 @@ export const LoginForm = () => {
                                                 variant="link"
                                                 asChild
                                                 className="px-0 font-normal">
-                                                <Link href="/auth/reset">
+                                                <Link href="/auth/reset" className="text-almond-700">
                                                     ¿Has olvidado tu contraseña?
                                                 </Link>
                                             </Button>
@@ -153,7 +155,7 @@ export const LoginForm = () => {
                     <Button
                         disabled={isPending}
                         type="submit"
-                        className="w-full"
+                        className="w-full text-white bg-almond-500 hover:bg-almond-600 active:bg-almond-700"
                     >
                         Iniciar Sesión
                     </Button>

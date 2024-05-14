@@ -1,4 +1,5 @@
-export const getBookId = (url: string) => {
+
+export const getBookById = (url: string) => {
 
     if (url.includes('flaticon')) return 'flaticon';
     url = url.replace('http://books.google.com/books/content?', '');

@@ -1,19 +1,68 @@
 "use client"
-import { AuthButton } from "@/components/auth/auth-button";
-import { Button } from "@/components/ui/button";
+
+import Link from "next/link"
+import { Source_Sans_3 } from "next/font/google"
+import { useState } from "react"
+import {
+    Navbar,
+    NavbarBrand,
+    NavbarContent,
+    NavbarItem,
+    NavbarMenuToggle,
+    NavbarMenu,
+    NavbarMenuItem,
+} from "@nextui-org/navbar"
+
+const sourceFont = Source_Sans_3({
+    subsets: ['latin'],
+    weight: ['200']
+})
+import { Link as Linkt } from "@nextui-org/link"
+const links = [
+    { href: "/home", label: "INICIO" },
+    { href: "/about", label: "SOBRE" },
+    { href: "/contact", label: "CONTACTO" },
+
+]
 
 export default function NavbarHome() {
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     return (
-        <nav className="flex flex-col lg:flex-row items-center justify-between w-full h-20 px-4 text-white bg-almond-100">
-            <div className="text-lg font-bold">LibraryVerse</div>
-            <div className="flex flex-col lg:flex-row items-center mt-4 lg:mt-0">
-                <AuthButton mode="modal" formType="login" asChild>
-                    <Button className="rounded-full bg-almond-500 text-white hover:bg-almond-700 lg:mr-4" size="lg">Iniciar Sesión</Button>
-                </AuthButton>
-                <AuthButton mode="modal" formType="register" asChild>
-                    <Button className="rounded-full bg-almond-500 text-white hover:bg-almond-700" size="lg">Registro</Button>
-                </AuthButton>
-            </div>
-        </nav>
+        <Navbar className="h-[110px] z-2">
+            <NavbarContent>
+                <NavbarMenuToggle
+                    aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                    className="sm:hidden"
+                />
+                <NavbarBrand>
+                    {/* <img className="h-[110px] z-0" src="/home/logo.png" alt="" /> */}
+                </NavbarBrand>
+            </NavbarContent>
+            <NavbarContent className="hidden sm:flex gap-4 h-[70px]" justify="center">
+                {links.map((link) => {
+                    return (
+                        <NavbarItem>
+                            <Link href={link.href} key={link.href} className={sourceFont.className + ''} legacyBehavior>
+                                <a className="p-7 tracking-widest text-muted-foreground">{link.label}</a>
+                            </Link>
+                        </NavbarItem>
+                    )
+                })}
+            </NavbarContent>
+            <NavbarMenu>
+                {links.map((link, index) => {
+                    return (
+                        <NavbarMenuItem key={`${link}-${index}`}>
+                            <Linkt href={`${link.href}`}
+                                key={`${link.label}`}
+                            >
+                                {link.label}
+                            </Linkt>
+                        </NavbarMenuItem >
+                    )
+                })}
+            </NavbarMenu>
+        </Navbar>
     )
 }

@@ -1,6 +1,6 @@
 "use client"
 import { Children, useEffect } from "react";
-import Navbar from "./_componets/navbar";
+import NavbarApp from "./_componets/navbarApp";
 import SideNav from "./_componets/sideNav";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { useSession } from "next-auth/react";
@@ -26,7 +26,7 @@ const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
     }
     return (
         <>
-            <Navbar />
+            <NavbarApp />
             <div className='flex h-screen flex-col md:flex-row md:overflow-hidden'>
                 <div className='w-full flex-none md:w-64'>
                     <SideNav />

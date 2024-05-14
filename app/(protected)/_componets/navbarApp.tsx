@@ -5,7 +5,7 @@ import { ThemeToggle } from "./darkmode/themeToggle"
 import { usePathname } from "next/navigation"
 import { UserButton } from "@/components/auth/user-button"
 
-export default function Navbar() {
+export default function NavbarApp() {
 
     const pathname = usePathname()
 

@@ -30,11 +30,11 @@ const LoadingScreen: React.FC<{ onLoadingComplete: () => void }> = ({ onLoadingC
                 setIcons((currentIcons) => {
                     const updatedIcons = [...currentIcons]
                     updatedIcons[index] = (
-                        <Icon key={index} size="3em" style={{ opacity: 1, transition: 'opacity 4s' }} />
+                        <Icon key={index} size="3em" style={{ opacity: 1, transition: 'opacity 1s' }} />
                     )
                     return updatedIcons;
                 })
-            }, index * 1000)
+            }, index * 200)
         ))
 
         const fadeOutTimer = setTimeout(() => {
@@ -42,8 +42,8 @@ const LoadingScreen: React.FC<{ onLoadingComplete: () => void }> = ({ onLoadingC
             setTimeout(() => {
                 setHideScreen(true)
                 onLoadingComplete() // Notificar que la carga ha completado
-            }, iconsComponents.length * 1000 + 500) // Ocultar después de que todos los iconos hayan aparecido y un pequeño tiempo adicional
-        }, (iconsComponents.length - 1) * 1000 + 500) // Asegurar que se oculte después de que todos los iconos hayan aparecido y un pequeño tiempo adicional
+            }, iconsComponents.length * 100 + 500) // Ocultar después de que todos los iconos hayan aparecido y un pequeño tiempo adicional
+        }, (iconsComponents.length - 1) * 100 + 50) // Asegurar que se oculte después de que todos los iconos hayan aparecido y un pequeño tiempo adicional
 
         return () => {
             timers.forEach((timer) => clearTimeout(timer))
@@ -53,7 +53,7 @@ const LoadingScreen: React.FC<{ onLoadingComplete: () => void }> = ({ onLoadingC
 
     return (
         <div
-            className={`flex h-screen w-screen items-center space-x-8 justify-center bg-white transition-opacity duration-500 ${fadeOut ? 'opacity-0' : 'opacity-100'
+            className={`flex h-screen w-screen items-center space-x-8 justify-center bg-white transition-opacity duration-200 ${fadeOut ? 'opacity-0' : 'opacity-100'
                 }`}
             style={{ transitionDelay: `${(iconsComponents.length * 1000) + 100}ms`, display: hideScreen ? 'none' : 'flex' }}>
             {icons}

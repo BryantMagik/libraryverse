@@ -1,10 +1,10 @@
 "use client"
-import * as React from 'react';
-import { useState } from 'react';
-import { GBook } from '@/app/types/typesBooks';
-import { Booklist } from '../_componets/books/booklist';
-import Search from '@/components/ui/search';
-import { Separator } from '@/components/ui/separator';
+import * as React from 'react'
+import { useState } from 'react'
+import { GBook } from '@/app/types/typesBooks'
+import { Booklist } from '../_componets/books/booklist'
+import Search from '@/components/ui/search'
+import { Separator } from '@/components/ui/separator'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 
 interface LibroPageProps { }
@@ -14,8 +14,8 @@ const LibroPage: React.FC<LibroPageProps> = () => {
     const [query, setQuery] = useState<string>('')
 
     const updateBooks = (newBooks: GBook[], newQuery: string) => {
-        setBooks(newBooks);
-        setQuery(newQuery);
+        setBooks(newBooks)
+        setQuery(newQuery)
     }
 
     return (
@@ -42,7 +42,7 @@ const LibroPage: React.FC<LibroPageProps> = () => {
             </div>
 
         </>
-    );
-};
+    )
+}
 
-export default LibroPage;
+export default LibroPage

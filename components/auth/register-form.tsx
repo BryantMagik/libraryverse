@@ -77,12 +77,13 @@ export const RegisterForm = () => {
                             name="name"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Nombre</FormLabel>
+                                    <FormLabel className="text-almond-500">Nombre</FormLabel>
                                     <FormControl>
                                         <Input
                                             {...field}
                                             disabled={isPending}
-                                            placeholder="John Doe"
+                                            placeholder="Escribe tu nombre.."
+                                            className="bg-white text-almond-700"
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -94,13 +95,15 @@ export const RegisterForm = () => {
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel className="text-almond-500">Email</FormLabel>
                                     <FormControl>
                                         <Input
                                             {...field}
                                             disabled={isPending}
-                                            placeholder="john.doe@example.com"
+                                            placeholder="tu.email@example.com"
                                             type="email"
+                                            className="bg-white text-almond-700"
+
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -112,13 +115,15 @@ export const RegisterForm = () => {
                             name="password"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Contraseña</FormLabel>
+                                    <FormLabel className="text-almond-500">Contraseña</FormLabel>
                                     <FormControl>
                                         <Input
                                             {...field}
                                             disabled={isPending}
-                                            placeholder="******"
+                                            placeholder="********"
                                             type="password"
+                                            className="bg-white text-almond-700"
+
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -131,7 +136,7 @@ export const RegisterForm = () => {
                     <Button
                         disabled={isPending}
                         type="submit"
-                        className="w-full"
+                        className="w-full text-white bg-almond-500 hover:bg-almond-600 active:bg-almond-700"
                     >
                         Crear una cuenta
                     </Button>

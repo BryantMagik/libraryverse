@@ -1,8 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 import { GBook, Work } from '@/app/types/typesBooks'
-import { getBookId } from '@/data/book'
+import { getBookById } from '@/data/book'
 import { BookArtwork } from '../dashboard/bookArtwork';
 
 interface IBook {
@@ -29,7 +28,7 @@ export const Book: React.FC<IBook> = ({ book, type }) => {
     }
 
     return (
-        <Link href={type === 'openlib' ? `/book/olib/${(book as Work).title}/${(book as Work).cover_edition_key}` : `/book/gbs/${(book as GBook).volumeInfo.title}/${getBookId(imgUrl)}`}>
+        <Link href={type === 'openlib' ? `/book/olib/${(book as Work).title}/${(book as Work).cover_edition_key}` : `/book/gbs/${(book as GBook).volumeInfo.title}/${getBookById(imgUrl)}`}>
             <BookArtwork className=''
                 book={{
                     title: title,

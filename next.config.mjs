@@ -28,10 +28,20 @@ const nextConfig = {
     },
     images: {
         domains: ['covers.openlibrary.org', 'books.google.com', 'cdn-icons-png.flaticon.com' ],
-        remotePatterns: [{
-            protocol: "https",
-            hostname: "res.cloudinary.com"
-        }],
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "res.cloudinary.com"
+            },
+            {
+                protocol: "https",
+                hostname: "books.google.com"
+            },
+            {
+                protocol: "https",
+                hostname: "covers.openlibrary.org"
+            },
+        ],
     },
 }
 

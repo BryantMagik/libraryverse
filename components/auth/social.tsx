@@ -22,7 +22,7 @@ export const Social = () => {
         <div className='flex items-center w-full gap-x-2'>
             <Button
                 size="lg"
-                className="w-full"
+                className="w-full hover:bg-almond-200"
                 variant="outline"
                 onClick={() => onClick("github")}
             >
@@ -30,7 +30,7 @@ export const Social = () => {
             </Button >
             <Button
                 size="lg"
-                className="w-full"
+                className="w-full hover:bg-almond-200"
                 variant="outline"
                 onClick={() => onClick("google")}
             >
