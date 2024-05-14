@@ -15,6 +15,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@nextui-org/link": "^2.0.29",
     "@nextui-org/navbar": "^2.0.30",
+    "@nextui-org/react": "^2.3.6",
     "@nextui-org/system": "^2.1.2",
     "@nextui-org/theme": "^2.2.3",
     "@prisma/client": "^5.13.0",
