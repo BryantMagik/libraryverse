@@ -34,8 +34,6 @@ model User {
   bookshelf             UserBook[]             // Lista de libros en el estante del usuario
   comments              Comment[]
   likes                 Like[]
-  follows               Follow[]               @relation("follower")
-  following             Follow[]               @relation("following")
 }
 
 model Account {
@@ -92,22 +90,32 @@ model TwoFactorConfirmation {
 
   @@unique([userId])
 }
+enum Genre {
+  FICTION
+  NONFICTION
+  MYSTERY
+  FANTASY
+  SCIFI
+  ROMANCE
+  HORROR
+  BIOGRAPHY
+  HISTORY
+  POETRY
+  OTHER
+}
 
 model Book {
   id            String      @id @default(cuid())
   title         String
   description   String      @db.Text
   coverImage    String?
-  genre         String?
+  genre         Genre?
   tags          String[]
   status        BookStatus
-  viewCount     Int         @default(0)
-  likeCount     Int         @default(0)
-  commentCount  Int         @default(0)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
   authorId      String    
-  author        User       @relation("AuthorBooks", fields: [authorId], references: [id])
+  author        User        @relation("AuthorBooks", fields: [authorId], references: [id])
   chapters      Chapter[]
   likes         Like[]
   comments      Comment[]
@@ -166,14 +174,4 @@ model Like {
   user      User     @relation(fields: [userId], references: [id])
   book      Book?    @relation(fields: [bookId], references: [id])
   chapter   Chapter? @relation(fields: [chapterId], references: [id])
-}
-
-model Follow {
-  id        String   @id @default(cuid())
-  followerId String
-  followingId String
-  follower  User @relation("follower", fields: [followerId], references: [id])
-  following User @relation("following", fields: [followingId], references: [id])
-
-  @@unique([followerId, followingId])
 }

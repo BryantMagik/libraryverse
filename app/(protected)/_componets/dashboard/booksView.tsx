@@ -15,7 +15,6 @@ const BooksView: React.FC = () => {
             const data = await response.json()
             setBooks(data)
         }
-
         fetchBooks()
     }, [])
 
@@ -36,7 +35,7 @@ const BooksView: React.FC = () => {
                 <ScrollArea>
                     <div className="flex space-x-4 pb-4">
                         {books.map((book) => (
-                            <BookArtwork key={book.id.toString()} book={book} width={300} height={200} />
+                            <BookArtwork key={book.id.toString()} book={book} width={300} height={300} />
                         ))}
                     </div>
 

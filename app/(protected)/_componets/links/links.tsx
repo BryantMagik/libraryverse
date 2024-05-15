@@ -3,6 +3,7 @@ import { BsBookshelf } from "react-icons/bs"
 import { IoIosLogOut } from "react-icons/io"
 import { GoBook } from "react-icons/go"
 import { SlNotebook } from "react-icons/sl"
+import { IoCreateOutline } from "react-icons/io5"
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -11,6 +12,7 @@ import { usePathname } from "next/navigation"
 
 const links = [
     { href: "/dashboard", label: "Home", Icon: PiHouseSimpleLight },
+    { href: "/create", label: "Crear Historia", Icon: IoCreateOutline },
     { href: "/libros", label: "Libros", Icon: SlNotebook },
     { href: "/categorias", label: "Categorias", Icon: GoBook },
     { href: "/bookshelf", label: "Bookshelf", Icon: BsBookshelf },

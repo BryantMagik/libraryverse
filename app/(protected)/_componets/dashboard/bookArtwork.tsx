@@ -33,7 +33,7 @@ export const BookArtwork: React.FC<BookArtworkProps> = ({
                             height={height}
                             className={cn(
                                 "h-auto w-auto object-cover transition-all hover:scale-105",
-                                aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square"
+                                aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-portrait"
                             )}
                         />
                     </div>

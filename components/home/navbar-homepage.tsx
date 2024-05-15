@@ -12,7 +12,7 @@ import {
     NavbarMenu,
     NavbarMenuItem,
 } from "@nextui-org/navbar"
-
+import Image from "next/image"
 const sourceFont = Source_Sans_3({
     subsets: ['latin'],
     weight: ['200']
@@ -35,7 +35,7 @@ export default function NavbarHome() {
                     className="sm:hidden"
                 />
                 <NavbarBrand>
-                    <img className="h-[110px] z-0 " src="/home/logo.png" alt="" />
+                    <Image src="/home/logo.png" height={110} width={300} alt="LogoVerse"/>
                 </NavbarBrand>
             </NavbarContent>
             <NavbarContent className="hidden sm:flex gap-4 h-[70px]" justify="center">

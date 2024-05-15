@@ -80,11 +80,13 @@ export const BookSchema = z.object({
     description: z.string().min(1, {
         message: "La descripción no puede estar vacía."
     }),
-    coverImage: z.string().url().optional(), //URL
+    coverImage: z
+        .any()
+        .refine((file) => file instanceof File, "Se requiere una imagen"),
     genre: z.string().optional(),
     tags: z.array(z.string()).optional(),
-    status: BookStatusSchema, 
-    createdAt: z.date().optional(), // These dates are set by the system, so they are optional in the schema
+    status: BookStatusSchema,
+    createdAt: z.date().optional(),
     updatedAt: z.date().optional(),
     authorId: z.string().uuid().optional(),
 })
