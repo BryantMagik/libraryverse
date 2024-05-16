@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    env: {
-        NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: "dk5b2zjck",
-    },
     async headers() {
         return [
             {

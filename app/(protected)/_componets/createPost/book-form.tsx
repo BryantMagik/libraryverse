@@ -53,6 +53,7 @@ export const BookForm = () => {
 
 
     const onSubmit = (values: z.infer<typeof BookSchema>) => {
+        console.log(values)
         setError("");
         setSuccess("");
 
@@ -80,7 +81,7 @@ export const BookForm = () => {
                 className="space-y-6">
                 <div className="space-y-4">
                     <div>
-                        <h1 className="font-semibold">Crea tu propia historia y compartela con la comunidad!</h1>
+                        <h1 className="font-semibold">Crea tu propia historia y compartela con la comunidad</h1>
                     </div>
                 </div>
                 <h2 className="font-bold border-almond-300 border-b-4">
