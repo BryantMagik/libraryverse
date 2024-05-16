@@ -53,7 +53,6 @@ export const BookForm = () => {
 
 
     const onSubmit = (values: z.infer<typeof BookSchema>) => {
-        console.log(values)
         setError("");
         setSuccess("");
 
