@@ -1,9 +1,9 @@
 "use client"
 
-import { BookSchema, GenreEnum } from "@/schemas";
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { BookSchema, GenreEnum } from "@/schemas"
+import * as z from "zod"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 import {
     Form,
     FormControl,
@@ -11,18 +11,19 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "../../../../components/ui/textarea";
-import { useState, useTransition } from "react";
-import { postBook } from "@/actions/post-books";
-import { useRouter } from "next/navigation";
-import { FormError } from "@/components/form-error";
-import { FormSuccess } from "@/components/form-success";
-import { Button } from "@/components/ui/button";
-import { useCurrentUser } from "@/hooks/use-current-user";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectScrollUpButton, SelectItem, SelectScrollDownButton } from "@/components/ui/select";
-import { CldUploadWidget } from 'next-cloudinary';
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "../../../../components/ui/textarea"
+import { useEffect, useState, useTransition } from "react"
+import { postBook } from "@/actions/post-books"
+import { useRouter } from "next/navigation"
+import { FormError } from "@/components/form-error"
+import { FormSuccess } from "@/components/form-success"
+import { Button } from "@/components/ui/button"
+import { useCurrentUser } from "@/hooks/use-current-user"
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectScrollUpButton, SelectItem, SelectScrollDownButton } from "@/components/ui/select"
+import { CldUploadWidget } from 'next-cloudinary'
+import Image from "next/image"
 
 export const BookForm = () => {
     const user = useCurrentUser();
@@ -46,6 +47,9 @@ export const BookForm = () => {
         },
     })
 
+    useEffect(() => {
+        form.setValue('coverImage', resource)
+    }, [resource, form])
 
 
     const onSubmit = (values: z.infer<typeof BookSchema>) => {
@@ -77,7 +81,7 @@ export const BookForm = () => {
                 className="space-y-6">
                 <div className="space-y-4">
                     <div>
-                        <h1 className="font-semibold">Historia sin título</h1>
+                        <h1 className="font-semibold">Crea tu propia historia y compartela con la comunidad!</h1>
                     </div>
                 </div>
                 <h2 className="font-bold border-almond-300 border-b-4">
@@ -94,17 +98,14 @@ export const BookForm = () => {
                                     widget.close()
                                     //@ts-ignore
                                     setResource(result?.info.secure_url)
-
                                 }}
                                 options={{ maxFiles: 1 }}
                             >
-                                {({ open }) => {
-
+                                {({ open }) => (
                                     <FormItem>
                                         <FormLabel className="text-2xl">Portada del libro</FormLabel>
-                                        <div className="relative cursor-pointer hover:opacity-70 transition p-10
-                                                                    border-neutral-300 flex flex-col justify-center items-center gap-4
-                                                                    text-neutral-600 bg-slate-100"
+                                        <div
+                                            className="relative cursor-pointer hover:opacity-70 transition p-10 border-neutral-300 flex flex-col justify-center items-center gap-4 text-neutral-600 bg-slate-100"
                                             onClick={() => open()}
                                         >
                                             <p className="text-lg font-semibold">Agregar Imagen</p>
@@ -129,9 +130,7 @@ export const BookForm = () => {
                                             />
                                         </FormControl>
                                     </FormItem>
-
-                                }}
-
+                                )}
                             </CldUploadWidget>
                         )}
                     />

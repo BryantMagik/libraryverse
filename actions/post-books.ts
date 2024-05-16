@@ -34,19 +34,20 @@ export const postBook = async (values: z.infer<typeof BookSchema>) => {
     }
     console.log("Database User:", dbUser);
 
-    const { title, description, genre, status } = validatedFields.data;
+    const { title, description,coverImage, genre, status } = validatedFields.data;
 
     await db.book.create({
         data: {
             title,
             description,
             genre,
+            coverImage,
             authorId: dbUser.id,
             status,
         },
     })
 
     return {
-        success: "Book uploaded successfully",
+        success: "Has creado tu propia historia correctamente",
     }
 }
