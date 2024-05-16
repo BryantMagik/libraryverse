@@ -7,8 +7,6 @@ cloudinary.config({
   secure: true,
 })
 
-export default cloudinary
-
 export async function POST(request: Request) {
   const body = (await request.json()) as { paramsToSign: Record<string, string> }
   const { paramsToSign } = body
