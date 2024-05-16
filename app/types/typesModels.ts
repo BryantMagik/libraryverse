@@ -1,10 +1,13 @@
-import { $Enums } from "@prisma/client";
+import { $Enums, Genre } from "@prisma/client";
 
 export enum BookStatus {
   DRAFT = "DRAFT",
   PUBLISHED = "PUBLISHED",
   PAUSED = "PAUSED"
 }
+
+
+
 export type User = {
   id: string;
   name: string | null
@@ -23,7 +26,7 @@ export interface Book {
   title: string
   description: string
   coverImage: string | null
-  genre: string | null
+  genre: Genre | null
   tags: string[]
   status: $Enums.BookStatus
   viewCount: number

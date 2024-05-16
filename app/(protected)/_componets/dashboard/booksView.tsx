@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { Book } from '@/app/types/typesModels'
 
 const BooksView: React.FC = () => {
-    const [books, setBooks] = useState<Book[]>([]);
+    const [books, setBooks] = useState<Book[]>([])
 
     useEffect(() => {
         const fetchBooks = async () => {
