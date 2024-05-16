@@ -19,7 +19,7 @@ export const settings = async (
         return { error: "no valido" }
     }
 
-    const user = await currentUser() //serverUser
+    const user = await currentUser()
 
     if (!user) {
         return { error: "  " }
@@ -32,10 +32,10 @@ export const settings = async (
     }
 
     if (user.isOAuth) {
-        validatedValues.data.email = undefined;
-        validatedValues.data.password = undefined;
-        validatedValues.data.newPassword = undefined;
-        validatedValues.data.isTwoFactorEnabled = undefined;
+        validatedValues.data.email = undefined
+        validatedValues.data.password = undefined
+        validatedValues.data.newPassword = undefined
+        validatedValues.data.isTwoFactorEnabled = undefined
 
         return
     }
@@ -91,7 +91,7 @@ export const settings = async (
             name: dbUser.name,
             role: dbUser.role,
             twoFactorAuth: dbUser.isTwoFactorEnabled,
-          },
+        },
     });
 
     return { success: "Configuración cambiada!" }

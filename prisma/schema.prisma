@@ -21,7 +21,7 @@ enum UserRole {
 model User {
   id                    String                 @id @default(cuid())
   name                  String?
-  email                 String                @unique
+  email                 String                 @unique
   image                 String?
   emailVerified         DateTime?
   password              String?
@@ -31,23 +31,21 @@ model User {
   twoFactorConfirmation TwoFactorConfirmation?
   accounts              Account[]
   authoredBooks         Book[]                 @relation("AuthorBooks")
-  bookshelf             UserBook[]             // Lista de libros en el estante del usuario
-  comments              Comment[]
-  likes                 Like[]
+  bookshelf             UserBook[] // Lista de libros en el estante del usuario
 }
 
 model Account {
-  id                String                     @id @default(cuid())
+  id                String  @id @default(cuid())
   userId            String
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String?                    @db.Text
-  access_token      String?                    @db.Text
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String?                    @db.Text
+  id_token          String? @db.Text
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -90,6 +88,7 @@ model TwoFactorConfirmation {
 
   @@unique([userId])
 }
+
 enum Genre {
   FICTION
   NONFICTION
@@ -105,31 +104,29 @@ enum Genre {
 }
 
 model Book {
-  id            String      @id @default(cuid())
-  title         String
-  description   String      @db.Text
-  coverImage    String?
-  genre         Genre?
-  tags          String[]
-  status        BookStatus
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-  authorId      String    
-  author        User        @relation("AuthorBooks", fields: [authorId], references: [id])
-  chapters      Chapter[]
-  likes         Like[]
-  comments      Comment[]
+  id              String     @id @default(cuid())
+  title           String
+  description     String     @db.Text
+  coverImage      String?
+  genre           Genre?
+  tags            String[]
+  status          BookStatus
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  authorId        String
+  author          User       @relation("AuthorBooks", fields: [authorId], references: [id])
+  chapters        Chapter[]
   bookshelfOwners UserBook[]
 
   @@unique([title, authorId])
 }
 
 model UserBook {
-  userId    String
-  bookId    String
-  user      User     @relation(fields: [userId], references: [id])
-  book      Book     @relation(fields: [bookId], references: [id])
-  addedAt   DateTime @default(now()) // Fecha cuando el usuario agregó el libro a su estante
+  userId  String
+  bookId  String
+  user    User     @relation(fields: [userId], references: [id])
+  book    Book     @relation(fields: [bookId], references: [id])
+  addedAt DateTime @default(now()) // Fecha cuando el usuario agregó el libro a su estante
 
   @@id([userId, bookId])
 }
@@ -141,37 +138,14 @@ enum BookStatus {
 }
 
 model Chapter {
-  id          String    @id @default(cuid())
-  title       String
-  content     String    @db.Text // Texto del capítulo
-  order       Int       // Orden del capítulo dentro del libro
-  bookId      String
-  book        Book      @relation(fields: [bookId], references: [id])
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  likes       Like[]    // Likes específicos para este capítulo
-  comments    Comment[] // Comentarios específicos para este capítulo
+  id        String   @id @default(cuid())
+  title     String
+  content   String   @db.Text // Texto del capítulo
+  order     Int // Orden del capítulo dentro del libro
+  bookId    String
+  book      Book     @relation(fields: [bookId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([bookId, order])
-}
-
-model Comment {
-  id        String   @id @default(cuid())
-  content   String
-  createdAt DateTime @default(now())
-  userId    String
-  bookId    String?
-  chapterId String?
-  user      User     @relation(fields: [userId], references: [id])
-  book      Book?    @relation(fields: [bookId], references: [id])
-  chapter   Chapter? @relation(fields: [chapterId], references: [id])
-}
-model Like {
-  id        String   @id @default(cuid())
-  userId    String
-  bookId    String?
-  chapterId String?
-  user      User     @relation(fields: [userId], references: [id])
-  book      Book?    @relation(fields: [bookId], references: [id])
-  chapter   Chapter? @relation(fields: [chapterId], references: [id])
 }

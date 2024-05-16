@@ -1,6 +1,6 @@
 "use client"
 
-import { BookForm } from "@/components/auth/book-form"
+import { BookForm } from "@/app/(protected)/_componets/createPost/book-form"
 
 
 const CreatePage = () => {

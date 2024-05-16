@@ -1,10 +1,9 @@
-import { UserRole } from "@prisma/client";
 import * as z from "zod";
 
 //Validación de datos
 
 export const SettingsSchema = z.object({
-    name: z.optional(z.string()),
+    name: z.string().min(1, { message: "El nombre es obligatorio" }),
     email: z.optional(
         z.string().email({ message: "Introduce el email correcto" })
     ),
@@ -72,6 +71,11 @@ export const RegisterSchema = z.object({
 //Esquema de Status
 const BookStatusSchema = z.enum(['DRAFT', 'PUBLISHED', 'PAUSED']);
 
+export const GenreEnum = z.enum([
+    'FICTION', 'NONFICTION', 'MYSTERY', 'FANTASY', 'SCIFI', 'ROMANCE', 'HORROR',
+    'BIOGRAPHY', 'HISTORY', 'POETRY', 'OTHER'
+])
+
 // Esquema de creación de libros
 export const BookSchema = z.object({
     title: z.string().min(1, {
@@ -80,13 +84,11 @@ export const BookSchema = z.object({
     description: z.string().min(1, {
         message: "La descripción no puede estar vacía."
     }),
-    coverImage: z
-        .any()
-        .refine((file) => file instanceof File, "Se requiere una imagen"),
-    genre: z.string().optional(),
-    tags: z.array(z.string()).optional(),
+    coverImage: z.string().optional(),
+    genre: GenreEnum.optional(),
+    // tags: z.array(z.string()).optional(),
     status: BookStatusSchema,
-    createdAt: z.date().optional(),
-    updatedAt: z.date().optional(),
-    authorId: z.string().uuid().optional(),
-})
+    authorId: z.string().min(1, {
+        message: "El ID del autor es requerido."
+    })
+});
