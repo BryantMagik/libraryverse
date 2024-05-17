@@ -1,7 +1,7 @@
 "use client"
 import * as React from 'react'
 import { useState } from 'react'
-import { GBook } from '@/app/types/typesBooks'
+import { GBook } from '@/app/types/typesBooksAPi'
 import { Booklist } from '../_componets/books/booklist'
 import Search from '@/components/ui/search'
 import { Separator } from '@/components/ui/separator'
@@ -12,10 +12,12 @@ interface LibroPageProps { }
 const LibroPage: React.FC<LibroPageProps> = () => {
     const [books, setBooks] = useState<GBook[]>([])
     const [query, setQuery] = useState<string>('')
+    const [searchPerformed, setSearchPerformed] = useState<boolean>(false)
 
     const updateBooks = (newBooks: GBook[], newQuery: string) => {
-        setBooks(newBooks)
-        setQuery(newQuery)
+        setBooks(newBooks ?? [])
+        setQuery(newQuery ?? '')
+        setSearchPerformed(true)
     }
 
     return (
@@ -32,15 +34,17 @@ const LibroPage: React.FC<LibroPageProps> = () => {
                         {books.length !== 0 ? (
                             <Booklist title={`Resultados de ${query}`} books={books} type={'gbooks'} />
                         ) : (
-                            <div className="pt-8 xl:mx-[10em]">
-                            </div>
+                            searchPerformed && (
+                                <div className="pt-8 xl:mx-[10em] text-center">
+                                    <p className="text-lg text-gray-500">No se encontraron libros para "{query}".</p>
+                                    <p className="text-sm text-gray-400">Intenta con una búsqueda diferente.</p>
+                                </div>
+                            )
                         )}
                     </div>
                     <ScrollBar orientation='horizontal' />
-
                 </ScrollArea>
             </div>
-
         </>
     )
 }

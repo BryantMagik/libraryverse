@@ -18,7 +18,7 @@ export type User = {
   role: string
   createdAt: Date
   isTwoFactorEnabled: boolean
-};
+}
 
 
 export interface Book {
@@ -29,11 +29,7 @@ export interface Book {
   genre: Genre | null
   tags: string[]
   status: $Enums.BookStatus
-  viewCount: number
-  likeCount: number
-  commentCount: number
   createdAt: Date
   updatedAt: Date
   author: Partial<User> | null;
-  subtitle: string
 }

@@ -3,19 +3,26 @@ import * as React from 'react'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { BookArtwork } from './bookArtwork'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import { Book } from '@/app/types/typesModels'
+import { lastBooks } from '@/actions/last-books'
 
 const BooksView: React.FC = () => {
+
     const [books, setBooks] = useState<Book[]>([])
+    const [isPending, startTransition] = useTransition()
 
     useEffect(() => {
-        const fetchBooks = async () => {
-            const response = await fetch('/api/books')
-            const data = await response.json()
-            setBooks(data)
-        }
-        fetchBooks()
+        startTransition(() => {
+            lastBooks()
+                .then((latestBooks) => {
+                    if ('error' in latestBooks) {
+                        console.error('Error al obtener los últimos libros:', latestBooks.error);
+                    } else {
+                        setBooks(latestBooks);
+                    }
+                })
+        })
     }, [])
 
     return (
@@ -23,10 +30,10 @@ const BooksView: React.FC = () => {
             <div className="flex items-center justify-between">
                 <div className="space-y-1">
                     <h2 className="text-2xl font-semibold tracking-tight">
-                        Historias Completadas
+                        Historias Actualizadas Recientemente
                     </h2>
                     <p className="text-sm text-muted-foreground">
-                        Lee de principio a fin
+                        Descubre las últimas actualizaciones...
                     </p>
                 </div>
             </div>
@@ -38,15 +45,17 @@ const BooksView: React.FC = () => {
                             <BookArtwork key={book.id.toString()} book={book} width={300} height={300} />
                         ))}
                     </div>
+                    <div className="flex space-x-4 pb-4">
 
+                    </div>
                     <ScrollBar orientation='horizontal' />
                 </ScrollArea>
                 <div className='mt-6 space-y-1'>
                     <h2 className='text-2xl font-semibold tracking-tight'>
-                        TEST
+                        Más populares
                     </h2>
                     <p className='text-sm text-muted-foreground'>
-                        TEST
+                        Descubre las historias más populares...
                     </p>
                 </div>
                 <Separator className='my-4' />

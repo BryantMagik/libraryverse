@@ -1,7 +1,7 @@
 import { FormEvent, KeyboardEvent, useState } from 'react';
 import { Input } from '../librarys/Input';
 import { Button } from '../librarys/Button';
-import { GBook } from '@/app/types/typesBooks';
+import { GBook } from '@/app/types/typesBooksAPi';
 
 interface SearchProps {
     updateBooks: (books: GBook[], query: string) => void;

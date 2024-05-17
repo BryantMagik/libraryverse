@@ -6,35 +6,29 @@ import { db } from "@/lib/db";
 import { currentUser } from "@/lib/auth";
 import { getUserById } from "@/data/user";
 
-export const postBook = async (values: z.infer<typeof BookSchema>) => {
-
+export const createBook = async (values: z.infer<typeof BookSchema>) => {
     console.log(values)
 
     const validatedFields = BookSchema.safeParse(values);
-    // console.log("Validated Fields:", validatedFields);
 
     if (!validatedFields.success) {
-        console.error("Validation Error:", validatedFields.error);
-        return { error: "Validation failed" };
+        return { error: "Error de validación" };
     }
 
     const user = await currentUser();
 
     if (!user) {
-        console.error("No user logged in");
-        return { error: "No user logged in" };
+        return { error: "Usuario no autenticado." }
     }
     console.log("Current User:", user);
 
     const dbUser = await getUserById(user.id);
 
     if (!dbUser) {
-        console.error("No logged-in user found in the database");
-        return { error: "User not logged in" };
+        return { error: "Usuario no encontrado en la DB" };
     }
-    console.log("Database User:", dbUser);
 
-    const { title, description,coverImage, genre, status } = validatedFields.data;
+    const { title, description, coverImage, genre, status } = validatedFields.data;
 
     await db.book.create({
         data: {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { GBook, Work } from '@/app/types/typesBooks'
+import { GBook, Work } from '@/app/types/typesBooksAPi'
 import { Book } from './book'
 
 interface IBooklist {

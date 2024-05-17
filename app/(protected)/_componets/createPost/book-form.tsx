@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "../../../../components/ui/textarea"
 import { useEffect, useState, useTransition } from "react"
-import { postBook } from "@/actions/post-books"
+import { createBook } from "@/actions/post-books"
 import { useRouter } from "next/navigation"
 import { FormError } from "@/components/form-error"
 import { FormSuccess } from "@/components/form-success"
@@ -27,11 +27,9 @@ import Image from "next/image"
 
 export const BookForm = () => {
     const user = useCurrentUser();
-    const [file, setFile] = useState<File | null>(null)
     const [error, setError] = useState<string | undefined>("")
     const [success, setSuccess] = useState<string | undefined>("")
     const [isPending, startTransition] = useTransition()
-    const [previewImage, setPreviewImage] = useState<string | undefined>("")
     const [resource, setResource] = useState("")
 
     const router = useRouter()
@@ -59,7 +57,7 @@ export const BookForm = () => {
 
         startTransition(() => {
             console.log("Form values:", values)
-            postBook(values)
+            createBook(values)
                 .then((data) => {
                     if (data?.error) {
                         form.reset()
@@ -215,4 +213,3 @@ export const BookForm = () => {
         </Form>
     )
 }
-

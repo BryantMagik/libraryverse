@@ -13,7 +13,7 @@ import { usePathname } from "next/navigation"
 const links = [
     { href: "/dashboard", label: "Home", Icon: PiHouseSimpleLight },
     { href: "/create", label: "Crear Historia", Icon: IoCreateOutline },
-    { href: "/libros", label: "Libros", Icon: SlNotebook },
+    { href: "/libros", label: "Buscar Libros", Icon: SlNotebook },
     { href: "/categorias", label: "Categorias", Icon: GoBook },
     { href: "/bookshelf", label: "Bookshelf", Icon: BsBookshelf },
     { href: "/login", label: "Cerrar Sesión", Icon: IoIosLogOut }

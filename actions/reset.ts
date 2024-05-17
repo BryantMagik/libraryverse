@@ -5,7 +5,6 @@ import { generatePasswordResetToken } from "@/lib/tokens";
 import { sendPasswordResetEmail } from "@/lib/mail";
 
 export const reset = async (values: z.infer<typeof ResetSchema>) => {
-    // Validar los campos recibidos
     const validatedFields = ResetSchema.safeParse(values);
     if (!validatedFields.success) {
         return { error: "El correo electrónico proporcionado es inválido." };
@@ -19,7 +18,6 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
         return { error: "No se encontró ninguna cuenta asociada a ese correo electrónico." };
     }
 
-    //TO DO PASSWORD RESET
     const passwordResetToken = await generatePasswordResetToken(email)
     await sendPasswordResetEmail(
         passwordResetToken.email,
