@@ -36,11 +36,12 @@ const LibroPage: React.FC<LibroPageProps> = () => {
                         ) : (
                             searchPerformed && (
                                 <div className="pt-8 xl:mx-[10em] text-center">
-                                    <p className="text-lg text-gray-500">No se encontraron libros para "{query}".</p>
+                                    <p className="text-lg text-gray-500">No se encontraron libros para &quot;{query}&quot;.</p>
                                     <p className="text-sm text-gray-400">Intenta con una búsqueda diferente.</p>
                                 </div>
                             )
                         )}
+
                     </div>
                     <ScrollBar orientation='horizontal' />
                 </ScrollArea>
