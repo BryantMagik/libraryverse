@@ -16,7 +16,6 @@ const links = [
     { href: "/libros", label: "Buscar Libros", Icon: SlNotebook },
     { href: "/categorias", label: "Categorias", Icon: GoBook },
     { href: "/bookshelf", label: "Bookshelf", Icon: BsBookshelf },
-    { href: "/login", label: "Cerrar Sesión", Icon: IoIosLogOut }
 ]
 
 export default function Navbar() {

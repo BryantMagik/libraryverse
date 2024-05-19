@@ -28,6 +28,7 @@ export const ResetForm = () => {
     const [isPending, startTransition] = useTransition()
 
     const form = useForm<z.infer<typeof ResetSchema>>({
+
         resolver: zodResolver(ResetSchema),
         defaultValues: {
             email: ""
@@ -37,7 +38,7 @@ export const ResetForm = () => {
     const onSubmit = (values: z.infer<typeof ResetSchema>) => {
         setError("")
         setSuccess("")
-
+        console.log(values)
 
         startTransition(() => {
             reset(values)
@@ -54,7 +55,6 @@ export const ResetForm = () => {
             backButtonLabel="Volver al inicio de sesión"
             backButtonHref="/auth/login"
         >
-
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}

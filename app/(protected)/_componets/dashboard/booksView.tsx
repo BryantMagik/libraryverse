@@ -6,6 +6,7 @@ import { BookArtwork } from './bookArtwork'
 import { useEffect, useState, useTransition } from 'react'
 import { Book } from '@/app/types/typesModels'
 import { lastBooks } from '@/actions/last-books'
+import Link from 'next/link'
 
 const BooksView: React.FC = () => {
 
@@ -42,7 +43,9 @@ const BooksView: React.FC = () => {
                 <ScrollArea>
                     <div className="flex space-x-4 pb-4">
                         {books.map((book) => (
-                            <BookArtwork key={book.id.toString()} book={book} width={300} height={300} />
+                            <Link key={book.id} href="">
+                                <BookArtwork key={book.id.toString()} book={book} width={300} height={300} />
+                            </Link>
                         ))}
                     </div>
                     <div className="flex space-x-4 pb-4">

@@ -2,10 +2,10 @@ import { StaticImageData } from "next/image";
 
 export interface Books {
     query: string;
-    works: Work[];
+    works: Obras[];
 }
 
-export interface Work {
+export interface Obras {
     key: string;
     title: string;
     edition_count: number;

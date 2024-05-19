@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { GBook, Work } from '@/app/types/typesBooksAPi'
+import { GBook, Obras } from '@/app/types/typesBooksAPi'
 import { Book } from './book'
 
 interface IBooklist {
-    books: Work[] | GBook[];
-    title?: string;
-    type: 'gbooks' | 'openlib';
+    books: Obras[] | GBook[]
+    title?: string
+    type: 'gbooks' | 'openlib'
 }
 
 export const Booklist: React.FC<IBooklist> = ({ books, title, type }) => {

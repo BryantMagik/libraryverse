@@ -1,4 +1,4 @@
-import * as z from "zod";
+import * as z from "zod"
 
 //Validación de datos
 
@@ -57,6 +57,7 @@ export const LoginSchema = z.object({
 })
 
 // Esquema de registro
+
 export const RegisterSchema = z.object({
     email: z.string().email({
         message: "Por favor, introduce un correo electrónico válido.",
@@ -68,8 +69,10 @@ export const RegisterSchema = z.object({
         message: "Por favor, introduce tu nombre.",
     }),
 })
+
 //Esquema de Status
-const BookStatusSchema = z.enum(['DRAFT', 'PUBLISHED', 'PAUSED']);
+
+export const BookStatusSchema = z.enum(['DRAFT', 'PUBLISHED', 'PAUSED']);
 
 export const GenreEnum = z.enum([
     'FICTION', 'NONFICTION', 'MYSTERY', 'FANTASY', 'SCIFI', 'ROMANCE', 'HORROR',
@@ -77,6 +80,7 @@ export const GenreEnum = z.enum([
 ])
 
 // Esquema de creación de libros
+
 export const BookSchema = z.object({
     title: z.string().min(1, {
         message: "Por favor, introduce un título."
@@ -91,4 +95,4 @@ export const BookSchema = z.object({
     authorId: z.string().min(1, {
         message: "El ID del autor es requerido."
     })
-});
+})
