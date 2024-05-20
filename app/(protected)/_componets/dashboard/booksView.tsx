@@ -1,4 +1,5 @@
 "use client"
+
 import * as React from 'react'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
@@ -20,7 +21,7 @@ const BooksView: React.FC = () => {
                     if ('error' in latestBooks) {
                         console.error('Error al obtener los últimos libros:', latestBooks.error);
                     } else {
-                        setBooks(latestBooks);
+                        setBooks(latestBooks)
                     }
                 })
         })
@@ -43,7 +44,7 @@ const BooksView: React.FC = () => {
                 <ScrollArea>
                     <div className="flex space-x-4 pb-4">
                         {books.map((book) => (
-                            <Link key={book.id} href="">
+                            <Link key={book.id} href={`/dashboard/${book.id}`}>
                                 <BookArtwork key={book.id.toString()} book={book} width={300} height={300} />
                             </Link>
                         ))}

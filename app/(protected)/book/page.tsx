@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { useState } from 'react'
 import { GBook } from '@/app/types/typesBooksAPi'
-import { Booklist } from '../_componets/books/booklist'
+import { Booklist } from '../_componets/searchBook/booklist'
 import Search from '@/components/ui/search'
 import { Separator } from '@/components/ui/separator'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
@@ -32,7 +32,7 @@ const LibroPage: React.FC<LibroPageProps> = () => {
                 <ScrollArea>
                     <div className="flex space-x-4 pb-4">
                         {books.length !== 0 ? (
-                            <Booklist title={`Resultados de ${query}`} books={books} type={'gbooks'} />
+                            <Booklist title={`Resultados de ${query}`} books={books} />
                         ) : (
                             searchPerformed && (
                                 <div className="pt-8 xl:mx-[10em] text-center">

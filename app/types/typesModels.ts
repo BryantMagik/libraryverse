@@ -1,12 +1,16 @@
 import { $Enums, Genre } from "@prisma/client";
 
 export enum BookStatus {
-  DRAFT = "DRAFT",
-  PUBLISHED = "PUBLISHED",
-  PAUSED = "PAUSED"
+  DRAFT = "en emisión",
+  PUBLISHED = "Terminado",
+  PAUSED = "Pausado"
 }
 
-
+export const statusLabels = {
+  DRAFT: "Continúa",
+  PUBLISHED: "Completa",
+  PAUSED: "Pausado",
+}
 
 export type User = {
   id: string;

@@ -7,12 +7,6 @@ export const GET = async (
     { params }: { params: { bookId: string } }
 ) => {
 
-    const isAdmin = await getIsAdmin()
-
-    if (!isAdmin) {
-        return new NextResponse("Unauthorized", { status: 403 })
-    }
-
     if (!params || !params.bookId) {
         return new NextResponse("Bad Request: ID no encontrado", { status: 400 });
     }
@@ -20,7 +14,10 @@ export const GET = async (
     const data = await db.book.findFirst({
         where: {
             id: params.bookId
-            }
+            },
+        include: {
+            author: true,
+        }
     })
 
     if (!data) {
@@ -36,34 +33,37 @@ export const PUT = async (
     { params }: { params: { bookId: string } }
 ) => {
 
-    const isAdmin = await getIsAdmin()
-
-    if (!isAdmin) {
-        return new NextResponse("Unauthorized", { status: 403 })
-    }
-
     if (!params || !params.bookId) {
         return new NextResponse("Bad Request: ID no encontrado", { status: 400 });
     }
 
     const body = await req.json()
+    const { title, description, coverImage, genre, tags, status } = body;
 
-    const data = await db.book.update({
-        where: {
-            id: params.bookId
-        },
-        include:{
-            author: true
-        },
-        data: body
-    })
+    try {
+        const data = await db.book.update({
+            where: {
+                id: params.bookId
+            },
+            data: {
+                title,
+                description,
+                coverImage,
+                genre,
+                tags,
+                status,
+                updatedAt: new Date()
+            },
+            include: {
+                author: true
+            }
+        })
 
-    if (!data) {
-        return new NextResponse("No encontrado", { status: 404 });
+        return NextResponse.json(data)
+    } catch (error) {
+        console.error('Error updating book:', error);
+        return new NextResponse("Internal Server Error", { status: 500 });
     }
-
-    return NextResponse.json(data)
-
 }
 
 export const DELETE = async (

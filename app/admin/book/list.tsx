@@ -1,13 +1,18 @@
-import { Datagrid, ImageField, List, ReferenceField, TextField } from "react-admin"
+import { Datagrid, ImageField, List, ReferenceField, SelectColumnsButton, TextField, TopToolbar } from "react-admin"
 
 export const Booklist = () => {
 
     return (
-        <List>
-            <Datagrid rowClick="edit">
+        <List
+            actions={
+                <TopToolbar>
+                    <SelectColumnsButton />
+                </TopToolbar>
+            }
+        >
+            <Datagrid rowClick="edit" sx={{ "& .column-reference": { width: 150 } }}>
                 <TextField source="id" />
                 <TextField source="title" />
-                <TextField source="description" />
                 <ImageField source="coverImage" />
                 <TextField source="genre" />
                 <TextField source="tags" />
