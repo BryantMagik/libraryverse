@@ -37,3 +37,13 @@ export interface Book {
   updatedAt: Date
   author: Partial<User> | null;
 }
+
+export interface Chapter {
+  id: string
+  title: string
+  content: string
+  book: Book
+  createdAt: Date
+  updatedAt: Date
+
+}

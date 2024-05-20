@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
 import { db } from "@/lib/db"
-import { getIsAdmin } from "@/lib/admin"
 
 export async function GET() {
 

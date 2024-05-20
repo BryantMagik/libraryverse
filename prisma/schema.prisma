@@ -126,7 +126,7 @@ model UserBook {
   bookId  String
   user    User     @relation(fields: [userId], references: [id])
   book    Book     @relation(fields: [bookId], references: [id])
-  addedAt DateTime @default(now()) // Fecha cuando el usuario agregó el libro a su estante
+  addedAt DateTime @default(now()) 
 
   @@id([userId, bookId])
 }

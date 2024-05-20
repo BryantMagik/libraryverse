@@ -7,6 +7,7 @@ import { BookCreate } from "./book/create"
 import { BookEdit } from "./book/edit"
 import { Userlist } from "./user/list"
 import { UserEdit } from "./user/edit"
+import { Chapterlist } from "./chapter/list"
 
 const dataProvider = simpleRestProvider("/api")
 
@@ -24,6 +25,11 @@ const App = () => {
                 name="users"
                 list={Userlist}
                 edit={UserEdit}
+                recordRepresentation="title"
+            />
+            <Resource
+                name="chapter"
+                list={Chapterlist}
                 recordRepresentation="title"
             />
         </Admin>
