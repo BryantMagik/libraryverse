@@ -1,17 +1,12 @@
+import { getBookById } from "@/data/book"
 import { db } from "@/lib/db"
 import { NextResponse } from "next/server"
 
-export async function GET(req: any) {
+export async function GET() {
+    try {
+        
 
-    const { bookId } = req.params
-
-    const chapters = await db.chapter.findMany({
-        where: {
-            bookId: bookId
-        }
-    })
-
-    return NextResponse.json(chapters)
-
+    } catch (error) {
+        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    }
 }
-

@@ -1,3 +1,4 @@
+import { title } from "process";
 import * as z from "zod"
 
 //Validación de datos
@@ -95,4 +96,20 @@ export const BookSchema = z.object({
     authorId: z.string().min(1, {
         message: "El ID del autor es requerido."
     })
+})
+
+export const ChapterSchema = z.object({
+    title: z.string().min(1, {
+        message: "Por favor, introduce un título"
+    }),
+    content: z.string().min(1, {
+        message: "Al menos, necesitas introducir algo en el contenido"
+    }),
+    order: z.number().min(1,{
+        message: "debes introducir el orden del capitulo."
+    }),
+    bookId: z.string().min(1,{
+        message: "El ID del libro es requerido."
+    })
+
 })

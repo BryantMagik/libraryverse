@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "./favicon.ico"
   }
-};
+}
 
 export default async function RootLayout({
   children,
@@ -27,5 +27,5 @@ export default async function RootLayout({
           {children}</body>
       </html>
     </SessionProvider>
-  );
+  )
 }

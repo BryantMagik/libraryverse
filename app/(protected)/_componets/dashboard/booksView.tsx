@@ -28,13 +28,16 @@ const BooksView: React.FC = () => {
     }, [])
 
     return (
-        <div>
-            <div className="flex items-center justify-between">
+        <div className=''>
+            <div className="">
                 <div className="space-y-1">
-                    <h2 className="text-2xl font-semibold tracking-tight">
+                    <h2
+                        className="text-2xl leading-9 font-semibold text-custom-gray border-almond-300 border-b-4
+                    dark:text-emerald-600 dark:border-emerald-400"
+                    >
                         Historias Actualizadas Recientemente
                     </h2>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-muted-foreground dark:text-white">
                         Descubre las últimas actualizaciones...
                     </p>
                 </div>
@@ -49,23 +52,24 @@ const BooksView: React.FC = () => {
                             </Link>
                         ))}
                     </div>
-                    <div className="flex space-x-4 pb-4">
-
-                    </div>
                     <ScrollBar orientation='horizontal' />
                 </ScrollArea>
                 <div className='mt-6 space-y-1'>
-                    <h2 className='text-2xl font-semibold tracking-tight'>
+                    <h2 className="text-2xl font-semibold text-custom-gray border-almond-300 border-b-4  dark:text-emerald-600 dark:border-emerald-400">
                         Más populares
                     </h2>
-                    <p className='text-sm text-muted-foreground'>
+                    <p className='text-sm text-muted-foreground dark:text-white'>
                         Descubre las historias más populares...
                     </p>
                 </div>
                 <Separator className='my-4' />
                 <ScrollArea>
                     <div className="flex space-x-4 pb-4">
-
+                        {books.map((book) => (
+                            <Link key={book.id} href={`/dashboard/${book.id}`}>
+                                <BookArtwork key={book.id.toString()} book={book} width={300} height={300} />
+                            </Link>
+                        ))}
                     </div>
                     <ScrollBar orientation='horizontal' />
                 </ScrollArea>

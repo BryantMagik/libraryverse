@@ -24,7 +24,7 @@ export const UserButton = () => {
     return (
         <>
             <h3 className="text-sm font-semibold text-muted-foreground">
-                ¡Te damos la bienvenida, <span className="dark:text-emerald-500 text-white">{user.session?.name}!</span>
+                ¡Te damos la bienvenida, <span className="dark:text-emerald-500 text-library-600">{user.session?.name}!</span>
             </h3>
             <DropdownMenu>
                 <DropdownMenuTrigger>

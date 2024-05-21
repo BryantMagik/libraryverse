@@ -30,7 +30,6 @@ export const generatePasswordResetToken = async (email: string) => {
 export const generateVerificationToken = async (email: string) => {
     const token: string = uuidv4()
 
-    //TODO: cambiar a 15 minutos mucho mejor
     const expiresTime = new Date(new Date().getTime() + 3600 * 1000)
 
     const existingToken = await getVerificationTokenByEmail(email)

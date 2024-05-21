@@ -21,7 +21,6 @@ const links = [
     { href: "/home", label: "INICIO" },
     { href: "/about", label: "SOBRE" },
     { href: "/contact", label: "CONTACTO" },
-
 ]
 
 export default function NavbarHome() {

@@ -1,31 +1,26 @@
 "use client"
-import { useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation' // Importa useSearchParams
+
+import { startTransition, useEffect, useState } from 'react'
 import { Chapter } from '@/app/types/typesModels'
+import { listChapter } from '@/actions/list-chapter'
+import { useParams } from 'next/navigation'
 
 const BookChaptersPage = () => {
     const [chapters, setChapters] = useState<Chapter[]>([])
-    const searchParams = useSearchParams()
-    const id = searchParams.get('id')
+    const { id } = useParams()
+    const bookId = Array.isArray(id) ? id[0] : id;
 
     useEffect(() => {
-        const fetchChapters = async () => {
-            if (id) {
-                try {
-                    const response = await fetch(`/api/books/${id}/chapters`)
-                    if (response.ok) {
-                        const chaptersData = await response.json()
-                        setChapters(chaptersData)
-                    } else {
-                        console.error('Error al obtener los capítulos del libro:', response.statusText)
-                    }
-                } catch (error) {
-                    console.error('Error al obtener los capítulos del libro:', error)
-                }
-            }
+        if (id) {
+            startTransition(() => {
+                listChapter(bookId)
+                    .then((fetchedChapters) => {
+                        setChapters(fetchedChapters)
+                    }).catch(error => {
+                        console.error("Error en server actions de listChapter:", error)
+                    })
+            })
         }
-
-        fetchChapters()
     }, [id])
 
     return (
@@ -34,7 +29,10 @@ const BookChaptersPage = () => {
             {chapters.length > 0 ? (
                 <ul>
                     {chapters.map(chapter => (
-                        <li key={chapter.id}>{chapter.title}</li>
+                        <div>
+                            <li key={chapter.id}>{chapter.title}</li>
+                            <p>{chapter.content}</p>
+                        </div>
                     ))}
                 </ul>
             ) : (

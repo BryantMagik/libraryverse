@@ -28,11 +28,18 @@ export default function Navbar() {
                     <Link href={link.href} key={link.href} passHref
                         className={`flex h-[48px] grow items-center border-0 justify-center gap-2 rounded-md p-3 font-medium md:flex-none md:justify-start md:p-2 md:px-3 md:w-44`}
                     >
-                        <Button variant={pathname === link.href ? "default" : "outline"}
-                            className={`flex h-[48px] grow items-center border-0 justify-center gap-2 rounded-md p-3 font-medium md:flex-none md:justify-start md:p-2 md:px-3 md:w-44 ${pathname === link.href ? "bg-blue-500 text-white dark:bg-emerald-500" : "bg-emerald-500 hover:bg-gray-200 text-gray-800 dark:bg-black"}`}
+                        <Button
+                            variant={pathname === link.href ? "default" : "outline"}
+                            className={`flex h-[48px] grow items-center border-0 justify-center gap-2 rounded-md p-3 font-medium md:flex-none md:justify-start md:p-2 md:px-3 md:w-44
+                            ${pathname === link.href
+                                    ? "bg-library-400 dark:bg-emerald-500 hover:bg-library-600 text-white"
+                                    : "bg-library-200 text-library-500 hover:bg-library-600 hover:text-white dark:bg-black dark:hover:bg-emerald-600 dark:text-white"
+                                }`}
                         >
-                            <link.Icon className="text-white text-lg" />
-                            <span className="text-white hidden md:block">{link.label}</span>
+                            <link.Icon className={`text-lg ${pathname === link.href}`} />
+                            <span className={`hidden md:block ${pathname === link.href}`}>
+                                {link.label}
+                            </span>
                         </Button>
                     </Link>
                 )

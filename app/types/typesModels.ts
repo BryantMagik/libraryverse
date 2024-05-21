@@ -42,7 +42,7 @@ export interface Chapter {
   id: string
   title: string
   content: string
-  book: Book
+  bookId: string
   createdAt: Date
   updatedAt: Date
 

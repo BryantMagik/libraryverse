@@ -3,11 +3,10 @@
 import { useEffect, useState } from 'react'
 import { Book, statusLabels } from '@/app/types/typesModels'
 import Image from 'next/image'
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card"
+import { Card, CardBody } from "@nextui-org/card"
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@nextui-org/button'
-import { useRouter } from 'next/navigation'
-import { useParams } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 
 const BookDetails = () => {
     const [book, setBook] = useState<Book | null>(null)
