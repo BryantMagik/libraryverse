@@ -29,10 +29,10 @@ const BookChaptersPage = () => {
             {chapters.length > 0 ? (
                 <ul>
                     {chapters.map(chapter => (
-                        <div>
+                        <>
                             <li key={chapter.id}>{chapter.title}</li>
                             <p>{chapter.content}</p>
-                        </div>
+                        </>
                     ))}
                 </ul>
             ) : (
