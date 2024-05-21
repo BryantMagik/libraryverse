@@ -118,7 +118,7 @@ model Book {
   chapters        Chapter[]
   bookshelfOwners UserBook[]
 
-  @@unique([title, authorId])
+  @@unique([ authorId])
 }
 
 model UserBook {

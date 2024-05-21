@@ -18,7 +18,7 @@ export const BookArtwork: React.FC<BookArtworkProps> = ({
     className,
     ...props
 }) => {
-    const imageUrl = book.coverImage || '/path/to/default-image.png'
+    const imageUrl = book.coverImage || '/dashboard/book-placeholder.jpg'
     const altText = book.title || 'Sin titulo'
 
     return (

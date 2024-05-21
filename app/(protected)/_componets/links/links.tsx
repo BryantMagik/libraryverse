@@ -20,7 +20,6 @@ const links = [
 
 export default function Navbar() {
     const pathname = usePathname()
-
     return (
         <>
             {links.map((link) => {
