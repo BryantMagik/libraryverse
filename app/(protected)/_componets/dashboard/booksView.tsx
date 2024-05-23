@@ -5,36 +5,22 @@ import useSWR from 'swr'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { BookArtwork } from './bookArtwork'
-import { useEffect, useState } from 'react'
 import { Book } from '@/app/types/typesModels'
 import { lastBooks } from '@/actions/last-books'
 import Link from 'next/link'
 
 const BooksView: React.FC = () => {
 
-    const { data: books, error } = useSWR('lastBooks', lastBooks, { refreshInterval: 1000})
-    if (error) return <div>Error al cargar los libros: {error}</div>;
-    
+    const { data: books, error } = useSWR('lastBooks', lastBooks, { })
+    if (error) return <div>Error al cargar los libros: {error}</div>
+
     if (books && 'error' in books) {
-        return <div>Error al obtener los libros: {books.error}</div>;
+        return <div>Error al obtener los libros: {books.error}</div>
     }
 
     if (!books) {
-        return <div>Cargando libros...</div>;
+        return <div>Cargando libros...</div>
     }
-
-    // const [books, setBooks] = useState<Book[]>([])
-    // useEffect(() => {
-    //     lastBooks()
-    //         .then((latestBooks) => {
-    //             if ('error' in latestBooks) {
-    //                 console.error('Error al obtener los últimos libros:', latestBooks.error)
-    //             } else {
-    //                 setBooks(latestBooks)
-    //             }
-    //         })
-
-    // }, [])
 
     return (
         <div className=''>

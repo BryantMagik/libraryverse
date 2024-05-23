@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from 'react'
-import { Book, statusLabels } from '@/app/types/typesModels'
+import { Book, GenreEnumESP, statusLabels } from '@/app/types/typesModels'
 import Image from 'next/image'
 import { Card, CardBody } from "@nextui-org/card"
 import { Separator } from '@/components/ui/separator'
@@ -62,7 +62,7 @@ const BookDetails = () => {
                             <h2 className='text-2xl mb-7 font-normal'>Acerca de</h2>
                             <p>Fecha de publicación: <span className='text-library-300'>{fechaCreacion}</span></p>
                             <p>Última actualización: <span className='text-library-300'>{fechaActualizacion}</span></p>
-                            <p>Género: <span className='text-library-300'>{book.genre}</span></p>
+                            <p>Género: <span className='text-library-300'>{book.genre ? GenreEnumESP[book.genre] : ''}</span></p>
                             <p>Estado del Verse: <span className='text-library-300'>{statusLabels[book.status]}</span></p>
                         </div>
                         <div className='mt-8'>

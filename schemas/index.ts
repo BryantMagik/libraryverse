@@ -1,4 +1,3 @@
-import { title } from "process";
 import * as z from "zod"
 
 //Validación de datos
@@ -76,8 +75,10 @@ export const RegisterSchema = z.object({
 export const BookStatusSchema = z.enum(['DRAFT', 'PUBLISHED', 'PAUSED']);
 
 export const GenreEnum = z.enum([
-    'FICTION', 'NONFICTION', 'MYSTERY', 'FANTASY', 'SCIFI', 'ROMANCE', 'HORROR',
-    'BIOGRAPHY', 'HISTORY', 'POETRY', 'OTHER'
+    'Fiction', 'NONFICTION', 'MYSTERY', 'FANTASY', 'SCIFI', 'Romance', 'HORROR',
+    'BIOGRAPHY', 'History', 'Poetry', 'OTHER','Political_Science','Grief',
+    'ADVENTURE', 'CHILDREN', 'THRILLER', 'CRIME', 'DRAMA','Literary_Criticism','Family_&_Relationships',
+    'COMEDY', 'ACTION', 'SELF_HELP', 'ART', 'Cooking','Juvenile_Nonfiction','COMPUTERS','Biography_&_Autobiography','Young_Adult_Fiction'
 ])
 
 // Esquema de creación de libros

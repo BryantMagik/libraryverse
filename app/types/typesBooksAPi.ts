@@ -1,92 +1,31 @@
-import { StaticImageData } from "next/image";
-
-export interface Books {
-    query: string;
-    works: Obras[];
-}
-
-export interface Obras {
-    key: string;
-    title: string;
-    edition_count: number;
-    first_publish_year: number;
-    has_fulltext: boolean;
-    public_scan_b: boolean;
-    ia?: string[];
-    ia_collection_s?: string;
-    lending_edition_s?: string;
-    lending_identifier_s?: string;
-    cover_edition_key?: string;
-    cover_i?: number;
-    language?: string[];
-    author_key?: string[];
-    author_name?: string[];
-    availability?: Availability;
-    subtitle?: string;
-    id_librivox?: string[];
-    id_project_gutenberg?: string[];
-}
-
-export interface Availability {
-    status: Status;
-    available_to_browse: boolean;
-    available_to_borrow: boolean;
-    available_to_waitlist: boolean;
-    is_printdisabled: boolean;
-    is_readable: boolean;
-    is_lendable: boolean;
-    is_previewable: boolean;
-    identifier: string;
-    isbn: null | string;
-    oclc: null;
-    openlibrary_work: string;
-    openlibrary_edition: string;
-    last_loan_date: Date | null;
-    num_waitlist: null | string;
-    last_waitlist_date: Date | null;
-    is_restricted: boolean;
-    is_browseable: boolean;
-    __src__: Src;
-}
-
-export enum Src {
-    CoreModelsLendingGetAvailability = "core.models.lending.get_availability",
-}
-
-export enum Status {
-    BorrowAvailable = "borrow_available",
-    BorrowUnavailable = "borrow_unavailable",
-    Open = "open",
-    Private = "private",
-}
 export interface GBooks {
-    kind: string;
-    totalItems: number;
-    items: GBook[];
+    kind: string
+    totalItems: number
+    items: GBook[]
 }
 
 export interface GBook {
-    kind: Kind;
-    id: string;
-    etag: string;
-    selfLink: string;
-    volumeInfo: VolumeInfo;
-    saleInfo: SaleInfo;
-    accessInfo: AccessInfo;
-    searchInfo: SearchInfo;
+    kind: Kind
+    id: string
+    etag: string
+    selfLink: string
+    volumeInfo: VolumeInfo
+    saleInfo: SaleInfo
+    accessInfo: AccessInfo
+    searchInfo: SearchInfo
 }
 
 export interface AccessInfo {
-    country: Country;
-    viewability: Viewability;
-    embeddable: boolean;
-    publicDomain: boolean;
-    textToSpeechPermission: TextToSpeechPermission;
-    epub: Epub;
-    pdf: Epub;
-    webReaderLink: string;
-    accessViewStatus: AccessViewStatus;
-    quoteSharingAllowed: boolean;
+    country: Country
+    viewability: Viewability
+    embeddable: boolean
+    publicDomain: boolean
+    textToSpeechPermission: TextToSpeechPermission
+    epub: Epub
+    pdf: Epub
+    webReaderLink: string
+    accessViewStatus: AccessViewStatus
+    quoteSharingAllowed: boolean
 }
 
 export enum AccessViewStatus {
@@ -117,13 +56,13 @@ export enum Kind {
 }
 
 export interface SaleInfo {
-    country: Country;
-    saleability: Saleability;
-    isEbook: boolean;
-    listPrice?: SaleInfoListPrice;
-    retailPrice?: SaleInfoListPrice;
-    buyLink?: string;
-    offers?: Offer[];
+    country: Country
+    saleability: Saleability
+    isEbook: boolean
+    listPrice?: SaleInfoListPrice
+    retailPrice?: SaleInfoListPrice
+    buyLink?: string
+    offers?: Offer[]
 }
 
 export interface SaleInfoListPrice {
@@ -156,28 +95,28 @@ export interface SearchInfo {
 }
 
 export interface VolumeInfo {
-    title: string;
-    subtitle?: string;
-    authors: string[];
-    publisher?: string;
-    publishedDate?: string;
-    description: string;
-    industryIdentifiers?: IndustryIdentifier[];
-    readingModes: ReadingModes;
-    pageCount?: number;
-    printType: PrintType;
-    categories?: string[];
-    averageRating?: number;
-    ratingsCount?: number;
-    maturityRating: MaturityRating;
-    allowAnonLogging: boolean;
-    contentVersion: string;
-    panelizationSummary: PanelizationSummary;
-    imageLinks: ImageLinks;
-    language: string;
-    previewLink: string;
-    infoLink: string;
-    canonicalVolumeLink: string;
+    title: string
+    subtitle?: string
+    authors: string[]
+    publisher?: string
+    publishedDate?: string
+    description: string
+    industryIdentifiers?: IndustryIdentifier[]
+    readingModes: ReadingModes
+    pageCount?: number
+    printType: PrintType
+    categories?: string[]
+    averageRating?: number
+    ratingsCount?: number
+    maturityRating: MaturityRating
+    allowAnonLogging: boolean
+    contentVersion: string
+    panelizationSummary: PanelizationSummary
+    imageLinks: ImageLinks
+    language: string
+    previewLink: string
+    infoLink: string
+    canonicalVolumeLink: string
 }
 
 export interface ImageLinks {

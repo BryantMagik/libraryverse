@@ -26,7 +26,7 @@ import {
 import { toast } from "sonner"
 import { SettingsSchema } from "@/schemas"
 import { settings } from "@/actions/settings"
-import { useCurrentUser } from "@/hooks/use-current-user"
+import { useCurrentUser } from "@/hooks/useCurrentUser"
 import { UserRole } from "@prisma/client"
 import { useSession } from "next-auth/react"
 

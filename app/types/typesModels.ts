@@ -6,6 +6,31 @@ export enum BookStatus {
   PAUSED = "Pausado"
 }
 
+export const GenreEnumESP = {
+  FICTION: 'Ficción',
+  NONFICTION: 'No ficción',
+  MYSTERY: 'Misterio',
+  FANTASY: 'Fantasía',
+  SCIFI: 'Ciencia ficción',
+  ROMANCE: 'Romance',
+  HORROR: 'Terror',
+  BIOGRAPHY: 'Biografía',
+  HISTORY: 'Historia',
+  POETRY: 'Poesía',
+  OTHER: 'Otro',
+  ADVENTURE: 'Aventura',
+  CHILDREN: 'Infantil',
+  THRILLER: 'Suspenso',
+  CRIME: 'Crimen',
+  DRAMA: 'Drama',
+  COMEDY: 'Comedia',
+  ACTION: 'Acción',
+  SELF_HELP: 'Autoayuda',
+  ART: 'Arte',
+  COOKING: 'Cocina',
+}
+
+
 export const statusLabels = {
   DRAFT: "Continúa",
   PUBLISHED: "Completa",

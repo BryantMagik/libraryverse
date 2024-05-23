@@ -11,7 +11,7 @@ export const BOOKS_IMAGE_SIZE = '?fife=w480-h690'
 
 export const Book: React.FC<IBook> = ({ book }) => {
     
-    const author: string | undefined = book.volumeInfo.authors?.join(', ') ?? 'Anonymous'
+    const author: string | undefined = book.volumeInfo.authors?.join(', ') ?? 'Anonimo'
     const imgUrl: string | undefined = (book.volumeInfo.imageLinks?.thumbnail ?? '/dashboard/book-placeholder.jpg') + BOOKS_IMAGE_SIZE
     const title: string = book.volumeInfo.title
     const bookId: string = book.id ?? ''
@@ -26,5 +26,5 @@ export const Book: React.FC<IBook> = ({ book }) => {
                 }}
             />
         </Link>
-    );
-};
+    )
+}

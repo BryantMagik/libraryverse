@@ -101,6 +101,17 @@ enum Genre {
   HISTORY
   POETRY
   OTHER
+  ADVENTURE
+  CHILDREN
+  THRILLER
+  CRIME
+  DRAMA
+  COMEDY
+  ACTION
+  SELF_HELP
+  ART
+  COOKING
+  JUVENILE_NONFICTION
 }
 
 model Book {
@@ -117,8 +128,6 @@ model Book {
   author          User       @relation("AuthorBooks", fields: [authorId], references: [id])
   chapters        Chapter[]
   bookshelfOwners UserBook[]
-
-  @@unique([ authorId])
 }
 
 model UserBook {

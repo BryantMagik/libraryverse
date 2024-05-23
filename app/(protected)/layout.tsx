@@ -2,7 +2,7 @@
 import { Children, useEffect } from "react";
 import NavbarApp from "./_componets/navbarApp";
 import SideNav from "./_componets/sideNav";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useSession } from "next-auth/react";
 
 interface ProtectedLayoutProps {

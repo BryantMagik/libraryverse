@@ -26,7 +26,7 @@ const Search: React.FC<SearchProps> = ({ updateBooks }) => {
         }
         const startIndex = page * maxResults;
         const response = await fetch(
-            `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}&startIndex=${startIndex}&maxResults=${maxResults}&key=${process.env.NEXT_PUBLIC_GOOGLEBOOKS_KEY}`
+            `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}&orderBy=relevance&startIndex=${startIndex}&maxResults=${maxResults}&key=${process.env.NEXT_PUBLIC_GOOGLEBOOKS_KEY}`
         )
         const data = await response.json();
         const fetchedBooks: GBook[] = data.items || []

@@ -25,7 +25,7 @@ export const settings = async (
         return { error: "  " }
     }
 
-    const dbUser = await getUserById(user.id);
+    const dbUser = await getUserById(user.id)
 
     if (!dbUser) {
         return { error: "Usuario no ha iniciado sesión" }

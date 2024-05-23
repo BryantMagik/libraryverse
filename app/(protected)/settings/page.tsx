@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { SettingsMainpanel } from "../_componets/settings/main-panel";
 
 const SettingsPage = () => {

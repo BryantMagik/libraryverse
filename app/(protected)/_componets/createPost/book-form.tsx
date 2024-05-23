@@ -20,11 +20,12 @@ import { useRouter } from "next/navigation"
 import { FormError } from "@/components/form-error"
 import { FormSuccess } from "@/components/form-success"
 import { Button } from "@/components/ui/button"
-import { useCurrentUser } from "@/hooks/use-current-user"
+import { useCurrentUser } from "@/hooks/useCurrentUser"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectScrollUpButton, SelectItem, SelectScrollDownButton } from "@/components/ui/select"
 import { CldUploadWidget } from 'next-cloudinary'
 import { HiMiniPhoto } from "react-icons/hi2"
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react"
+import { GenreEnumESP } from "@/app/types/typesModels"
 
 export const BookForm = () => {
     const user = useCurrentUser();
@@ -182,19 +183,17 @@ export const BookForm = () => {
                                                     onValueChange={field.onChange}
                                                     disabled={isPending}
                                                 >
-                                                    <SelectTrigger>
+                                                    <SelectTrigger className="w-[280px]">
                                                         <SelectValue placeholder="Selecciona un genero" />
                                                     </SelectTrigger>
                                                     <SelectContent>
-                                                        <SelectScrollUpButton />
-                                                        <SelectGroup>
+                                                        <SelectGroup >
                                                             {GenreEnum.options.map((genre) => (
                                                                 <SelectItem key={genre} value={genre}>
-                                                                    {genre}
+                                                                    {GenreEnumESP[genre]}
                                                                 </SelectItem>
                                                             ))}
                                                         </SelectGroup>
-                                                        <SelectScrollDownButton />
                                                     </SelectContent>
                                                 </Select>
                                             </FormControl>

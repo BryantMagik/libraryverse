@@ -14,7 +14,7 @@ import {
     AvatarImage,
     AvatarFallback,
 } from "@/components/ui/avatar"
-import { useCurrentUser } from "@/hooks/use-current-user"
+import { useCurrentUser } from "@/hooks/useCurrentUser"
 import { LogoutButton } from "@/components/auth/logout-button"
 import { SettingsButton } from "@/components/auth/settings-button"
 
