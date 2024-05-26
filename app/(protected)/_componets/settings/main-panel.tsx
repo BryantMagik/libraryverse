@@ -16,26 +16,18 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
-import {
-    Select,
-    SelectContent,
-    SelectTrigger,
-    SelectValue,
-    SelectItem
-} from "@/components/ui/select"
 import { toast } from "sonner"
 import { SettingsSchema } from "@/schemas"
 import { settings } from "@/actions/settings"
 import { useCurrentUser } from "@/hooks/useCurrentUser"
-import { UserRole } from "@prisma/client"
 import { useSession } from "next-auth/react"
 
 export const SettingsMainpanel = () => {
 
     const [isPending, startTransition] = useTransition()
-    const user = useCurrentUser();
-    const dateToday = new Date();
-    const { update } = useSession();
+    const user = useCurrentUser()
+    const dateToday = new Date()
+    const { update } = useSession()
 
     const form = useForm<z.infer<typeof SettingsSchema>>({
         resolver: zodResolver(SettingsSchema),
@@ -46,7 +38,7 @@ export const SettingsMainpanel = () => {
             newPassword: undefined,
             isTwoFactorEnabled: user.session?.twoFactorAuth || undefined,
         },
-    });
+    })
 
     const onSubmit = (values: z.infer<typeof SettingsSchema>) => {
         startTransition(() => {
@@ -59,7 +51,7 @@ export const SettingsMainpanel = () => {
                             label: "Cancelar",
                             onClick: () => toast.info("Cancelado"),
                         },
-                    });
+                    })
                 }
                 if (data?.error) {
                     toast.error(data.error, {
@@ -82,7 +74,7 @@ export const SettingsMainpanel = () => {
             })
         })
         update()
-    };
+    }
     return (
         <div id="#start" className="overflow pl-4">
             <div className="mb-2">

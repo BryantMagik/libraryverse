@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { GBook } from '@/app/types/typesBooksAPi'
-import { BookArtwork } from '../dashboard/bookArtwork'
+import { BookArtwork } from '../bookArtwork'
 
 interface IBook {
     book: GBook

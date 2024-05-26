@@ -7,8 +7,10 @@ import { Card, CardBody } from "@nextui-org/card"
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@nextui-org/button'
 import { useRouter, useParams } from 'next/navigation'
+import { ScrollShadow } from "@nextui-org/scroll-shadow"
 
 const BookDetails = () => {
+
     const [book, setBook] = useState<Book | null>(null)
     const router = useRouter()
     const { id } = useParams()
@@ -47,7 +49,7 @@ const BookDetails = () => {
     return (
         <>
             {book ? (
-                <div className='grid grid-cols-2 gap-1'>
+                <div className='grid sm:grid-cols-1 md:grid-cols-2 gap-1 grid-cols-1'>
                     <div className='text-center'>
                         <Image src={book.coverImage ?? '/dashboard/book-placeholder.jpg'} width="350" height="20" alt="a" className="mx-auto" />
                         <div className='flex flex-row justify-center space-x-3 mt-10'>
@@ -55,7 +57,7 @@ const BookDetails = () => {
                             <Button className=''>Agregar al Bookshelf</Button>
                         </div>
                     </div>
-                    <div>
+                    <div className='md:mt-2 lg:mt-0'>
                         <h1 className='text-3xl font-semibold leading-9 text-custom-gray'>{book.title}</h1>
                         <h2 className='text-2x1 font-medium text-library-400'>{book.author?.name}</h2>
                         <div className='mt-6'>
@@ -67,12 +69,14 @@ const BookDetails = () => {
                         </div>
                         <div className='mt-8'>
                             <h2 className='text-2xl mb-7 font-normal'>Descripción</h2>
-                            <Card className="">
-                                <Separator />
-                                <CardBody>
-                                    <p className='text-justify'>{book.description}</p>
-                                </CardBody>
-                            </Card>
+                            <ScrollShadow className="md:w-[550px] md:h-[200px] w-[350px] h-[200px]">
+                                <Card className="">
+                                    <Separator />
+                                    <CardBody>
+                                        <p className='text-justify'>{book.description}</p>
+                                    </CardBody>
+                                </Card>
+                            </ScrollShadow>
                         </div>
                     </div>
                 </div>

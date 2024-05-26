@@ -1,12 +1,17 @@
 "use client"
 
-const CategoriasPage = () => {
+import { mybooks } from '@/actions/list-mybooks'
+import MyBooks from '../_componets/books/mybook'
+
+const MisHistorias = () => {
+
+
 
     return (
-        <>
-            <h1>Estas en historias, aqui se mostraran tus historias aun en Mantenimiento</h1>
-        </>
+        <div>
+            <MyBooks />
+        </div>
     )
 }
 
-export default CategoriasPage
+export default MisHistorias

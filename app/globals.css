@@ -79,3 +79,12 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.active {
+  background-color: #0070f3;
+  color: white;
+}
+
+.active:hover {
+  background-color: #005bb5;
+}

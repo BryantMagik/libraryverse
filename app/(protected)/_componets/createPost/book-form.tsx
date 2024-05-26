@@ -28,7 +28,7 @@ import { Card, CardHeader, CardBody, Image } from "@nextui-org/react"
 import { GenreEnumESP } from "@/app/types/typesModels"
 
 export const BookForm = () => {
-    const user = useCurrentUser();
+    const user = useCurrentUser()
     const [error, setError] = useState<string | undefined>("")
     const [success, setSuccess] = useState<string | undefined>("")
     const [isPending, startTransition] = useTransition()

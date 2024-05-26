@@ -74,11 +74,13 @@ export const RegisterSchema = z.object({
 
 export const BookStatusSchema = z.enum(['DRAFT', 'PUBLISHED', 'PAUSED']);
 
+
 export const GenreEnum = z.enum([
-    'Fiction', 'NONFICTION', 'MYSTERY', 'FANTASY', 'SCIFI', 'Romance', 'HORROR',
-    'BIOGRAPHY', 'History', 'Poetry', 'OTHER','Political_Science','Grief',
-    'ADVENTURE', 'CHILDREN', 'THRILLER', 'CRIME', 'DRAMA','Literary_Criticism','Family_&_Relationships',
-    'COMEDY', 'ACTION', 'SELF_HELP', 'ART', 'Cooking','Juvenile_Nonfiction','COMPUTERS','Biography_&_Autobiography','Young_Adult_Fiction'
+    'FICTION', 'NONFICTION', 'MYSTERY', 'FANTASY', 'SCIFI', 'ROMANCE', 'HORROR',
+    'BIOGRAPHY', 'HISTORY', 'POETRY', 'OTHER',
+    'POLITICAL_SCIENCE', 'GRIEF',
+    'ADVENTURE', 'CHILDREN', 'THRILLER', 'CRIME', 'DRAMA', 'LITERARY_CRITICISM', 'FAMILY_RELATIONSHIPS',
+    'COMEDY', 'ACTION', 'SELF_HELP', 'ART', 'COOKING', 'JUVENILE_NONFICTION', 'COMPUTERS', 'BIOGRAPHY_AUTOBIOGRAPHY', 'YOUNG_ADULT_FICTION'
 ])
 
 // Esquema de creación de libros
@@ -106,10 +108,10 @@ export const ChapterSchema = z.object({
     content: z.string().min(1, {
         message: "Al menos, necesitas introducir algo en el contenido"
     }),
-    order: z.number().min(1,{
+    order: z.number().min(1, {
         message: "debes introducir el orden del capitulo."
     }),
-    bookId: z.string().min(1,{
+    bookId: z.string().min(1, {
         message: "El ID del libro es requerido."
     })
 

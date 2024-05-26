@@ -28,6 +28,14 @@ export const GenreEnumESP = {
   SELF_HELP: 'Autoayuda',
   ART: 'Arte',
   COOKING: 'Cocina',
+  JUVENILE_NONFICTION: 'No ficción juvenil',
+  POLITICAL_SCIENCE: 'Ciencias políticas',
+  GRIEF: 'Duelo',
+  LITERARY_CRITICISM: 'Crítica literaria',
+  FAMILY_RELATIONSHIPS: 'Familia y relaciones',
+  COMPUTERS: 'Computación',
+  BIOGRAPHY_AUTOBIOGRAPHY: 'Biografía y autobiografía',
+  YOUNG_ADULT_FICTION: 'Ficción para jóvenes adultos'
 }
 
 
