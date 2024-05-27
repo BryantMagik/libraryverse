@@ -1,4 +1,5 @@
 "use client"
+
 import { logout } from "@/actions/logout"
 
 interface LogoutButtonProps {
@@ -7,7 +8,11 @@ interface LogoutButtonProps {
 
 export const LogoutButton = ({ children }: LogoutButtonProps) => {
 
+
     const onClick = () => {
+        localStorage.clear()
+        sessionStorage.clear()
+    
         logout()
     }
 

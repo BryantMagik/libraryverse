@@ -22,13 +22,13 @@ export const createBook = async (values: z.infer<typeof BookSchema>) => {
     }
     console.log("Usuario actual:", user)
 
-    const dbUser = await getUserById(user.id);
+    const dbUser = await getUserById(user.id)
 
     if (!dbUser) {
         return { error: "Usuario no encontrado en la DB" }
     }
 
-    const { title, description, coverImage, genre, status } = validatedFields.data;
+    const { title, description, coverImage, genre, status } = validatedFields.data
 
     await db.book.create({
         data: {

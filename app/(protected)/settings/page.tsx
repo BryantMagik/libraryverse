@@ -2,8 +2,8 @@
 
 import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useCurrentUser } from "@/hooks/useCurrentUser";
-import { SettingsMainpanel } from "../_componets/settings/main-panel";
+import { useCurrentUser } from "@/hook/use-current-user"
+import { SettingsMainpanel } from "../_componets/settings/main-panel"
 
 const SettingsPage = () => {
   const userRole = useCurrentUser()
@@ -14,7 +14,7 @@ const SettingsPage = () => {
     if (session.data === null) {
       session.status
       window.location.reload()
-      return;
+      return
     }
   }, [session])
 

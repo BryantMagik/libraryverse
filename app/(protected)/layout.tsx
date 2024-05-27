@@ -1,29 +1,14 @@
 "use client"
-import { Children, useEffect } from "react";
-import NavbarApp from "./_componets/navbarApp";
-import SideNav from "./_componets/sideNav";
-import { useCurrentUser } from "@/hooks/useCurrentUser";
-import { useSession } from "next-auth/react";
+import NavbarApp from "./_componets/navbarApp"
+import SideNav from "./_componets/sideNav"
+
 
 interface ProtectedLayoutProps {
     children: React.ReactNode
 }
 
 const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
-    const userRole = useCurrentUser()
-    const session = useSession()
 
-    useEffect(() => {
-        if (session.data === null) {
-            session.status
-            window.location.reload()
-            return;
-        }
-    }, [session])
-
-    if (!userRole) {
-        return null
-    }
     return (
         <>
             <NavbarApp />

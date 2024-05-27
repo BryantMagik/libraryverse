@@ -1,11 +1,8 @@
 "use client"
 
-import { mybooks } from '@/actions/list-mybooks'
 import MyBooks from '../_componets/books/mybook'
 
-const MisHistorias = () => {
-
-
+const MyHistorys = () => {
 
     return (
         <div>
@@ -14,4 +11,4 @@ const MisHistorias = () => {
     )
 }
 
-export default MisHistorias
+export default MyHistorys

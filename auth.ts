@@ -29,7 +29,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update,
             const existingUser = await getUserById(user.id)
 
             if (!existingUser || !existingUser.emailVerified) {
-                return false;
+                return false
             }
 
             if (existingUser.isTwoFactorEnabled) {
@@ -65,11 +65,13 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update,
                 session.user.email = token.email as string
                 session.user.isOAuth = token.isOAuth as boolean
             }
+            console.log("Session:", session.user.name)
             return session
-
 
         },
         async jwt({ token }) {
+
+            console.log("Token:", token.name)
 
             if (!token.sub) return token
 

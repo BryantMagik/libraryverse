@@ -90,8 +90,6 @@ model Book {
   bookshelfOwners UserBook[]
 }
 
-//TODO: Comentarios para los libros...
-
 model UserBook {
   userId  String
   bookId  String

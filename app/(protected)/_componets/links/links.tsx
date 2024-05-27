@@ -1,6 +1,5 @@
 import { PiHouseSimpleLight } from "react-icons/pi"
 import { BsBookshelf } from "react-icons/bs"
-import { IoIosLogOut } from "react-icons/io"
 import { GoBook } from "react-icons/go"
 import { SlNotebook } from "react-icons/sl"
 import { IoCreateOutline } from "react-icons/io5"

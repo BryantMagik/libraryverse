@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import { SessionProvider } from "next-auth/react";
-import { auth } from "@/auth";
-import { Inter } from "next/font/google";
+import type { Metadata } from "next"
+import { SessionProvider } from "next-auth/react"
+import { auth } from "@/auth"
+import { Inter } from "next/font/google"
 import "./globals.css"
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "LibraryVerse",
@@ -20,7 +20,7 @@ export default async function RootLayout({
 }>) {
   const session = await auth()
   return (
-    
+
     <SessionProvider session={session}>
       <html lang="en" className="no-scrollbar">
         <body className={inter.className}>

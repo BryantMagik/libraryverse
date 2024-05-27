@@ -2,13 +2,14 @@
 
 import { poppins } from "@/components/ui/font"
 import { ThemeToggle } from "./darkmode/themeToggle"
-import { usePathname } from "next/navigation"
-import { UserButton } from "@/components/auth/user-button"
+import { UserButton } from "@/app/(protected)/_componets/user-button"
+import { useEffect } from "react"
+import { useCurrentUser } from "@/hook/use-current-user";
+
 
 export default function NavbarApp() {
 
-    const pathname = usePathname()
-
+    const { session } = useCurrentUser()
 
     return (
         <nav className="flex justify-between items-center w-full px-4 text-library-600 dark:bg-black nav dark:text-emerald-400 bg-library-200 sm:flex-none">
@@ -17,7 +18,7 @@ export default function NavbarApp() {
             </div>
             <div className="flex items-center space-x-6">
                 <ThemeToggle />
-                <UserButton />
+                <UserButton label={"ha"} user={session} />
             </div>
         </nav>
     )

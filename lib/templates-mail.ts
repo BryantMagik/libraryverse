@@ -62,7 +62,6 @@ export const getTwoFactorTokenEmailHtml = (token: string): string => `
                 <table class="container" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td class="header">
-                            <img src="/public/home/logo.png">
                             <h1>Tu Código de Autenticación</h1>
                         </td>
                     </tr>
@@ -228,7 +227,6 @@ export const getVerificationEmailHtml = (confirmLink: string): string => `
                 <table class="container" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td class="header">
-                            <img src="/public/home/logo.png">
                             <h1>Bienvenido a LibraryVerse!</h1>
                         </td>
                     </tr>

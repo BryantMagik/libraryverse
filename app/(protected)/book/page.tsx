@@ -7,9 +7,9 @@ import { GBook } from '@/app/types/typesBooksAPi'
 import { Booklist } from '../_componets/searchBook/booklist'
 import { Separator } from '@/components/ui/separator'
 
-interface LibroPageProps { }
 
-const LibroPage: React.FC<LibroPageProps> = () => {
+const LibroPage = () => {
+    
     const [books, setBooks] = useState<GBook[]>([])
     const [query, setQuery] = useState<string>('')
     const [searchPerformed, setSearchPerformed] = useState<boolean>(false)

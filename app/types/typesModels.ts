@@ -68,7 +68,7 @@ export interface Book {
   status: $Enums.BookStatus
   createdAt: Date
   updatedAt: Date
-  author: Partial<User> | null;
+  author: Partial<User> | null
 }
 
 export interface Chapter {

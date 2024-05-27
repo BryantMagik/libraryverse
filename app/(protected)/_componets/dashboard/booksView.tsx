@@ -11,7 +11,7 @@ import Link from 'next/link'
 
 const BooksView: React.FC = () => {
 
-    const { data: books, error } = useSWR('lastBooks', lastBooks, { })
+    const { data: books, error } = useSWR('lastBooks', lastBooks, {})
     if (error) return <div>Error al cargar los libros: {error}</div>
 
     if (books && 'error' in books) {

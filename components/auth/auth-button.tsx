@@ -1,10 +1,10 @@
 "use client"
 
-import { useRouter } from "next/navigation";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { LoginForm } from "@/components/auth/login-form";
-import { RegisterForm } from "@/components/auth/register-form";
-import React from "react";
+import { useRouter } from "next/navigation"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { LoginForm } from "@/components/auth/login-form"
+import { RegisterForm } from "@/components/auth/register-form"
+import React from "react"
 
 interface AuthButtonProps {
     children: React.ReactNode
@@ -16,8 +16,8 @@ interface AuthButtonProps {
 export const AuthButton: React.FC<AuthButtonProps> = ({ children, mode = "redirect", asChild, formType }) => {
     const router = useRouter()
     const onClick = () => {
-        const route = formType === "login" ? "/auth/login" : "/auth/register";
-        router.push(route);
+        const route = formType === "login" ? "/auth/login" : "/auth/register"
+        router.push(route)
     }
 
     if (mode === "modal") {

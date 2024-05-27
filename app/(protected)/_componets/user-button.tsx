@@ -14,22 +14,26 @@ import {
     AvatarImage,
     AvatarFallback,
 } from "@/components/ui/avatar"
-import { useCurrentUser } from "@/hooks/useCurrentUser"
 import { LogoutButton } from "@/components/auth/logout-button"
 import { SettingsButton } from "@/components/auth/settings-button"
+import { ExtendedUser } from "@/next-auth"
 
-export const UserButton = () => {
-    const user = useCurrentUser()
+interface UserInfoProps {
+    user?: ExtendedUser
+    label: string
+}
+
+export const UserButton = ({ user, label }: UserInfoProps) => {
 
     return (
         <>
             <h3 className="text-sm font-semibold text-muted-foreground">
-                ¡Te damos la bienvenida, <span className="dark:text-emerald-500 text-library-600">{user.session?.name}!</span>
+                ¡Te damos la bienvenida, <span className="dark:text-emerald-500 text-library-600">{user?.name}!</span>
             </h3>
             <DropdownMenu>
                 <DropdownMenuTrigger>
                     <Avatar>
-                        <AvatarImage src={user.session?.image || ""} />
+                        <AvatarImage src={user?.image || ""} />
                         <AvatarFallback className="bg-black">
                             <FaUser className="text-white" />
                         </AvatarFallback>

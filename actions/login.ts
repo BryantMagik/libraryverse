@@ -2,7 +2,7 @@
 
 import * as z from "zod"
 
-import { signIn } from "@/auth"
+import { signIn, unstable_update } from "@/auth"
 import { db } from "@/lib/db"
 import { LoginSchema } from "@/schemas"
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
@@ -103,7 +103,25 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: s
             password,
             redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT
         })
-        return { success: "Login successful" };
+        const dbUser = await getUserByEmail(email)
+        console.log("TEST UNESTABLE",dbUser)
+
+        if (!dbUser) {
+            return { error: "El usuario no pudo ser encontrado después del inicio de sesión." }
+        }
+
+        await unstable_update({
+            user: {
+                email: dbUser.email,
+                id: dbUser.id,
+                image: dbUser.image,
+                name: dbUser.name,
+                role: dbUser.role,
+                twoFactorAuth: dbUser.isTwoFactorEnabled,
+            },
+        })
+
+        return { success: "Login successful" }
     } catch (error) {
         if (error instanceof AuthError) {
             switch (error.type) {
@@ -115,5 +133,4 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: s
         }
         throw error
     }
-
 }

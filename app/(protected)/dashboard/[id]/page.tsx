@@ -8,38 +8,34 @@ import { Separator } from '@/components/ui/separator'
 import { Button } from '@nextui-org/button'
 import { useRouter, useParams } from 'next/navigation'
 import { ScrollShadow } from "@nextui-org/scroll-shadow"
+import { bookDetails } from '@/actions/book-details'
 
 const BookDetails = () => {
 
     const [book, setBook] = useState<Book | null>(null)
     const router = useRouter()
     const { id } = useParams()
+    const bookId = Array.isArray(id) ? id[0] : id
+
 
     useEffect(() => {
-        const fetchBook = async () => {
-            if (id) {
-                try {
-                    const response = await fetch(`/api/books/${id}`)
-                    if (response.ok) {
-                        const bookData = await response.json()
-                        setBook(bookData)
+        if (id) {
+            bookDetails(bookId)
+                .then((fetchBook) => {
+                    if (fetchBook !== null) {
+                        setBook(fetchBook)
                     } else {
-                        console.error('Error al obtener los detalles del libro:', response.statusText)
+                        console.error("El libro no fue encontrado");
                     }
-                } catch (error) {
-                    console.error('Error al obtener los detalles del libro:', error)
-                }
-            } else {
-                console.error('ID del libro no encontrado en la URL')
-            }
+                }).catch(error => {
+                    console.error("Error en server actions bookdetails:", error)
+                })
         }
-
-        fetchBook()
     }, [id])
 
     const handleViewChapters = () => {
         if (book) {
-            router.push(`/dashboard/${book.id}/chapters`)
+            router.push(`/dashboard/${bookId}/chapters`)
         }
     }
 
@@ -69,7 +65,7 @@ const BookDetails = () => {
                         </div>
                         <div className='mt-8'>
                             <h2 className='text-2xl mb-7 font-normal'>Descripción</h2>
-                            <ScrollShadow className="md:w-[550px] md:h-[200px] w-[350px] h-[200px]">
+                            <ScrollShadow className="md:w-[500px] md:h-[200px] w-[350px] h-[200px]">
                                 <Card className="">
                                     <Separator />
                                     <CardBody>

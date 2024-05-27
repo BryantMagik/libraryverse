@@ -42,7 +42,7 @@ const Search: React.FC<SearchProps> = ({ updateBooks }) => {
             console.warn("Necesita una búsqueda")
             return
         }
-        const cachedResults = localStorage.getItem(searchQuery)
+        const cachedResults = sessionStorage.getItem(searchQuery)
 
         if (cachedResults) {
             const parsedResults = JSON.parse(cachedResults)
@@ -63,7 +63,7 @@ const Search: React.FC<SearchProps> = ({ updateBooks }) => {
         updateBooks(fetchedBooks, searchQuery, data.totalItems || 0)
         setTotalPages(Math.ceil((data.totalItems || 0) / maxResults))
 
-        localStorage.setItem(searchQuery, JSON.stringify({
+        sessionStorage.setItem(searchQuery, JSON.stringify({
             books: fetchedBooks,
             totalItems: data.totalItems || 0
         }))

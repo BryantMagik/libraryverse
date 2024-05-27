@@ -19,7 +19,7 @@ import { Switch } from "@/components/ui/switch"
 import { toast } from "sonner"
 import { SettingsSchema } from "@/schemas"
 import { settings } from "@/actions/settings"
-import { useCurrentUser } from "@/hooks/useCurrentUser"
+import { useCurrentUser } from "@/hook/use-current-user"
 import { useSession } from "next-auth/react"
 
 export const SettingsMainpanel = () => {
