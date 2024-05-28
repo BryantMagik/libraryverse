@@ -18,10 +18,9 @@ import { ExtendedUser } from "@/next-auth"
 
 interface UserInfoProps {
     user?: ExtendedUser
-    label: string
 }
 
-export const UserButton = ({ user, label }: UserInfoProps) => {
+export const UserButton = ({ user }: UserInfoProps) => {
 
     return (
         <>

@@ -16,7 +16,7 @@ export default function NavbarApp() {
             <div className="flex items-center space-x-6">
                 <ThemeToggle />
                 {session ? (
-                    <UserButton label="ha" user={session.user} />
+                    <UserButton user={session.user} />
                 ) : (
                     <button className="px-4 py-2 bg-blue-500 text-white rounded">
                         Login
