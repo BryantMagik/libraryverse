@@ -8,12 +8,16 @@ import { BookEdit } from "./book/edit"
 import { Userlist } from "./user/list"
 import { UserEdit } from "./user/edit"
 import { Chapterlist } from "./chapter/list"
+import dashboard from "./dashboard/dashboard"
+//TODOO import { darkTheme, lightTheme } from './themes'
+
 
 const dataProvider = simpleRestProvider("/api")
 
 const App = () => {
     return (
-        <Admin dataProvider={dataProvider}>
+        <Admin dashboard={dashboard} dataProvider={dataProvider}
+        >
             <Resource
                 name="books"
                 list={Booklist}
@@ -27,11 +31,11 @@ const App = () => {
                 edit={UserEdit}
                 recordRepresentation="title"
             />
-            <Resource
+            {/* <Resource
                 name="chapter"
                 list={Chapterlist}
                 recordRepresentation="title"
-            />
+            /> */}
         </Admin>
     )
 }

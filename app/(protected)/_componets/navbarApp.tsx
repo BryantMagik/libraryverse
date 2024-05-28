@@ -1,12 +1,12 @@
 "use client";
 
-import { poppins } from "@/components/ui/font";
-import { ThemeToggle } from "./darkmode/themeToggle";
-import { UserButton } from "@/app/(protected)/_componets/user-button";
-import { useSession } from "next-auth/react";
+import { poppins } from "@/components/ui/font"
+import { ThemeToggle } from "./darkmode/themeToggle"
+import { UserButton } from "@/app/(protected)/_componets/user-button"
+import { useSession } from "next-auth/react"
 
 export default function NavbarApp() {
-    const { data: session } = useSession();
+    const { data: session } = useSession()
 
     return (
         <nav className="flex justify-between items-center w-full px-4 text-library-600 dark:bg-black nav dark:text-emerald-400 bg-library-200 sm:flex-none">
@@ -24,5 +24,5 @@ export default function NavbarApp() {
                 )}
             </div>
         </nav>
-    );
+    )
 }

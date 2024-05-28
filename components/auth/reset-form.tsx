@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useState, useTransition } from "react"
 import { ResetSchema } from "@/schemas"
-
 import {
     Form,
     FormControl,
@@ -38,7 +37,6 @@ export const ResetForm = () => {
     const onSubmit = (values: z.infer<typeof ResetSchema>) => {
         setError("")
         setSuccess("")
-        console.log(values)
 
         startTransition(() => {
             reset(values)

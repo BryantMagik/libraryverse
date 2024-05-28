@@ -131,7 +131,7 @@ const Search: React.FC<SearchProps> = ({ updateBooks }) => {
                     onClick={() => handleSearchModeChange('all')}
                     className={searchMode === 'all' ? 'active' : ''}
                 >
-                    All
+                    Todos
                 </Button>
                 <Button
                     onClick={() => handleSearchModeChange('title')}
@@ -143,7 +143,7 @@ const Search: React.FC<SearchProps> = ({ updateBooks }) => {
                     onClick={() => handleSearchModeChange('author')}
                     className={searchMode === 'author' ? 'active' : ''}
                 >
-                    Por Author
+                    Por Autor
                 </Button>
                 <Button
                     onClick={() => handleSearchModeChange('category')}

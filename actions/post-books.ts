@@ -12,7 +12,7 @@ export const createBook = async (values: z.infer<typeof BookSchema>) => {
     const validatedFields = BookSchema.safeParse(values)
 
     if (!validatedFields.success) {
-        return { error: "Error en la validación de datos"}
+        return { error: "Error en la validación de datos" }
     }
 
     const user = await currentUser()
@@ -30,12 +30,14 @@ export const createBook = async (values: z.infer<typeof BookSchema>) => {
 
     const { title, description, coverImage, genre, status } = validatedFields.data
 
+    const defaultCoverImage = '/dashboard/book-placeholder.jpg'
+
     await db.book.create({
         data: {
             title,
             description,
             genre,
-            coverImage,
+            coverImage: coverImage || defaultCoverImage,
             authorId: dbUser.id,
             status,
         },

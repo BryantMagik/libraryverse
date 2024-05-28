@@ -2,8 +2,8 @@
 
 import { startTransition, useEffect, useState } from 'react'
 import { Chapter } from '@/app/types/typesModels'
-import { listChapter } from '@/actions/list-chapter'
 import { useParams } from 'next/navigation'
+import { listChapter } from '@/actions/chapters'
 
 const BookChaptersPage = () => {
     const [chapters, setChapters] = useState<Chapter[]>([])

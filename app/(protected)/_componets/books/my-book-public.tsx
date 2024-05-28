@@ -1,23 +1,23 @@
 "use client"
 
-
 import * as React from 'react'
 import { useEffect, useState, useTransition } from 'react'
 import { Book } from '@/app/types/typesModels'
-import { mybooks } from '@/actions/list-mybooks'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
-import { BookArtwork } from '../bookArtwork'
+import { BookArtwork } from './bookArtwork'
+import { myBooksPublished } from '@/actions/my-books-published'
+import { BookArtTable } from './bookArtTable'
 
 
-const MyBooks: React.FC = () => {
+const MyBooksPublic: React.FC = () => {
 
     const [books, setBooks] = useState<Book[]>([])
     const [isPending, startTransition] = useTransition()
 
     useEffect(() => {
         startTransition(() => {
-            mybooks()
+            myBooksPublished()
                 .then((mybooks) => {
                     if ('error' in mybooks) {
                         console.error('Error al obtener los últimos libros:', mybooks.error);
@@ -33,10 +33,10 @@ const MyBooks: React.FC = () => {
             <div className="flex items-center justify-between">
                 <div className="space-y-1">
                     <h2 className="text-2xl font-semibold tracking-tight">
-                        Tus historias
+                        Mis historias
                     </h2>
                     <p className="text-sm text-muted-foreground">
-                        Continúa escribiendo y editando tus historias...
+                        Historias Publicadas
                     </p>
                 </div>
             </div>
@@ -45,7 +45,7 @@ const MyBooks: React.FC = () => {
                 <div className="flex space-x-4 pb-4">
                     {books.map((book: Book) => (
                         <Link key={book.id} href={`/historias/${book.id}`}>
-                            <BookArtwork key={book.id.toString()} className="w-[250px]" book={book} width={250} height={330} aspectRatio='portrait' />
+                            <BookArtTable key={book.id.toString()} className="w-[250px]" book={book} />
                         </Link>
                     ))}
                 </div>
@@ -54,4 +54,4 @@ const MyBooks: React.FC = () => {
     )
 }
 
-export default MyBooks
+export default MyBooksPublic

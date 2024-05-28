@@ -4,7 +4,7 @@ import { getUserById } from "@/data/user"
 import { currentUser } from "@/lib/auth"
 import { db } from "@/lib/db"
 
-export const mybooks = async () => {
+export const myBooksAll = async () => {
 
     const user = await currentUser()
 
@@ -20,11 +20,11 @@ export const mybooks = async () => {
 
     const mybooks = await db.book.findMany({
         where: {
-            authorId: dbUser.id
+            authorId: dbUser.id,
         },
         include: {
             author: true
-        }
+        },
     })
 
     return mybooks

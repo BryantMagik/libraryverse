@@ -3,13 +3,7 @@ import { Datagrid, ImageField, List, ReferenceField, SelectColumnsButton, TextFi
 export const Booklist = () => {
 
     return (
-        <List
-            actions={
-                <TopToolbar>
-                    <SelectColumnsButton />
-                </TopToolbar>
-            }
-        >
+        <List>
             <Datagrid rowClick="edit" sx={{ "& .column-reference": { width: 150 } }}>
                 <TextField source="id" />
                 <TextField source="title" />

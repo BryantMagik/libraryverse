@@ -17,15 +17,14 @@ import { Textarea } from "../../../../components/ui/textarea"
 import { useEffect, useState, useTransition } from "react"
 import { createBook } from "@/actions/post-books"
 import { useRouter } from "next/navigation"
-import { FormError } from "@/components/form-error"
-import { FormSuccess } from "@/components/form-success"
 import { Button } from "@/components/ui/button"
 import { useCurrentUser } from "@/hook/use-current-user"
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup,  SelectItem  } from "@/components/ui/select"
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem } from "@/components/ui/select"
 import { CldUploadWidget } from 'next-cloudinary'
 import { HiMiniPhoto } from "react-icons/hi2"
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react"
 import { GenreEnumESP } from "@/app/types/typesModels"
+import toast, { Toaster } from "react-hot-toast"
 
 export const BookForm = () => {
     const user = useCurrentUser()
@@ -61,11 +60,13 @@ export const BookForm = () => {
                 .then((data) => {
                     if (data?.error) {
                         form.reset()
+                        toast.error(data.error)
                         setError(data.error)
                     }
                     if (data?.success) {
                         form.reset()
                         setSuccess(data.success)
+                        toast.success(data.success)
                         router.refresh()
                     }
                 })
@@ -126,6 +127,7 @@ export const BookForm = () => {
                                                     value={resource}
                                                 />
                                             </FormControl>
+                                            <FormMessage />
                                         </FormItem>
                                     )}
                                 </CldUploadWidget>
@@ -150,6 +152,7 @@ export const BookForm = () => {
                                                     type="text"
                                                 />
                                             </FormControl>
+                                            <FormMessage />
                                         </FormItem>
                                     )}
                                 />
@@ -168,6 +171,7 @@ export const BookForm = () => {
                                                     className="min-h-10 max-h-20"
                                                 />
                                             </FormControl>
+                                            <FormMessage />
                                         </FormItem>
                                     )}
                                 />
@@ -201,8 +205,6 @@ export const BookForm = () => {
                                         </FormItem>
                                     )}
                                 />
-                                <FormError message={error} />
-                                <FormSuccess message={success} />
                                 <Button
                                     disabled={isPending}
                                     type="submit"
@@ -210,6 +212,7 @@ export const BookForm = () => {
                                 >
                                     Crear libro
                                 </Button>
+                                <Toaster />
                             </CardBody>
                         </Card>
                     </div>

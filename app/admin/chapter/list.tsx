@@ -6,11 +6,6 @@ export const Chapterlist = () => {
 
     return (
         <List
-            actions={
-                <TopToolbar>
-                    <SelectColumnsButton />
-                </TopToolbar>
-            }
         >
             <Datagrid rowClick="edit" sx={{ "& .column-reference": { width: 150 } }}>
                 <TextField source="id" />

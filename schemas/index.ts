@@ -5,11 +5,11 @@ import * as z from "zod"
 export const SettingsSchema = z.object({
     name: z.string().min(1, { message: "El nombre es obligatorio" }),
     email: z.optional(
-        z.string().email({ message: "Introduce el email correcto" })
+        z.string().email({ message: "Introduce un email válido." })
     ),
     isTwoFactorEnabled: z.optional(z.boolean()),
-    password: z.optional(z.string().min(6)),
-    newPassword: z.optional(z.string().min(6)),
+    password: z.optional(z.string().min(6, { message: "Contraseña minimo de 6 caracteres" })),
+    newPassword: z.optional(z.string().min(6, { message: "La nueva contraseña debe tener al menos 6 caracteres." })),
 })
     .refine(
         (data) => {
@@ -19,7 +19,7 @@ export const SettingsSchema = z.object({
 
             return true;
         },
-        { message: "Es requerida una nueva contraseña", path: ["newPassword"] }
+        { message: "La nueva contraseña es obligatoria cuando se proporciona una contraseña actual.", path: ["newPassword"] }
     )
     .refine((data) => {
         if (data.newPassword && !data.password) {
@@ -28,7 +28,7 @@ export const SettingsSchema = z.object({
 
         return true;
     },
-        { message: "Password is required!", path: ["password"] }
+        { message: "La contraseña actual es obligatoria cuando se proporciona una nueva contraseña.", path: ["password"] }
     )
 
 
@@ -87,7 +87,7 @@ export const GenreEnum = z.enum([
 
 export const BookSchema = z.object({
     title: z.string().min(1, {
-        message: "Por favor, introduce un título."
+        message: "Por favor, proporciona un título válido."
     }),
     description: z.string().min(1, {
         message: "La descripción no puede estar vacía."
@@ -97,9 +97,10 @@ export const BookSchema = z.object({
     // tags: z.array(z.string()).optional(),
     status: BookStatusSchema,
     authorId: z.string().min(1, {
-        message: "El ID del autor es requerido."
+        message: "El ID del autor es obligatorio."
     })
 })
+// Esquema de creación de capitulos
 
 export const ChapterSchema = z.object({
     title: z.string().min(1, {

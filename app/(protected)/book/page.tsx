@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator'
 
 
 const LibroPage = () => {
-    
+
     const [books, setBooks] = useState<GBook[]>([])
     const [query, setQuery] = useState<string>('')
     const [searchPerformed, setSearchPerformed] = useState<boolean>(false)

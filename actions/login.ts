@@ -15,7 +15,6 @@ import bcrypt from "bcryptjs"
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation"
 
 export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: string | null) => {
-    console.log(values)
     const validatedFields = LoginSchema.safeParse(values)
 
     if (!validatedFields.success) {
@@ -104,7 +103,6 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: s
             redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT
         })
         const dbUser = await getUserByEmail(email)
-        console.log("TEST UNESTABLE",dbUser)
 
         if (!dbUser) {
             return { error: "El usuario no pudo ser encontrado después del inicio de sesión." }

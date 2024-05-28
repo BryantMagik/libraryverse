@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
-import { toast } from "sonner"
+import { Toaster, toast } from "sonner"
 import { SettingsSchema } from "@/schemas"
 import { settings } from "@/actions/settings"
 import { useCurrentUser } from "@/hook/use-current-user"
@@ -46,29 +46,17 @@ export const SettingsMainpanel = () => {
                 if (data?.success) {
                     update()
                     toast.success(data.success, {
-                        description: <>{dateToday.toDateString()}</>,
-                        cancel: {
-                            label: "Cancelar",
-                            onClick: () => toast.info("Cancelado"),
-                        },
+                        description: `${dateToday.toDateString()}`
                     })
                 }
                 if (data?.error) {
                     toast.error(data.error, {
-                        description: <>{dateToday.toDateString()}</>,
-                        cancel: {
-                            label: "Cancelar",
-                            onClick: () => toast.info("Cancelado"),
-                        },
+                        description: `${dateToday.toDateString()}`
                     })
                 }
                 if (data?.info) {
                     toast.info(data.info, {
-                        description: <>{dateToday.toDateString()}</>,
-                        cancel: {
-                            label: "Cancelar",
-                            onClick: () => toast.info("Cancelado"),
-                        },
+                        description: `${dateToday.toDateString()}`
                     })
                 }
             })
@@ -84,7 +72,7 @@ export const SettingsMainpanel = () => {
                 </p>
             </div>
             <Separator className="dark:bg-slate-800 bg-gray-300" />
-
+            <Toaster />
             <div className="my-3">
                 <Form {...form}>
                     <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
@@ -104,7 +92,7 @@ export const SettingsMainpanel = () => {
                                                     <Input
                                                         className="dark:border-slate-800 w-full"
                                                         {...field}
-                                                        placeholder="Joseph Ngigi"
+                                                        placeholder="Bry Magik"
                                                         disabled={isPending}
                                                         type="text"
                                                     />
@@ -126,7 +114,7 @@ export const SettingsMainpanel = () => {
                                                             <Input
                                                                 className="dark:border-slate-800 w-full"
                                                                 {...field}
-                                                                placeholder="josephngigi775@gmail.com"
+                                                                placeholder="BryMagik@gmail.com"
                                                                 disabled={isPending}
                                                                 type="email"
                                                             />
