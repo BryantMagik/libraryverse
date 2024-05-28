@@ -2,20 +2,31 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+The table below outlines the versions of our project that are currently supported with security updates.
 
-| Version | Supported          |
+| Version | Support Status     |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| 5.1.x   | ![Supported](https://img.shields.io/badge/status-supported-brightgreen) |
+| 5.0.x   | ![Not Supported](https://img.shields.io/badge/status-not%20supported-red) |
+| 4.0.x   | ![Supported](https://img.shields.io/badge/status-supported-brightgreen) |
+| < 4.0   | ![Not Supported](https://img.shields.io/badge/status-not%20supported-red) |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+We take security vulnerabilities seriously and appreciate your efforts to disclose them responsibly.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+**How to Report:**
+
+1. **Contact Information:**
+   - Please report vulnerabilities by emailing us at [security@yourproject.org](mailto:security@yourproject.org).
+
+2. **Response Expectations:**
+   - You will receive an initial acknowledgment of your report within 48 hours.
+   - We will provide regular updates on the status of your reported vulnerability.
+   - We aim to resolve all verified vulnerabilities within a reasonable timeframe, depending on the complexity and severity of the issue.
+
+3. **After Reporting:**
+   - If the vulnerability is accepted, we will work on a fix and keep you updated on the progress.
+   - If the vulnerability is declined, we will provide a detailed explanation of our decision.
+
+We appreciate your assistance in improving the security of our project.
