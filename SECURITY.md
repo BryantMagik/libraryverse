@@ -15,18 +15,4 @@ The table below outlines the versions of our project that are currently supporte
 
 We take security vulnerabilities seriously and appreciate your efforts to disclose them responsibly.
 
-**How to Report:**
-
-1. **Contact Information:**
-   - Please report vulnerabilities by emailing us at [security@yourproject.org](mailto:security@yourproject.org).
-
-2. **Response Expectations:**
-   - You will receive an initial acknowledgment of your report within 48 hours.
-   - We will provide regular updates on the status of your reported vulnerability.
-   - We aim to resolve all verified vulnerabilities within a reasonable timeframe, depending on the complexity and severity of the issue.
-
-3. **After Reporting:**
-   - If the vulnerability is accepted, we will work on a fix and keep you updated on the progress.
-   - If the vulnerability is declined, we will provide a detailed explanation of our decision.
-
 We appreciate your assistance in improving the security of our project.
