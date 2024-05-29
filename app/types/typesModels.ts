@@ -40,8 +40,8 @@ export const GenreEnumESP = {
 
 
 export const statusLabels = {
-  DRAFT: "Continúa",
-  PUBLISHED: "Completa",
+  DRAFT: "Borrador",
+  PUBLISHED: "Publicado",
   PAUSED: "Pausado",
 }
 

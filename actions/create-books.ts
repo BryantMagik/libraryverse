@@ -7,7 +7,6 @@ import { currentUser } from "@/lib/auth"
 import { getUserById } from "@/data/user"
 
 export const createBook = async (values: z.infer<typeof BookSchema>) => {
-    console.log(values)
 
     const validatedFields = BookSchema.safeParse(values)
 
@@ -20,7 +19,6 @@ export const createBook = async (values: z.infer<typeof BookSchema>) => {
     if (!user) {
         return { error: "Usuario no autenticado." }
     }
-    console.log("Usuario actual:", user)
 
     const dbUser = await getUserById(user.id)
 

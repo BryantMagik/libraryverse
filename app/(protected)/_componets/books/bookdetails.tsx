@@ -60,9 +60,7 @@ const BookDetailsComponent: React.FC<Props> = ({ handleViewChapters }) => {
         }
     }
 
-    const deleteBookHistory = async () => {
-        // some code
-    }
+
 
     return (
         <>
@@ -73,11 +71,6 @@ const BookDetailsComponent: React.FC<Props> = ({ handleViewChapters }) => {
                         <div className='flex flex-row justify-center space-x-3 mt-10'>
                             <Button className='' onClick={handleViewChapters}>Leer</Button>
                             <Button className='' onClick={addBookshelf} >Agregar al Bookshelf</Button>
-                            {user.session?.id === book.author?.id ? (
-                                <Button className=''>Eliminar Historia</Button>
-                            ) : (
-                                <></>
-                            )}
                         </div>
                     </div>
                     <div className='md:mt-2 lg:mt-0'>

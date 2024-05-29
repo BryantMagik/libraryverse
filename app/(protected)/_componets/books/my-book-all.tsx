@@ -43,9 +43,7 @@ const MyBooksAll: React.FC = () => {
             <div className="relative">
                 <div className="flex flex-col">
                     {books.map((book: Book) => (
-                        <Link key={book.id} href={`/historias/${book.id}`}>
-                            <BookArtTable key={book.id.toString()} className="w-[250px]" book={book} />
-                        </Link>
+                        <BookArtTable key={book.id.toString()} className="w-[250px]" book={book} />
                     ))}
                 </div>
             </div>
