@@ -12,11 +12,11 @@ import { useCurrentUser } from "@/hook/use-current-user"
 import { useParams } from 'next/navigation'
 import { bookDetails } from '@/actions/book-details'
 
-interface Props {
+interface BookDetailsProps {
     handleViewChapters: () => void
 }
 
-const BookDetailsComponent: React.FC<Props> = ({ handleViewChapters }) => {
+const BookDetailsComponent: React.FC<BookDetailsProps> = ({ handleViewChapters }) => {
     const [book, setBook] = useState<Book | null>(null)
     const { id } = useParams()
     const bookId = Array.isArray(id) ? id[0] : id
@@ -69,23 +69,23 @@ const BookDetailsComponent: React.FC<Props> = ({ handleViewChapters }) => {
                     <div className='text-center'>
                         <Image src={book.coverImage ?? '/dashboard/book-placeholder.jpg'} width="350" height="20" alt="a" className="mx-auto" />
                         <div className='flex flex-row justify-center space-x-3 mt-10'>
-                            <Button className='' onClick={handleViewChapters}>Leer</Button>
-                            <Button className='' onClick={addBookshelf} >Agregar al Bookshelf</Button>
+                            <Button className='dark:bg-emerald-700 dark:hover:bg-emerald-400' onClick={handleViewChapters}>Leer</Button>
+                            <Button className='dark:bg-emerald-700 dark:hover:bg-emerald-400' onClick={addBookshelf} >Agregar al Bookshelf</Button>
                         </div>
                     </div>
                     <div className='md:mt-2 lg:mt-0'>
-                        <h1 className='text-3xl font-semibold leading-9 text-custom-gray'>{book.title}</h1>
-                        <h2 className='text-2x1 font-medium text-library-400'>{book.author?.name}</h2>
+                        <h1 className='text-3xl font-semibold leading-9 text-custom-gray dark:text-emerald-500'>{book.title}</h1>
+                        <h2 className='text-2x1 font-medium text-library-400 dark:text-white'>{book.author?.name}</h2>
                         <div className='mt-6'>
-                            <h2 className='text-2xl mb-7 font-normal'>Acerca de</h2>
-                            <p>Fecha de publicación: <span className='text-library-300'>{fechaCreacion}</span></p>
-                            <p>Última actualización: <span className='text-library-300'>{fechaActualizacion}</span></p>
-                            <p>Género: <span className='text-library-300'>{book.genre ? GenreEnumESP[book.genre] : ''}</span></p>
-                            <p>Estado del Verse: <span className='text-library-300'>{statusLabels[book.status]}</span></p>
+                            <h2 className='text-2xl mb-7 font-normal dark:text-emerald-400'>Acerca de</h2>
+                            <p>Fecha de publicación: <span className='text-library-300 dark:text-emerald-400'>{fechaCreacion}</span></p>
+                            <p>Última actualización: <span className='text-library-300 dark:text-emerald-400'>{fechaActualizacion}</span></p>
+                            <p>Género: <span className='text-library-300 dark:text-emerald-400'>{book.genre ? GenreEnumESP[book.genre] : ''}</span></p>
+                            <p>Estado del Verse: <span className='text-library-300 dark:text-emerald-400'>{statusLabels[book.status]}</span></p>
                         </div>
                         <div className='mt-8'>
-                            <h2 className='text-2xl mb-7 font-normal'>Descripción</h2>
-                            <ScrollShadow className="md:w-[500px] md:h-[200px] w-[350px] h-[200px]">
+                            <h2 className='text-2xl mb-7 font-normal dark:text-emerald-400'>Descripción</h2>
+                            <ScrollShadow className="md:w-[500px] md:h-[200px] w-[350px] h-[200px] scrollbar-hide">
                                 <Card className="">
                                     <Separator />
                                     <CardBody>

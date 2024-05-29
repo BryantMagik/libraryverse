@@ -4,16 +4,19 @@ import * as React from 'react'
 import { useEffect, useState, useTransition } from 'react'
 import { Book } from '@/app/types/typesModels'
 import { Separator } from '@/components/ui/separator'
-import Link from 'next/link'
-import { BookArtwork } from './bookArtwork'
 import { myBooksPublished } from '@/actions/my-books-published'
 import { BookArtTable } from './bookArtTable'
+import { TitlePage } from '@/app/(protected)/_componets/title-page'
+import { user } from '@nextui-org/theme'
+import { useCurrentUser } from '@/hook/use-current-user'
+import { deleteBook } from '@/actions/delete-book'
 
 
 const MyBooksPublic: React.FC = () => {
 
     const [books, setBooks] = useState<Book[]>([])
     const [isPending, startTransition] = useTransition()
+    const user = useCurrentUser()
 
     useEffect(() => {
         startTransition(() => {
@@ -28,27 +31,34 @@ const MyBooksPublic: React.FC = () => {
         })
     }, [])
 
+    const removeBookHandler = async (bookId: string) => {
+        console.log('Eliminado', bookId)
+        if(user.session?.id) {
+            deleteBook(bookId, user.session?.id)
+                .then((data) => {
+                    if (data?.success) {
+                        setBooks(books.filter((book) => book.id !== bookId))
+                    }
+                })
+        }
+    }
+
+    const editBookHandler = (bookId: string) => {
+
+    }
+
     return (
-        <div>
-            <div className="flex items-center justify-between">
-                <div className="space-y-1">
-                    <h2 className="text-2xl font-semibold tracking-tight">
-                        Mis historias
-                    </h2>
-                    <p className="text-sm text-muted-foreground">
-                        Historias Publicadas
-                    </p>
-                </div>
-            </div>
+        <>
+            <TitlePage title="Mis Historias" subtitle={'Historias Publicadas'} />
             <Separator className="my-4" />
             <div className="relative">
-                <div className="flex space-x-4 pb-4">
+                <div className="flex flex-col">
                     {books.map((book: Book) => (
-                        <BookArtTable key={book.id.toString()} className="w-[250px]" book={book} />
+                        <BookArtTable key={book.id.toString()} className="w-[250px]" book={book} removeBook={removeBookHandler} editBook={editBookHandler} />
                     ))}
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

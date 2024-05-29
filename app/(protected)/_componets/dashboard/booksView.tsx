@@ -8,6 +8,7 @@ import { BookArtwork } from '../books/bookArtwork'
 import { Book } from '@/app/types/typesModels'
 import { lastBooks } from '@/actions/last-books'
 import Link from 'next/link'
+import { TitlePage } from '@/app/(protected)/_componets/title-page'
 
 const BooksView: React.FC = () => {
 
@@ -23,20 +24,8 @@ const BooksView: React.FC = () => {
     }
 
     return (
-        <div className=''>
-            <div className="">
-                <div className="space-y-1">
-                    <h2
-                        className="text-2xl leading-9 font-semibold text-custom-gray border-almond-300 border-b-4
-                    dark:text-emerald-600 dark:border-emerald-400"
-                    >
-                        Historias Actualizadas Recientemente
-                    </h2>
-                    <p className="text-sm text-muted-foreground dark:text-white">
-                        Descubre las últimas actualizaciones...
-                    </p>
-                </div>
-            </div>
+        <>
+            <TitlePage title={'Historias Actualizadas Recientemente'} subtitle={'Descubre las últimas actualizaciones...'}/>
             <Separator className="my-4" />
             <div className="relative">
                 <ScrollArea>
@@ -69,7 +58,7 @@ const BooksView: React.FC = () => {
                     <ScrollBar orientation='horizontal' />
                 </ScrollArea>
             </div>
-        </div>
+        </>
     )
 }
 

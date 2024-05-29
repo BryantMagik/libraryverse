@@ -25,6 +25,7 @@ import { Card, CardHeader, CardBody, Image } from "@nextui-org/react"
 import { GenreEnumESP } from "@/app/types/typesModels"
 import toast, { Toaster } from "react-hot-toast"
 import { createBook } from "@/actions/create-books"
+import { Separator } from "@radix-ui/react-dropdown-menu"
 
 export const BookForm = () => {
     const user = useCurrentUser()
@@ -49,7 +50,6 @@ export const BookForm = () => {
     useEffect(() => {
         form.setValue('coverImage', resource)
     }, [resource, form])
-
 
     const onSubmit = (values: z.infer<typeof BookSchema>) => {
         setError("")
@@ -81,8 +81,12 @@ export const BookForm = () => {
                 <h2 className="text-2xl leading-9 font-semibold text-custom-gray border-almond-300 border-b-4
                     dark:text-emerald-600 dark:border-emerald-400"
                 >
-                    Detalles de la historia
+                    Detalles de la Historia
                 </h2>
+                <p className="text-sm text-muted-foreground dark:text-white">
+                    Completa los campos para crear una nueva historia
+                </p>
+                <Separator />
                 <div className="grid md:grid-cols-2 space-y-4 p-2 grid-cols-1">
                     <div className="">
                         <FormField

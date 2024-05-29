@@ -1,6 +1,6 @@
-import { getIsAdmin } from "@/lib/admin";
+import { getIsAdmin } from "@/lib/admin"
 import { db } from "@/lib/db"
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server'
 
 export const GET = async (
     req: Request,
@@ -8,7 +8,7 @@ export const GET = async (
 ) => {
 
     if (!params || !params.bookId) {
-        return new NextResponse("Bad Request: ID no encontrado", { status: 400 });
+        return new NextResponse("Bad Request: ID no encontrado", { status: 400 })
     }
 
     const data = await db.book.findFirst({
@@ -25,7 +25,6 @@ export const GET = async (
     }
 
     return NextResponse.json(data)
-
 }
 
 export const PUT = async (
@@ -34,11 +33,11 @@ export const PUT = async (
 ) => {
 
     if (!params || !params.bookId) {
-        return new NextResponse("Bad Request: ID no encontrado", { status: 400 });
+        return new NextResponse("Bad Request: ID no encontrado", { status: 400 })
     }
 
     const body = await req.json()
-    const { title, description, coverImage, genre, tags, status } = body;
+    const { title, description, coverImage, genre, tags, status } = body
 
     try {
         const data = await db.book.update({
@@ -61,8 +60,8 @@ export const PUT = async (
 
         return NextResponse.json(data)
     } catch (error) {
-        console.error('Error updating book:', error);
-        return new NextResponse("Internal Server Error", { status: 500 });
+        console.error('Error updating book:', error)
+        return new NextResponse("Internal Server Error", { status: 500 })
     }
 }
 
@@ -78,7 +77,7 @@ export const DELETE = async (
     }
 
     if (!params || !params.bookId) {
-        return new NextResponse("Bad Request: ID no encontrado", { status: 400 });
+        return new NextResponse("Bad Request: ID no encontrado", { status: 400 })
     }
 
     const data = await db.book.delete({
@@ -88,9 +87,8 @@ export const DELETE = async (
     })
 
     if (!data) {
-        return new NextResponse("No encontrado", { status: 404 });
+        return new NextResponse("No encontrado", { status: 404 })
     }
 
     return NextResponse.json(data)
-
 }

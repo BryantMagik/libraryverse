@@ -6,7 +6,6 @@ import { ChapterSchema } from "@/schemas"
 import { currentUser } from "@/lib/auth"
 import { getUserById } from "@/data/user"
 
-
 export const createHistory = async (bookId: string, values: z.infer<typeof ChapterSchema>) => {
 
     const validatedFields = ChapterSchema.safeParse(values)
@@ -36,8 +35,5 @@ export const createHistory = async (bookId: string, values: z.infer<typeof Chapt
             order,
         }
     })
-
     return { success: true, message: 'Historial creado exitosamente' }
-
-
 }

@@ -6,6 +6,7 @@ import { Pagination } from "@nextui-org/pagination"
 import { GBook } from '@/app/types/typesBooksAPi'
 import { Booklist } from '../_componets/searchBook/booklist'
 import { Separator } from '@/components/ui/separator'
+import { TitlePage } from '../_componets/title-page'
 
 
 const LibroPage = () => {
@@ -41,16 +42,17 @@ const LibroPage = () => {
 
     return (
         <>
+        <TitlePage title="Buscar Libros" subtitle={'Encuentra tu libro favorito'} />
+        <Separator className="my-4" />
             <div className="flex items-center justify-between">
                 <div className="space-y-1">
                     <Search updateBooks={updateBooks} />
                 </div>
             </div>
-            <Separator className="my-4" />
             <div className="relative">
                 <div className="flex space-x-4 pb-4">
                     {books.length !== 0 ? (
-                        <Booklist title={`Resultados de ${query}`} books={books} />
+                        <Booklist books={books} />
                     ) : (
                         searchPerformed && (
                             <div className="pt-8 xl:mx-[10em] text-center">
