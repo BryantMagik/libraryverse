@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from 'react'
-import { useEffect, useState, useTransition } from 'react'
+import { useEffect, useState } from 'react'
 import { Book } from '@/app/types/typesModels'
 import { Separator } from '@/components/ui/separator'
 import { myBooksAll } from '@/actions/my-books-all'
@@ -11,13 +11,14 @@ import { deleteBook } from '@/actions/delete-book'
 import { publishBook } from '@/actions/publish-book'
 import { unpublishBook } from '@/actions/unpublish-book'
 import { BookFormUpdate } from '../create/book-update-form'
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextui-org/modal"
+import { Modal, ModalContent, ModalHeader, ModalBody } from "@nextui-org/modal"
 import { useDisclosure } from '@nextui-org/react'
 
 const MyBooksAll: React.FC = () => {
 
     const [books, setBooks] = useState<Book[]>([])
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
+    const [selectedBook, setSelectedBook] = useState<Book | null>(null)
 
     useEffect(() => {
         myBooksAll()
@@ -25,7 +26,6 @@ const MyBooksAll: React.FC = () => {
                 if ('error' in mybooks) {
                     console.error('Error al obtener los últimos libros:', mybooks.error);
                 } else {
-
                     setBooks(mybooks)
                 }
             })
@@ -40,9 +40,9 @@ const MyBooksAll: React.FC = () => {
             })
     }
 
-    const editBookHandler = (bookId: string) => {
-        console.log('editado', bookId)
-
+    const editBookHandler = (book: Book) => {
+        setSelectedBook(book)
+        onOpen()
     }
 
     const publicBookHandler = (bookId: string) => {
@@ -80,7 +80,15 @@ const MyBooksAll: React.FC = () => {
             <div className="relative">
                 <div className="flex flex-col">
                     {books.map((book: Book) => (
-                        <BookArtTable key={book.id.toString()} className="w-[250px]" book={book} removeBook={removeBookHandler} editBook={onOpen} publicBook={publicBookHandler} cancelPublication={cancelPublicBookHandler} />
+                        <BookArtTable
+                            key={book.id.toString()}
+                            className="w-[250px]"
+                            book={book}
+                            removeBook={removeBookHandler}
+                            editBook={() => editBookHandler(book)}
+                            publicBook={publicBookHandler}
+                            cancelPublication={cancelPublicBookHandler}
+                        />
                     ))}
                 </div>
             </div>
@@ -94,9 +102,7 @@ const MyBooksAll: React.FC = () => {
                         <>
                             <ModalHeader className='flex flex-col gap-1'>Editar Historia</ModalHeader>
                             <ModalBody>
-                                {books.map((book: Book) => (
-                                    <BookFormUpdate key={book.id.toString()} book={book} />
-                                ))}
+                                {selectedBook && <BookFormUpdate book={selectedBook} />}
                             </ModalBody>
                         </>
                     )}
