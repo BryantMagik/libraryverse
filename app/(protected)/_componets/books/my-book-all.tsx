@@ -100,7 +100,6 @@ const MyBooksAll: React.FC = () => {
                 <ModalContent>
                     {(onclose) => (
                         <>
-                            <ModalHeader className='flex flex-col gap-1'>Editar Historia</ModalHeader>
                             <ModalBody>
                                 {selectedBook && <BookFormUpdate book={selectedBook} />}
                             </ModalBody>

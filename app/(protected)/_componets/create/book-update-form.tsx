@@ -22,6 +22,7 @@ import toast from "react-hot-toast"
 import { Separator } from "@radix-ui/react-dropdown-menu"
 import { CldUploadWidget } from 'next-cloudinary'
 import { Card, CardHeader, CardBody, Image, Input } from "@nextui-org/react"
+import {Textarea} from "@nextui-org/input"
 
 interface BookFormUpdateProps extends React.HTMLAttributes<HTMLDivElement> {
     book: Partial<Book>
@@ -142,6 +143,7 @@ export const BookFormUpdate: React.FC<BookFormUpdateProps> = ({ book }) => {
                                                         disabled={isPending}
                                                         type="hidden"
                                                         name="coverImage"
+                                                        value={resource}
                                                     />
                                                 </FormControl>
                                                 <FormMessage />
@@ -165,7 +167,26 @@ export const BookFormUpdate: React.FC<BookFormUpdateProps> = ({ book }) => {
                                             disabled={isPending}
                                             type="text"
                                             id="title"
-                                            placeholder="Título del Libro"
+                                            placeholder="Titulo de la historia"
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="description"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormControl>
+                                        <Textarea
+                                            label="Descripción"
+                                            {...field}
+                                            disabled={isPending}
+                                            type="text"
+                                            id="description"
+                                            placeholder="Descripción de la historia"
                                         />
                                     </FormControl>
                                     <FormMessage />
