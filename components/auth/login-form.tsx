@@ -80,7 +80,7 @@ export const LoginForm = () => {
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-6"
+                    className="space-y-4"
                 >
                     <div className="space-y-4">
                         {showTwoFactor && (
@@ -168,7 +168,7 @@ export const LoginForm = () => {
                     <Button
                         disabled={isPending}
                         type="submit"
-                        className="w-full text-white bg-almond-500 hover:bg-almond-600 active:bg-almond-700"
+                        className="w-full text-white bg-library-500 hover:bg-library-600 active:bg-library-700"
                     >
                         Iniciar Sesión
                     </Button>

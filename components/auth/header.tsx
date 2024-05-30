@@ -16,9 +16,6 @@ export const Header = ({
             )}>
                 LibraryVerse
             </h1>
-            <p className="text-muted-foreground text-sm text-almond-600">
-                {label}
-            </p>
         </div>
     )
 }

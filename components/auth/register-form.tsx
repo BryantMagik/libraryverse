@@ -87,7 +87,6 @@ export const RegisterForm = () => {
                                             label="Nombre"
                                             {...field}
                                             disabled={isPending}
-                                            placeholder="Escribe tu nombre.."
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -106,7 +105,6 @@ export const RegisterForm = () => {
                                             label="Email"
                                             {...field}
                                             disabled={isPending}
-                                            placeholder="tu.email@example.com"
                                             type="email"
                                         />
                                     </FormControl>
@@ -126,7 +124,6 @@ export const RegisterForm = () => {
                                             label="Contraseña"
                                             {...field}
                                             disabled={isPending}
-                                            placeholder="********"
                                             endContent={
                                                 <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
                                                     {isVisible ? (
@@ -149,7 +146,7 @@ export const RegisterForm = () => {
                     <Button
                         disabled={isPending}
                         type="submit"
-                        className="w-full text-white bg-almond-500 hover:bg-almond-600 active:bg-almond-700"
+                        className="w-full text-white bg-library-500 hover:bg-library-600 active:bg-library-700"
                     >
                         Crear una cuenta
                     </Button>
