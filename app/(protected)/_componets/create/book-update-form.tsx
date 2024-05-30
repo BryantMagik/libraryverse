@@ -188,6 +188,7 @@ export const BookFormUpdate: React.FC<BookFormUpdateProps> = ({ book }) => {
                                             id="description"
                                             placeholder="Descripción de la historia"
                                         />
+                                        
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
