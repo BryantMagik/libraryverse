@@ -25,22 +25,20 @@ const BookDetailsComponent: React.FC<BookDetailsProps> = ({ handleViewChapters }
     const fechaActualizacion = book && book.updatedAt ? new Date(book.updatedAt).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : ''
 
     useEffect(() => {
-        if (id) {
-            bookDetails(bookId)
-                .then((fetchBook) => {
-                    if (fetchBook !== null) {
-                        setBook(fetchBook)
-                    } else {
-                        console.error("El libro no fue encontrado")
-                    }
-                }).catch(error => {
-                    console.error("Error en server actions bookdetails:", error)
-                })
-        }
-    }, [id])
+        bookDetails(bookId)
+            .then((fetchBook) => {
+                if (fetchBook !== null) {
+                    setBook(fetchBook)
+                } else {
+                    console.error("El libro no fue encontrado")
+                }
+            }).catch(error => {
+                console.error("Error en server actions bookdetails:", error)
+            })
+    }, [])
 
     const addBookshelf = async () => {
-
+        
         if (book) {
             try {
                 if (user.session?.id) {
@@ -59,6 +57,7 @@ const BookDetailsComponent: React.FC<BookDetailsProps> = ({ handleViewChapters }
             }
         }
     }
+
 
     return (
         <>

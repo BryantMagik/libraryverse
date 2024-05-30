@@ -95,7 +95,7 @@ const MyBooksAll: React.FC = () => {
                             <ModalHeader className='flex flex-col gap-1'>Editar Historia</ModalHeader>
                             <ModalBody>
                                 {books.map((book: Book) => (
-                                    <BookFormUpdate book={book} />
+                                    <BookFormUpdate key={book.id.toString()} book={book} />
                                 ))}
                             </ModalBody>
                         </>
