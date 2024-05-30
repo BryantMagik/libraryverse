@@ -28,7 +28,7 @@ export const createBook = async (values: z.infer<typeof BookSchema>) => {
 
     const { title, description, coverImage, genre, status } = validatedFields.data
 
-    const defaultCoverImage = '/dashboard/book-placeholder.jpg'
+    const defaultCoverImage = '/dashboard/book-placeholder.png'
 
     await db.book.create({
         data: {

@@ -2,11 +2,9 @@
 
 function AuthLayout({ children }: { children: React.ReactNode }) {
     return (
-        <>
-            <div className="grid place-content-center mt-10">
-                {children}
-            </div>
-        </>
+        <div className="grid place-content-center bg-fondol">
+            {children}
+        </div>
     )
 }
 

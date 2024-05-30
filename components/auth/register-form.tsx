@@ -4,9 +4,10 @@ import * as z from "zod"
 import { useState, useTransition } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-
+import { PiEye } from "react-icons/pi"
+import { PiEyeClosed } from "react-icons/pi"
 import { RegisterSchema } from "@/schemas"
-import { Input } from "@/components/ui/input"
+import { Input } from "@nextui-org/react"
 import {
     Form,
     FormControl,
@@ -26,6 +27,8 @@ export const RegisterForm = () => {
     const [error, setError] = useState<string | undefined>("")
     const [success, setSuccess] = useState<string | undefined>("")
     const [isPending, startTransition] = useTransition()
+    const [isVisible, setIsVisible] = useState(false)
+    const toggleVisibility = () => setIsVisible(!isVisible)
     const router = useRouter()
 
     const form = useForm<z.infer<typeof RegisterSchema>>({
@@ -77,13 +80,14 @@ export const RegisterForm = () => {
                             name="name"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-almond-500">Nombre</FormLabel>
                                     <FormControl>
                                         <Input
+                                            isRequired
+                                            variant="underlined"
+                                            label="Nombre"
                                             {...field}
                                             disabled={isPending}
                                             placeholder="Escribe tu nombre.."
-                                            className="bg-white text-almond-700"
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -95,15 +99,15 @@ export const RegisterForm = () => {
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-almond-500">Email</FormLabel>
                                     <FormControl>
                                         <Input
+                                            isRequired
+                                            variant="underlined"
+                                            label="Email"
                                             {...field}
                                             disabled={isPending}
                                             placeholder="tu.email@example.com"
                                             type="email"
-                                            className="bg-white text-almond-700"
-
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -115,15 +119,24 @@ export const RegisterForm = () => {
                             name="password"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-almond-500">Contraseña</FormLabel>
                                     <FormControl>
                                         <Input
+                                            isRequired
+                                            variant="underlined"
+                                            label="Contraseña"
                                             {...field}
                                             disabled={isPending}
                                             placeholder="********"
-                                            type="password"
-                                            className="bg-white text-almond-700"
-
+                                            endContent={
+                                                <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
+                                                    {isVisible ? (
+                                                        <PiEyeClosed className="text-2xl text-default-400 pointer-events-none" />
+                                                    ) : (
+                                                        <PiEye className="text-2xl text-default-400 pointer-events-none" />
+                                                    )}
+                                                </button>
+                                            }
+                                            type={isVisible ? "text" : "password"}
                                         />
                                     </FormControl>
                                     <FormMessage />

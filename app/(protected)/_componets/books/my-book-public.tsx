@@ -1,50 +1,54 @@
 "use client"
 
 import * as React from 'react'
-import { useEffect, useState, useTransition } from 'react'
+import { useEffect, useState } from 'react'
 import { Book } from '@/app/types/typesModels'
 import { Separator } from '@/components/ui/separator'
 import { myBooksPublished } from '@/actions/my-books-published'
 import { BookArtTable } from './bookArtTable'
 import { TitlePage } from '@/app/(protected)/_componets/title-page'
-import { user } from '@nextui-org/theme'
-import { useCurrentUser } from '@/hook/use-current-user'
 import { deleteBook } from '@/actions/delete-book'
+import { unpublishBook } from '@/actions/unpublish-book'
+import { BookFormUpdate } from '../create/book-update-form'
 
 
 const MyBooksPublic: React.FC = () => {
 
     const [books, setBooks] = useState<Book[]>([])
-    const [isPending, startTransition] = useTransition()
-    const user = useCurrentUser()
 
     useEffect(() => {
-        startTransition(() => {
-            myBooksPublished()
-                .then((mybooks) => {
-                    if ('error' in mybooks) {
-                        console.error('Error al obtener los últimos libros:', mybooks.error);
-                    } else {
-                        setBooks(mybooks)
-                    }
-                })
-        })
+        myBooksPublished()
+            .then((mybooks) => {
+                if ('error' in mybooks) {
+                    console.error('Error al obtener los últimos libros:', mybooks.error);
+                } else {
+                    setBooks(mybooks)
+                }
+            })
     }, [])
 
     const removeBookHandler = async (bookId: string) => {
         console.log('Eliminado', bookId)
-        if(user.session?.id) {
-            deleteBook(bookId, user.session?.id)
-                .then((data) => {
-                    if (data?.success) {
-                        setBooks(books.filter((book) => book.id !== bookId))
-                    }
-                })
-        }
+        deleteBook(bookId)
+            .then((data) => {
+                if (data?.success) {
+                    setBooks(books.filter((book) => book.id !== bookId))
+                }
+            })
+
     }
 
     const editBookHandler = (bookId: string) => {
 
+    }
+
+    const cancelPublicBookHandler = (bookId: string) => {
+        unpublishBook(bookId)
+            .then((data) => {
+                if (data?.success) {
+                    setBooks((prevBooks) => prevBooks.filter((book) => book.id !== bookId))
+                }
+            })
     }
 
     return (
@@ -54,7 +58,7 @@ const MyBooksPublic: React.FC = () => {
             <div className="relative">
                 <div className="flex flex-col">
                     {books.map((book: Book) => (
-                        <BookArtTable key={book.id.toString()} className="w-[250px]" book={book} removeBook={removeBookHandler} editBook={editBookHandler} />
+                        <BookArtTable key={book.id.toString()} className="w-[250px]" book={book} removeBook={removeBookHandler} editBook={editBookHandler} cancelPublication={cancelPublicBookHandler} />
                     ))}
                 </div>
             </div>

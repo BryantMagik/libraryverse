@@ -5,6 +5,11 @@ import { formatDistanceToNow } from "date-fns/formatDistanceToNow"
 import { statusLabels } from "@/app/types/typesModels"
 import { Button, Image } from "@nextui-org/react"
 import { MdOutlineDelete } from "react-icons/md"
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownSection, DropdownItem } from "@nextui-org/dropdown"
+import { SlOptions } from "react-icons/sl"
+import { TbEyeShare } from "react-icons/tb"
+import { CiEdit } from "react-icons/ci"
+import { FaRegEyeSlash } from "react-icons/fa"
 
 interface BookArtTableProps extends React.HTMLAttributes<HTMLDivElement> {
     book: Partial<Book>
@@ -12,6 +17,8 @@ interface BookArtTableProps extends React.HTMLAttributes<HTMLDivElement> {
     hght?: number
     removeBook: (bookId: string) => void
     editBook: (bookId: string) => void
+    publicBook?: (bookId: string) => void
+    cancelPublication?: (bookId: string) => void
 }
 
 export const BookArtTable: React.FC<BookArtTableProps> = ({
@@ -20,6 +27,8 @@ export const BookArtTable: React.FC<BookArtTableProps> = ({
     hght = 125,
     removeBook,
     editBook,
+    publicBook,
+    cancelPublication,
 }) => {
 
     const imageUrl = book.coverImage || '/dashboard/book-placeholder.jpg'
@@ -35,7 +44,7 @@ export const BookArtTable: React.FC<BookArtTableProps> = ({
 
     return (
         <div className="flex flex-row md:pt-2 pt-2">
-            <div className="">
+            <div className="content-center">
                 <Image
                     src={imageUrl}
                     alt={altText}
@@ -43,7 +52,7 @@ export const BookArtTable: React.FC<BookArtTableProps> = ({
                     height={hght}
                 />
             </div>
-            <div className="flex-1 ml-5">
+            <div className="flex-1 ml-5 content-center">
                 <Link key={book.id} href={`/historias/${book.id}`}>
                     <h3 className="font-medium leading-none text-black dark:text-emerald-400 hover:underline p-2">{book.title}</h3>
                 </Link>
@@ -53,20 +62,46 @@ export const BookArtTable: React.FC<BookArtTableProps> = ({
                 <p className="text-xs text-muted-foreground p-2">Actualizada {formattedDate}</p>
             </div>
             <div className="flex flex-col place-content-center">
-                <Button
-                    onClick={() => book.id && removeBook(book.id)}
-                    disabled={!book.id}
-                    className="hover:bg-almond-500 dark:hover:bg-almond-600 hover:text-white p-2 mb-2 mx-auto rounded-full bg-almond-300 text-white dark:bg-almond-400"
-                >
-                    Editar Libro
-                </Button>
-                <Button
-                    onClick={() => book.id && removeBook(book.id)}
-                    disabled={!book.id}
-                    className="hover:bg-red-500 dark:hover:bg-red-500 hover:text-white p-2 mb-2 pt-2 mx-auto rounded-full bg-library-300 text-white dark:bg-emerald-500"
-                >
-                    <MdOutlineDelete size={25} />
-                </Button>
+                <Dropdown>
+                    <DropdownTrigger>
+                        <Button className="hover:bg-library-600 dark:hover:bg-emerald-600 hover:text-white p-2 mb-2 mx-auto rounded-full bg-library-300 text-white dark:bg-emerald-400">
+                            <SlOptions size={25} />
+                        </Button>
+                    </DropdownTrigger>
+                    <DropdownMenu>
+                        <DropdownSection>
+                            <DropdownItem onClick={() => book.id && editBook(book.id)}>
+                                <span className="flex flex-row">
+                                    <CiEdit size={18} /><span className="ml-1">Editar Libro</span>
+                                </span>
+                            </DropdownItem>
+                        </DropdownSection>
+                        {book.status === 'PUBLISHED' ? (
+                            <DropdownSection>
+                                <DropdownItem onClick={() => book.id && cancelPublication && cancelPublication(book.id)}>
+                                    <span className="flex flex-row">
+                                        <FaRegEyeSlash size={18} /><span className="ml-1">Anular Publicación</span>
+                                    </span>
+                                </DropdownItem>
+                            </DropdownSection>
+                        ) : (
+                            <DropdownSection>
+                                <DropdownItem onClick={() => book.id && publicBook && publicBook(book.id)}>
+                                    <span className="flex flex-row">
+                                        <TbEyeShare size={18} /><span className="ml-1">Publicar Historia</span>
+                                    </span>
+                                </DropdownItem>
+                            </DropdownSection>
+                        )}
+                        <DropdownSection>
+                            <DropdownItem onClick={() => book.id && removeBook(book.id)}>
+                                <span className="flex flex-row">
+                                    <MdOutlineDelete size={18} /><span className="ml-1">Eliminar Libro</span>
+                                </span>
+                            </DropdownItem>
+                        </DropdownSection>
+                    </DropdownMenu>
+                </Dropdown>
             </div>
         </div>
     )

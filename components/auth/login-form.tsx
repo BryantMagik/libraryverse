@@ -15,13 +15,15 @@ import {
     FormMessage
 } from "@/components/ui/form"
 import { CardWrapper } from "@/components/auth/card-wrapper"
-import { Input } from "@/components/ui/input"
+import { Input } from "@nextui-org/react"
 import { Button } from "@/components/ui/button"
 import { FormError } from "@/components/form-error"
 import { FormSuccess } from "../form-success"
 import { login } from "@/actions/login"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
+import { PiEye } from "react-icons/pi"
+import { PiEyeClosed } from "react-icons/pi"
 
 export const LoginForm = () => {
     const searchParams = useSearchParams()
@@ -34,6 +36,8 @@ export const LoginForm = () => {
     const [error, setError] = useState<string | undefined>("")
     const [success, setSuccess] = useState<string | undefined>("")
     const [isPending, startTransition] = useTransition()
+    const [isVisible, setIsVisible] = useState(false)
+    const toggleVisibility = () => setIsVisible(!isVisible)
 
     const form = useForm<z.infer<typeof LoginSchema>>({
         resolver: zodResolver(LoginSchema),
@@ -105,14 +109,14 @@ export const LoginForm = () => {
                                     name="email"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="text-almond-500">Email</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    isRequired
+                                                    variant="underlined"
+                                                    label="Correo Electrónico"
                                                     {...field}
                                                     disabled={isPending}
-                                                    placeholder="john.doe@example.com"
                                                     type="email"
-                                                    className="bg-white text-almond-700"
                                                 />
                                             </FormControl>
                                             <FormMessage />
@@ -124,14 +128,23 @@ export const LoginForm = () => {
                                     name="password"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="text-almond-500">Contraseña</FormLabel>
                                             <FormControl>
                                                 <Input
+                                                    variant="underlined"
+                                                    label="Contraseña"
+                                                    isRequired
                                                     {...field}
                                                     disabled={isPending}
-                                                    placeholder="********"
-                                                    type="password"
-                                                    className="bg-white text-almond-700"
+                                                    endContent={
+                                                        <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
+                                                            {isVisible ? (
+                                                                <PiEyeClosed className="text-2xl text-default-400 pointer-events-none" />
+                                                            ) : (
+                                                                <PiEye className="text-2xl text-default-400 pointer-events-none" />
+                                                            )}
+                                                        </button>
+                                                    }
+                                                    type={isVisible ? "text" : "password"}
                                                 />
                                             </FormControl>
                                             <Button

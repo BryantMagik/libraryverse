@@ -20,6 +20,9 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        fondo: "url('/dashboard/fondo1.png')",
+      },
       colors: {
         'almond': {
           '50': '#fcf6f0',

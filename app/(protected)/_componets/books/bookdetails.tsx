@@ -60,8 +60,6 @@ const BookDetailsComponent: React.FC<BookDetailsProps> = ({ handleViewChapters }
         }
     }
 
-
-
     return (
         <>
             {book ? (

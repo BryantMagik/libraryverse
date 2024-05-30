@@ -21,24 +21,26 @@ export const CardWrapper = ({
     showSocial
 }: CardWrapperProps) => {
     return (
-        <Card className='md:w-[500px] w-[300px] shadow-md border-0 bg-almond-50'>
-            <CardHeader>
-                <Header label={headerLabel} />
-            </CardHeader>
-            <CardContent>
-                {children}
-            </CardContent>
-            {showSocial && (
+        <>
+            <Card className='md:w-[500px] md:h-[630px] h-[800px] w-[300px] shadow-md border-0 bg-library-50'>
+                <CardHeader>
+                    <Header label={headerLabel} />
+                </CardHeader>
+                <CardContent>
+                    {children}
+                </CardContent>
+                {showSocial && (
+                    <CardFooter className="place-content-center">
+                        <Social />
+                    </CardFooter>
+                )}
                 <CardFooter>
-                    <Social />
+                    <BackButton
+                        label={backButtonLabel}
+                        href={backButtonHref} />
                 </CardFooter>
-            )}
-            <CardFooter>
-                <BackButton
-                    label={backButtonLabel}
-                    href={backButtonHref} />
-            </CardFooter>
-        </Card>
+            </Card>
+        </>
     )
 
 }

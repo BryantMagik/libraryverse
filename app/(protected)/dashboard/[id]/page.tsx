@@ -1,6 +1,5 @@
 "use client"
 
-import { GenreEnumESP, statusLabels } from '@/app/types/typesModels'
 import { useRouter, useParams } from 'next/navigation'
 
 import BookDetailsComponent from '@/app/(protected)/_componets/books/bookdetails'
@@ -14,7 +13,6 @@ const BookDetailsPage = () => {
     const handleViewChapters = () => {
         router.push(`/dashboard/${bookId}/chapters`)
     }
-
 
     return (
         <>

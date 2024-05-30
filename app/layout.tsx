@@ -22,7 +22,7 @@ export default async function RootLayout({
   return (
 
     <SessionProvider session={session}>
-      <html lang="en" className="no-scrollbar">
+      <html lang="en" className="no-scrollbar p-0 m-0">
         <body className={inter.className}>
           {children}</body>
       </html>

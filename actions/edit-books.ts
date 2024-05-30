@@ -12,7 +12,7 @@ export const editBooks = async (bookId: string, values: z.infer<typeof BookSchem
     const validatedFields = BookSchema.safeParse(values)
 
     if (!validatedFields.success) {
-        return { error: "No valido" }
+        return { error: "Los campos proporcionados no son válidos" }
     }
     const user = await currentUser()
 
