@@ -15,30 +15,27 @@ import {
 } from "@/components/ui/form"
 import { useCurrentUser } from "@/hook/use-current-user"
 import { useParams, useRouter } from "next/navigation"
-import { BookSchema } from "@/schemas"
+import { BookSchema, GenreEnum } from "@/schemas"
 import { Book, GenreEnumESP, statusLabels } from '@/app/types/typesModels'
 import { editBooks } from "@/actions/edit-books"
-import toast from "react-hot-toast"
+import toast, { Toaster } from "react-hot-toast"
 import { Separator } from "@radix-ui/react-dropdown-menu"
 import { CldUploadWidget } from 'next-cloudinary'
-import { Card, CardHeader, CardBody, Image, Input } from "@nextui-org/react"
-import {Textarea} from "@nextui-org/input"
+import { Card, CardHeader, CardBody, Image, Input, Button } from "@nextui-org/react"
+import { Textarea } from "@nextui-org/input"
+import { Select, SelectItem } from "@nextui-org/react"
 
 interface BookFormUpdateProps extends React.HTMLAttributes<HTMLDivElement> {
     book: Partial<Book>
+    onUpdate: (updatedBook: Book) => void
 }
 
-export const BookFormUpdate: React.FC<BookFormUpdateProps> = ({ book }) => {
+export const BookFormUpdate: React.FC<BookFormUpdateProps> = ({ book, onUpdate }) => {
 
     const user = useCurrentUser()
-    const [error, setError] = useState<string | undefined>("")
-    const [success, setSuccess] = useState<string | undefined>("")
     const [isPending, startTransition] = useTransition()
     const [resource, setResource] = useState(book?.coverImage || "")
-
-    const router = useRouter()
-    const { id } = useParams()
-    const bookId = Array.isArray(id) ? id[0] : id
+    const genres = GenreEnum.options
 
     const form = useForm<z.infer<typeof BookSchema>>({
         resolver: zodResolver(BookSchema),
@@ -46,6 +43,7 @@ export const BookFormUpdate: React.FC<BookFormUpdateProps> = ({ book }) => {
             title: book?.title,
             description: book?.description,
             coverImage: book?.coverImage ?? "",
+            genre: book?.genre || undefined,
             authorId: user.session?.id,
             status: book?.status,
         },
@@ -56,23 +54,20 @@ export const BookFormUpdate: React.FC<BookFormUpdateProps> = ({ book }) => {
     }, [resource, form])
 
     const onSubmit = (values: z.infer<typeof BookSchema>) => {
-        setError("")
-        setSuccess("")
 
         startTransition(() => {
-            editBooks(bookId, values)
+            editBooks(book.id ?? "", values)
                 .then((data) => {
                     if (data?.error) {
                         toast.error(data.error)
-                        setError(data.error)
                     }
                     if (data?.success) {
                         toast.success(data.success)
-                        setSuccess(data.success)
+                        //@ts-ignore
+                        onUpdate({ ...book, ...values })
                     }
                 })
         })
-
     }
 
     return (
@@ -124,24 +119,22 @@ export const BookFormUpdate: React.FC<BookFormUpdateProps> = ({ book }) => {
                                                     "
                                                     onClick={() => open()}
                                                 >
-                                                    <p className="text-lg font-light text-custom-gray">Cambiar portada</p>
-                                                    <div className="absolute inset-0 w-full h-full">
-                                                        {resource && (
-                                                            <div className="absolute inset-0 w-full h-full">
-                                                                <Image
-                                                                    style={{ objectFit: 'contain' }}
-                                                                    src={resource}
-                                                                    alt="Portada del Libro"
-                                                                />
-                                                            </div>
-                                                        )}
-                                                    </div>
+                                                    {resource && (
+                                                        <div className="absolute inset-0 w-full h-full">
+                                                            <Image
+                                                                style={{ objectFit: 'contain' }}
+                                                                src={resource}
+                                                                alt="Portada del Libro"
+                                                            />
+                                                        </div>
+                                                    )}
                                                 </div>
                                                 <FormControl>
                                                     <Input
                                                         {...field}
                                                         disabled={isPending}
                                                         type="hidden"
+                                                        className="hidden"
                                                         name="coverImage"
                                                         value={resource}
                                                     />
@@ -188,15 +181,47 @@ export const BookFormUpdate: React.FC<BookFormUpdateProps> = ({ book }) => {
                                             id="description"
                                             placeholder="Descripción de la historia"
                                         />
-                                        
+
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
+                        <FormField
+                            control={form.control}
+                            name="genre"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormControl>
+                                        <Select
+                                            {...field}
+                                            defaultSelectedKeys={[field.value as string]}
+                                            label="Género"
+                                            id="genre"
+                                            disabled={isPending}
+                                        >
+                                            {genres.map((genre) => (
+                                                <SelectItem key={genre} value={genre}>
+                                                    {GenreEnumESP[genre]}
+                                                </SelectItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <Button
+                            disabled={isPending}
+                            type="submit"
+                            className="w-max mx-auto mt-4 text-white bg-library-500 hover:bg-library-600 active:bg-almond-700"
+                        >
+                            Guardar Cambios
+                        </Button>
+
+                        <Toaster />
                     </div>
                 </div>
-
             </form>
         </Form>
     )

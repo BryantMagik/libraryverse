@@ -64,13 +64,13 @@ export const BookArtTable: React.FC<BookArtTableProps> = ({
             <div className="flex flex-col place-content-center">
                 <Dropdown>
                     <DropdownTrigger>
-                        <Button className="hover:bg-library-600 dark:hover:bg-emerald-600 hover:text-white p-2 mb-2 mx-auto rounded-full bg-library-300 text-white dark:bg-emerald-400">
+                        <Button aria-label="Options" className="hover:bg-library-600 dark:hover:bg-emerald-600 hover:text-white p-2 mb-2 mx-auto rounded-full bg-library-300 text-white dark:bg-emerald-400">
                             <SlOptions size={25} />
                         </Button>
                     </DropdownTrigger>
-                    <DropdownMenu>
+                    <DropdownMenu aria-label="Book actions">
                         <DropdownSection>
-                            <DropdownItem onClick={() => book.id && editBook(book.id)}>
+                            <DropdownItem textValue="Edit Book" onClick={() => book.id && editBook(book.id)}>
                                 <span className="flex flex-row">
                                     <CiEdit size={18} /><span className="ml-1">Editar Libro</span>
                                 </span>
@@ -78,7 +78,7 @@ export const BookArtTable: React.FC<BookArtTableProps> = ({
                         </DropdownSection>
                         {book.status === 'PUBLISHED' ? (
                             <DropdownSection>
-                                <DropdownItem onClick={() => book.id && cancelPublication && cancelPublication(book.id)}>
+                                <DropdownItem textValue="Cancel Publication" onClick={() => book.id && cancelPublication && cancelPublication(book.id)}>
                                     <span className="flex flex-row">
                                         <FaRegEyeSlash size={18} /><span className="ml-1">Anular Publicación</span>
                                     </span>
@@ -86,7 +86,7 @@ export const BookArtTable: React.FC<BookArtTableProps> = ({
                             </DropdownSection>
                         ) : (
                             <DropdownSection>
-                                <DropdownItem onClick={() => book.id && publicBook && publicBook(book.id)}>
+                                <DropdownItem textValue="Publish Book" onClick={() => book.id && publicBook && publicBook(book.id)}>
                                     <span className="flex flex-row">
                                         <TbEyeShare size={18} /><span className="ml-1">Publicar Historia</span>
                                     </span>
@@ -94,7 +94,7 @@ export const BookArtTable: React.FC<BookArtTableProps> = ({
                             </DropdownSection>
                         )}
                         <DropdownSection>
-                            <DropdownItem onClick={() => book.id && removeBook(book.id)}>
+                            <DropdownItem textValue="Delete Book" onClick={() => book.id && removeBook(book.id)}>
                                 <span className="flex flex-row">
                                     <MdOutlineDelete size={18} /><span className="ml-1">Eliminar Libro</span>
                                 </span>

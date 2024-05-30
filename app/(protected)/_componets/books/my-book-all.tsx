@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { Book } from '@/app/types/typesModels'
 import { Separator } from '@/components/ui/separator'
 import { myBooksAll } from '@/actions/my-books-all'
@@ -59,6 +59,10 @@ const MyBooksAll: React.FC = () => {
             })
     }
 
+    const updateBookList = (updatedBook: Book) => {
+        setBooks(prevBooks => prevBooks.map(book => book.id === updatedBook.id ? updatedBook as Book : book))
+    }
+
     const cancelPublicBookHandler = (bookId: string) => {
         unpublishBook(bookId)
             .then((data) => {
@@ -88,23 +92,23 @@ const MyBooksAll: React.FC = () => {
                             editBook={() => editBookHandler(book)}
                             publicBook={publicBookHandler}
                             cancelPublication={cancelPublicBookHandler}
+                            aria-label={`Actions for ${book.title}`}
                         />
                     ))}
                 </div>
             </div>
             <Modal
+                size='4xl'
                 isOpen={isOpen}
                 onOpenChange={onOpenChange}
                 placement="top-center"
             >
                 <ModalContent>
-                    {(onclose) => (
-                        <>
-                            <ModalBody>
-                                {selectedBook && <BookFormUpdate book={selectedBook} />}
-                            </ModalBody>
-                        </>
-                    )}
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <ModalBody>
+                            {selectedBook && <BookFormUpdate onUpdate={updateBookList} book={selectedBook} />}
+                        </ModalBody>
+                    </Suspense>
                 </ModalContent>
             </Modal>
 
