@@ -2,7 +2,6 @@
 
 import { bookDetails } from "@/actions/book-details"
 import MyChaptersAll from "@/app/(protected)/_componets/historys/my-chapter-all"
-import { NewChapterForm } from "@/app/(protected)/_componets/historys/new-chapter-form"
 import { TitlePage } from "@/app/(protected)/_componets/title-page"
 import { Book } from "@/app/types/typesModels"
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react"
@@ -40,7 +39,6 @@ const MyBookChaptersPage = () => {
                 <Card>
                     <CardBody>
                         <TitlePage title={`Nuevo Capítulo para ${book?.title}`} subtitle={'Continúa creando capítulos'} />
-                        {/* <NewChapterForm content={chapter.content ?? ""}/> */}
                     </CardBody>
                 </Card>
             </Tab>
