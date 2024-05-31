@@ -40,7 +40,7 @@ const MyBookChaptersPage = () => {
                 <Card>
                     <CardBody>
                         <TitlePage title={`Nuevo Capítulo para ${book?.title}`} subtitle={'Continúa creando capítulos'} />
-                        <NewChapterForm content={chapter.content ?? ""}/>
+                        {/* <NewChapterForm content={chapter.content ?? ""}/> */}
                     </CardBody>
                 </Card>
             </Tab>
