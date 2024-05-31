@@ -3,7 +3,7 @@
 import { startTransition, useEffect, useState } from 'react'
 import { Chapter } from '@/app/types/typesModels'
 import { useParams } from 'next/navigation'
-import { listChapter } from '@/actions/chapters'
+import { listChapter } from '@/actions/list-chapter'
 
 const BookChaptersPage = () => {
     const [chapters, setChapters] = useState<Chapter[]>([])
@@ -31,7 +31,7 @@ const BookChaptersPage = () => {
                     {chapters.map(chapter => (
                         <>
                             <li key={chapter.id}>{chapter.title}</li>
-                            <p>{chapter.content}</p>
+                            <p>{String(chapter.content)}</p> // Convert chapter.content to a string
                         </>
                     ))}
                 </ul>

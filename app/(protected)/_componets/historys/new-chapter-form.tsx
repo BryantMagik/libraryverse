@@ -57,6 +57,7 @@ function MenuBar() {
 
 }
 
+
 export const NewChapterForm: React.FC<NewChapterProps> = ({ content }: { content: string }) => {
 
     const extensions = [StarterKit]
