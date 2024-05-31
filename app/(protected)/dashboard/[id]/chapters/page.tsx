@@ -31,7 +31,7 @@ const BookChaptersPage = () => {
                     {chapters.map(chapter => (
                         <>
                             <li key={chapter.id}>{chapter.title}</li>
-                            <p>{String(chapter.content)}</p> // Convert chapter.content to a string
+                            <p>{String(chapter.content)}</p>
                         </>
                     ))}
                 </ul>
