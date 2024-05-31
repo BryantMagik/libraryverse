@@ -1,31 +1,65 @@
 "use client"
 
 import * as React from 'react'
-import { Suspense } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { Book } from '@/app/types/typesModels'
 import { Separator } from '@/components/ui/separator'
 import { BookArtTable } from './bookArtTable'
 import { TitlePage } from '@/app/(protected)/_componets/title-page'
 import { BookFormUpdate } from '../create/book-update-form'
 import { Modal, ModalContent, ModalBody } from "@nextui-org/modal"
-import { useBookStateHandlers } from '@/hook/use-book-states'
+import { deleteBook } from '@/actions/delete-book'
+import { publishBook } from '@/actions/publish-book'
+import { useDisclosure } from '@nextui-org/react'
+import { myBooksAll } from '@/actions/my-books-all'
+import { unpublishBook } from '@/actions/unpublish-book'
+import { myBooksPublished } from '@/actions/my-books-published'
 
 
 const MyBooksPublic: React.FC = () => {
 
-    const {
-        books,
-        isOpen,
-        onOpen,
-        onOpenChange,
-        selectedBook,
-        setSelectedBook,
-        removeBookHandler,
-        editBookHandler,
-        publicBookHandler,
-        updateBookList,
-        cancelPublicBookHandler
-    } = useBookStateHandlers()
+    const [books, setBooks] = useState<Book[]>([])
+    const { isOpen, onOpen, onOpenChange } = useDisclosure()
+    const [selectedBook, setSelectedBook] = useState<Book | null>(null)
+
+    useEffect(() => {
+        myBooksPublished()
+            .then((mybooks) => {
+                if ('error' in mybooks) {
+                    console.error('Error al obtener los últimos libros:', mybooks.error)
+                } else {
+                    setBooks(mybooks)
+                }
+            })
+    }, [])
+
+    const removeBookHandler = async (bookId: string) => {
+        deleteBook(bookId)
+            .then((data) => {
+                if (data?.success) {
+                    setBooks(prevBooks => prevBooks.filter((book) => book.id !== bookId))
+                }
+            })
+    }
+
+    const editBookHandler = (book: Book) => {
+        setSelectedBook(book)
+        onOpen()
+    }
+
+    const updateBookList = (updatedBook: Book) => {
+        setBooks(prevBooks => prevBooks.map((book) => book.id === updatedBook.id ? updatedBook : book))
+    }
+
+    const cancelPublicBookHandler = (bookId: string) => {
+        unpublishBook(bookId)
+            .then((data) => {
+                if (data?.success) {
+                    setBooks((prevBooks) => prevBooks.filter((book) => book.id !== bookId))
+                }
+            })
+    }
+
     return (
         <>
             <TitlePage title="Mis Historias" subtitle={'Historias Publicadas'} />

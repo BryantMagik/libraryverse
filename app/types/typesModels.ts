@@ -1,4 +1,4 @@
-import { $Enums, Genre } from "@prisma/client";
+import { $Enums, Genre, Prisma } from "@prisma/client"
 
 export enum BookStatus {
   DRAFT = "en emisión",
@@ -74,9 +74,9 @@ export interface Book {
 export interface Chapter {
   id: string
   title: string
-  content: string
+  content: Prisma.JsonValue
   bookId: string
   createdAt: Date
   updatedAt: Date
-
+  order: number
 }

@@ -106,9 +106,7 @@ export const ChapterSchema = z.object({
     title: z.string().min(1, {
         message: "Por favor, introduce un título"
     }),
-    content: z.string().min(1, {
-        message: "Al menos, necesitas introducir algo en el contenido"
-    }),
+    content: z.record(z.any()),
     order: z.number().min(1, {
         message: "debes introducir el orden del capitulo."
     }),

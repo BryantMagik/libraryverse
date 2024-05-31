@@ -104,7 +104,7 @@ model UserBook {
 model Chapter {
   id        String   @id @default(cuid())
   title     String
-  content   String
+  content   Json
   order     Int
   bookId    String
   createdAt DateTime @default(now())

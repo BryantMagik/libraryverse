@@ -7,7 +7,11 @@ export const listChapter = async (bookId: string): Promise<Chapter[]> => {
     try {
         const chapters = await db.chapter.findMany({
             where: { bookId },
-            include: { book: true }
+            include: {
+                book: {
+                    select: { title: true }
+                }
+            }
         })
 
         if (!chapters) {

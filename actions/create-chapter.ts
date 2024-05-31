@@ -6,7 +6,7 @@ import { ChapterSchema } from "@/schemas"
 import { currentUser } from "@/lib/auth"
 import { getUserById } from "@/data/user"
 
-export const createHistory = async (bookId: string, values: z.infer<typeof ChapterSchema>) => {
+export const createChapter = async (bookId: string, values: z.infer<typeof ChapterSchema>) => {
 
     const validatedFields = ChapterSchema.safeParse(values)
 
@@ -31,7 +31,7 @@ export const createHistory = async (bookId: string, values: z.infer<typeof Chapt
         data: {
             bookId: bookId,
             title,
-            content,
+            content: JSON.stringify(content),
             order,
         }
     })

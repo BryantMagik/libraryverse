@@ -1,7 +1,7 @@
 "use client"
 
 import { z } from "zod"
-import { useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ChapterSchema } from "@/schemas"
 import { useRouter } from "next/router"
@@ -27,7 +27,7 @@ export const ChapterForm = () => {
         resolver: zodResolver(ChapterSchema),
         defaultValues: {
             title: "",
-            content: "",
+            content: {} as { [x: string]: any },
             bookId: "",
         },
     })

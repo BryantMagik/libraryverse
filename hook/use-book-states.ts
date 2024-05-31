@@ -94,5 +94,5 @@ export const useBookStateHandlers = (): BookStateHandlers => {
         publicBookHandler,
         updateBookList,
         cancelPublicBookHandler
-    };
-};
+    }
+}
