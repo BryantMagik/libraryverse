@@ -1,10 +1,4 @@
-import { $Enums, Genre, Prisma } from "@prisma/client"
-
-export enum BookStatus {
-  DRAFT = "en emisión",
-  PUBLISHED = "Terminado",
-  PAUSED = "Pausado"
-}
+import { $Enums, Genre } from "@prisma/client"
 
 export const GenreEnumESP = {
   FICTION: 'Ficción',
@@ -72,11 +66,12 @@ export interface Book {
 }
 
 export interface Chapter {
+  book: any;
   id: string
   title: string
-  content: Prisma.JsonValue
+  content: string
   bookId: string
   createdAt: Date
   updatedAt: Date
-  order: number
+  order: string
 }

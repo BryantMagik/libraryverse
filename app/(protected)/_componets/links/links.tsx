@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation"
 const links = [
     { href: "/dashboard", label: "Home", Icon: PiHouseSimpleLight },
     { href: "/create", label: "Crear Historia", Icon: IoCreateOutline },
-    { href: "/book", label: "Buscar Libros", Icon: SlNotebook },
+    { href: "/gbook", label: "Buscar Libros", Icon: SlNotebook },
     { href: "/historias", label: "Mis Historias", Icon: GoBook },
     { href: "/bookshelf", label: "Bookshelf", Icon: BsBookshelf },
 ]

@@ -55,7 +55,7 @@ export const BookFormCreate = () => {
     const onSubmit = (values: z.infer<typeof BookSchema>) => {
         setError("")
         setSuccess("")
-
+        console.log('Enviando...', values)
         startTransition(() => {
             createBook(values)
                 .then((data) => {

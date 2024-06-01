@@ -9,8 +9,19 @@ export const listChapter = async (bookId: string): Promise<Chapter[]> => {
             where: { bookId },
             include: {
                 book: {
-                    select: { title: true }
-                }
+                    select: { 
+                        id: true,
+                        title: true, 
+                        author: {
+                            select: {
+                                id: true,
+                                name: true
+                            }
+                        }
+                    }
+                },
+                
+                
             }
         })
 

@@ -31,7 +31,7 @@ const BooksView: React.FC = () => {
                 <ScrollArea>
                     <div className="flex space-x-4 pb-4">
                         {books.map((book: Book) => (
-                            <Link key={book.id} href={`/dashboard/${book.id}`}>
+                            <Link key={book.id} href={`/book/${book.id}`}>
                                 <BookArtwork key={book.id.toString()} className="w-[250px]" book={book} width={250} height={330} aspectRatio='portrait' />
                             </Link>
                         ))}

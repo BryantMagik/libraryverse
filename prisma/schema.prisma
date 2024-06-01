@@ -23,6 +23,7 @@ model User {
   authoredBooks         Book[]                 @relation("AuthorBooks")
   twoFactorConfirmation TwoFactorConfirmation?
   bookshelf             UserBook[]
+  chapterStatuses       UserChapterStatus[]
 }
 
 model Account {
@@ -101,17 +102,40 @@ model UserBook {
   @@id([userId, bookId])
 }
 
+model UserChapterStatus {
+  userId    String
+  chapterId String
+  status    ChapterUserStatus
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  @@id([userId, chapterId])
+}
+
 model Chapter {
-  id        String   @id @default(cuid())
+  id        String              @id @default(cuid())
   title     String
-  content   Json
-  order     Int
+  content   String
+  status    ChapterStatus
+  order     String
   bookId    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  book      Book     @relation(fields: [bookId], references: [id])
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  book      Book                @relation(fields: [bookId], references: [id])
+  userStatuses UserChapterStatus[]
 
   @@unique([bookId, order])
+}
+
+enum ChapterUserStatus {
+  READ
+  UNREAD
+}
+
+enum ChapterStatus {
+  DRAFT
+  PUBLISHED
+  PAUSED
 }
 
 enum UserRole {

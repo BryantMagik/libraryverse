@@ -20,6 +20,15 @@ const config = {
       },
     },
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: "100%",
+            maxHeight: "70%",
+          }
+        }
+      }
+      ,
       backgroundImage: {
         fondo: "url('/dashboard/fondo1.png')",
       },
@@ -108,8 +117,10 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"),
-  nextui()
+  plugins: [
+    require("tailwindcss-animate"),
+    nextui(),
+    require('@tailwindcss/typography')
   ],
 } satisfies Config
 

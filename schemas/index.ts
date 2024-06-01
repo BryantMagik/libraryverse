@@ -72,7 +72,7 @@ export const RegisterSchema = z.object({
 
 //Esquema de Status
 
-export const BookStatusSchema = z.enum(['DRAFT', 'PUBLISHED', 'PAUSED']);
+export const BookStatusSchema = z.enum(['DRAFT', 'PUBLISHED', 'PAUSED'])
 
 
 export const GenreEnum = z.enum([
@@ -102,16 +102,20 @@ export const BookSchema = z.object({
 })
 // Esquema de creación de capitulos
 
+export const ChapterStatusSchema = z.enum(['DRAFT', 'PUBLISHED', 'PAUSED'])
+
 export const ChapterSchema = z.object({
     title: z.string().min(1, {
         message: "Por favor, introduce un título"
     }),
-    content: z.record(z.any()),
-    order: z.number().min(1, {
-        message: "debes introducir el orden del capitulo."
+    content: z.string().min(1, {}),
+    order: z.string().regex(/^\d+$/, {
+        message: "El orden del capítulo debe ser un número positivo"
     }),
+    status: ChapterStatusSchema,
     bookId: z.string().min(1, {
         message: "El ID del libro es requerido."
     })
 
 })
+

@@ -11,7 +11,14 @@ export const bookDetails = async (
 
         const book = await db.book.findUnique({
             where: { id: bookId },
-            include: { author: true }
+            include: { author: true,
+                chapters: {
+                    select: {
+                        id: true,
+                        bookId: true,
+                    }
+                }
+             }
         })
 
         if (book) {

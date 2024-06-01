@@ -1,75 +1,131 @@
+"use client"
+
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { Chapter } from "@/app/types/typesModels"
 import { Button } from "@nextui-org/button"
-import { cn } from "@nextui-org/react"
-import { EditorProvider, extensions, useCurrentEditor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
+import { ChapterSchema } from "@/schemas"
+import { useForm } from "react-hook-form"
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form"
+import { useTransition } from "react"
+import toast, { Toaster } from "react-hot-toast"
+import Tiptap from "./Tiptap"
+import { create } from "domain"
+import { createChapter } from "@/actions/create-chapter"
 
 interface NewChapterProps extends React.HTMLAttributes<HTMLDivElement> {
     chapter?: Partial<Chapter>
-    content: string
+    bookIdfetch: string
 }
 
-function MenuBar() {
-    const { editor } = useCurrentEditor()
-    if (!editor) {
-        return null
+export const NewChapterForm: React.FC<NewChapterProps> = ({ bookIdfetch }) => {
+
+    const [isPending, startTransition] = useTransition()
+
+    const form = useForm<z.infer<typeof ChapterSchema>>({
+        resolver: zodResolver(ChapterSchema),
+        mode: "onChange",
+        defaultValues: {
+            title: "",
+            content: "",
+            bookId: bookIdfetch,
+            order: "",
+            status: "DRAFT",
+        },
+    })
+
+    const onSubmit = (values: z.infer<typeof ChapterSchema>) => {
+
+        startTransition(() => {
+            createChapter(bookIdfetch,values)
+                .then((data) => {
+                    if(data?.error) {
+                        toast.error(data.error)
+                    }
+                    if(data?.success) {
+                        toast.success(data.success)
+                    }
+                })
+        })
     }
 
     return (
-        <div className="flex gap-2 mb-4">
-            <Button
-                onClick={() => editor.chain().focus().toggleBold().run()}
-                className={cn("flex gap-2", editor.isActive("bold") ? "bg-black text-white" : "")}
+        <Form {...form}>
+            <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
             >
-                Bold
-            </Button>
-            <Button
-                onClick={() => editor.chain().focus().toggleItalic().run()}
-            >
-                Italic
-            </Button>
-            <Button
-                onClick={() => editor.chain().focus().toggleStrike().run()}
-                className="btn btn-primary"
-            >
-                Strike
-            </Button>
-            <Button
-                onClick={() => editor.chain().focus().toggleCode().run()}
-                className="btn btn-primary"
-            >
-                Code
-            </Button>
-            <Button
-                onClick={() => editor.chain().focus().toggleBulletList().run()}
-                className="btn btn-primary"
-            >
-                Bullet List
-            </Button>
-            <Button
-                onClick={() => editor.chain().focus().toggleOrderedList().run()}
-                className="btn btn-primary"
-            >
-                Ordered List
-            </Button>
-        </div>
-    )
-
-}
-
-
-export const NewChapterForm: React.FC<NewChapterProps> = ({ content }: { content: string }) => {
-
-    const extensions = [StarterKit]
-
-    return (
-        <>
-            <EditorProvider
-                slotBefore={<MenuBar />}
-                extensions={extensions}
-                content={content}
-            >
-            </EditorProvider>
-        </>
+                <div className="grid space-y-4 p-2 grid-cols-1 gap-10">
+                    <FormField
+                        control={form.control}
+                        name="title"
+                        render={({ field }) => (
+                            <FormItem className="border-b-1 border-b-custom-gray">
+                                <FormControl>
+                                    <input
+                                        {...field}
+                                        name="title"
+                                        disabled={isPending}
+                                        placeholder="Título del capítulo"
+                                        required
+                                        id="title"
+                                        className="w-full text-center text-4xl hover:outline-none active:outline-none focus:outline-none"
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="content"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormControl>
+                                    <Tiptap description={field.value} onChange={field.onChange} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="order"
+                        render={({ field }) => (
+                            <FormItem className="border-b-1 border-b-custom-gray">
+                                <FormControl>
+                                    <input
+                                        {...field}
+                                        name="order"
+                                        type="number"
+                                        disabled={isPending}
+                                        placeholder="Orden del capítulo"
+                                        required
+                                        id="order"
+                                        className="w-full text-center text-4xl hover:outline-none active:outline-none focus:outline-none"
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button
+                        type="submit"
+                        disabled={isPending}
+                        className="w-max mx-auto mt-4 text-white bg-library-500 hover:bg-library-600 active:bg-almond-700"
+                    >
+                        Crear capítulo
+                    </Button>
+                    <Toaster />
+                </div>
+            </form>
+        </Form>
     )
 }
