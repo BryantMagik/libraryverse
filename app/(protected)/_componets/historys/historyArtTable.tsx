@@ -38,7 +38,7 @@ export const HistoryArtTable: React.FC<HistoryArtTableProps> = ({
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Chapter actions">
                         <DropdownSection>
-                            <DropdownItem textValue="Edit Chapter" onClick={() => chapter.id && editChapter && editChapter(chapter.id)}>
+                            <DropdownItem key="edit" textValue="Edit Chapter" onClick={() => chapter.id && editChapter && editChapter(chapter.id)}>
                                 <span className="flex flex-row">
                                     <FaRegEdit size={18} />
                                     <span className="ml-1">Editar Capitulo</span>
@@ -46,7 +46,7 @@ export const HistoryArtTable: React.FC<HistoryArtTableProps> = ({
                             </DropdownItem>
                         </DropdownSection>
                         <DropdownSection>
-                            <DropdownItem textValue="Delete Chapter" onClick={() => chapter.id && editChapter && editChapter(chapter.id)}>
+                            <DropdownItem key="delete" textValue="Delete Chapter" onClick={() => chapter.id && editChapter && editChapter(chapter.id)}>
                                 <span className="flex flex-row">
                                     <MdOutlineDelete size={18} />
                                     <span className="ml-1">Eliminar Capitulo</span>

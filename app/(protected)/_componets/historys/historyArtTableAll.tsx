@@ -35,14 +35,13 @@ export const HistoryArtTableAll: React.FC<HistoryArtTableProps> = ({
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Chapter actions">
                         <DropdownSection>
-                            <DropdownItem textValue="Edit Chapter" onClick={() => chapter.id && readChapter && readChapter(chapter.id)}>
+                            <DropdownItem key="read" textValue="Edit Chapter" onClick={() => chapter.id && readChapter && readChapter(chapter.id)}>
                                 <span className="flex flex-row">
                                     <FaRegEdit size={18} />
                                     <span className="ml-1">Ver capitulo</span>
                                 </span>
                             </DropdownItem>
                         </DropdownSection>
-
                     </DropdownMenu>
                 </Dropdown>
             </div>
