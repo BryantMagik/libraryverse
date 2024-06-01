@@ -19,6 +19,7 @@ export const ChaptersAll: React.FC = () => {
         listChapter(bookId)
             .then((fetchedChapters) => {
                 console.log("Fetched Chapters:", fetchedChapters)
+                //@ts-ignore
                 setChapters(fetchedChapters)
             }).catch(error => {
                 console.error("Error en server actions de listChapter:", error)
