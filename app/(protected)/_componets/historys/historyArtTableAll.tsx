@@ -29,7 +29,7 @@ export const HistoryArtTableAll: React.FC<HistoryArtTableProps> = ({
                 <Button
                     onClick={() => chapter.id && readChapter && readChapter(chapter.id)}
                     aria-label="Options" className="hover:bg-library-600 dark:hover:bg-emerald-600 hover:text-white p-2 mb-2 mx-auto rounded-full bg-library-300 text-white dark:bg-emerald-400">
-                    <BsBookHalf size={25} />
+                    <BsBookHalf size={25} />    
                 </Button>
             </div>
         </div>

@@ -9,9 +9,6 @@
     "lint": "next lint",
     "postinstall": "prisma generate"
   },
-  "overrides": {
-    "@react-aria/interactions": "3.21.3"
-  },
   "dependencies": {
     "@auth/prisma-adapter": "^1.6.0",
     "@date-io/date-fns": "^3.0.0",
