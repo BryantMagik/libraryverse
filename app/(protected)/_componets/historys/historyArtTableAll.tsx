@@ -1,8 +1,7 @@
 import { Chapter } from "@/app/types/typesModels"
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownSection, DropdownItem } from "@nextui-org/dropdown"
 import { Button } from "@nextui-org/react"
 import { SlOptions } from "react-icons/sl"
-import { FaRegEdit } from "react-icons/fa"
+import { BsBookHalf } from "react-icons/bs";
 
 interface HistoryArtTableProps extends React.HTMLAttributes<HTMLDivElement> {
     chapter: Partial<Chapter>
@@ -27,23 +26,11 @@ export const HistoryArtTableAll: React.FC<HistoryArtTableProps> = ({
                 {chapter.title}
             </h3>
             <div className="flex flex-col place-content-center">
-                <Dropdown>
-                    <DropdownTrigger>
-                        <Button aria-label="Options" className="hover:bg-library-600 dark:hover:bg-emerald-600 hover:text-white p-2 mb-2 mx-auto rounded-full bg-library-300 text-white dark:bg-emerald-400">
-                            <SlOptions size={25} />
-                        </Button>
-                    </DropdownTrigger>
-                    <DropdownMenu aria-label="Chapter actions">
-                        <DropdownSection>
-                            <DropdownItem key="read" textValue="Edit Chapter" onClick={() => chapter.id && readChapter && readChapter(chapter.id)}>
-                                <span className="flex flex-row">
-                                    <FaRegEdit size={18} />
-                                    <span className="ml-1">Ver capitulo</span>
-                                </span>
-                            </DropdownItem>
-                        </DropdownSection>
-                    </DropdownMenu>
-                </Dropdown>
+                <Button
+                    onClick={() => chapter.id && readChapter && readChapter(chapter.id)}
+                    aria-label="Options" className="hover:bg-library-600 dark:hover:bg-emerald-600 hover:text-white p-2 mb-2 mx-auto rounded-full bg-library-300 text-white dark:bg-emerald-400">
+                    <BsBookHalf size={25} />
+                </Button>
             </div>
         </div>
     )
