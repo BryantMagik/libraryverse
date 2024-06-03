@@ -25,11 +25,12 @@ export const createChapter = async (bookId: string, values: z.infer<typeof Chapt
         return { error: "Usuario no encontrado en la DB" }
     }
 
-    const { title, content,status, order } = validatedFields.data
+    const { title, content, order } = validatedFields.data
 
     await db.chapter.create({
         data: {
             bookId: bookId,
+            userId: dbUser.id,
             title,
             content,
             order,
@@ -37,6 +38,6 @@ export const createChapter = async (bookId: string, values: z.infer<typeof Chapt
         }
     })
     return {
-        success: "¡Has agregado un nuevo capítulo a tu libro con éxito! 📚🌟"
+        success: "¡Has agregado un nuevo capítulo a tu libro con éxito!"
     }
 }

@@ -115,6 +115,9 @@ export const ChapterSchema = z.object({
     status: ChapterStatusSchema,
     bookId: z.string().min(1, {
         message: "El ID del libro es requerido."
+    }),
+    userId: z.string().min(1, {
+        message: "El ID del libro es requerido."
     })
 
 })

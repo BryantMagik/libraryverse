@@ -14,6 +14,5 @@ export const useCurrentName = () => {
 
     }, [])
 
-    console.log("HOOK DATOS: ", session)
     return { session: session.data?.user, revalidate: 2 }
 }

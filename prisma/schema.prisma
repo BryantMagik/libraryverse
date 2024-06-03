@@ -7,8 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-
 model User {
   id                    String                 @id @default(cuid())
   name                  String?
@@ -24,6 +22,7 @@ model User {
   twoFactorConfirmation TwoFactorConfirmation?
   bookshelf             UserBook[]
   chapterStatuses       UserChapterStatus[]
+  chapters              Chapter[]
 }
 
 model Account {
@@ -99,6 +98,7 @@ model UserBook {
   addedAt DateTime @default(now())
   book    Book     @relation(fields: [bookId], references: [id])
   user    User     @relation(fields: [userId], references: [id])
+
   @@id([userId, bookId])
 }
 
@@ -106,22 +106,24 @@ model UserChapterStatus {
   userId    String
   chapterId String
   status    ChapterUserStatus
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapter   Chapter           @relation(fields: [chapterId], references: [id], onDelete: Cascade)
 
   @@id([userId, chapterId])
 }
 
 model Chapter {
-  id        String              @id @default(cuid())
-  title     String
-  content   String
-  status    ChapterStatus
-  order     String
-  bookId    String
-  createdAt DateTime            @default(now())
-  updatedAt DateTime            @updatedAt
-  book      Book                @relation(fields: [bookId], references: [id])
+  id      String        @id @default(cuid())
+  title   String
+  content String
+  status  ChapterStatus
+  order   String
+  bookId  String
+  userId String
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  book         Book                @relation(fields: [bookId], references: [id])
+  user         User                @relation(fields: [userId], references: [id])
   userStatuses UserChapterStatus[]
 
   @@unique([bookId, order])

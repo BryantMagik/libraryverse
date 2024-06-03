@@ -11,7 +11,7 @@ interface ProtectedLayoutProps {
 const ProtectedLayout = async ({ children }: ProtectedLayoutProps) => {
 
     const session = await auth()
-
+    
     return (
         <SessionProvider session={session}>
             <NavbarApp />

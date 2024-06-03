@@ -3,23 +3,25 @@
 import { startTransition, useEffect, useState } from 'react'
 import { Book, Chapter } from '@/app/types/typesModels'
 import { useParams } from 'next/navigation'
-import { listChapter } from '@/actions/list-chapter'
 import { ChapterContent } from '@/app/(protected)/_componets/historys/chapter-content'
 import { TitlePage } from '../title-page'
+import { getChapter } from '@/actions/get-chapter'
 
 const ByChapter = () => {
-    
+
     const [chapters, setChapters] = useState<Chapter[]>([])
-    const { id, bookId } = useParams()
+    const { chapterId, bookId } = useParams()
 
 
     useEffect(() => {
-        if (id) {
+        if (chapterId) {
             startTransition(() => {
                 const bookIdString = Array.isArray(bookId) ? bookId[0] : bookId
-                listChapter(bookIdString)
+                const idChapterString = Array.isArray(chapterId) ? chapterId[0] : chapterId
+
+                getChapter(bookIdString, idChapterString,)
                     .then((fetchedChapters) => {
-                         //@ts-ignore
+                        //@ts-ignore
                         setChapters(fetchedChapters)
 
                     }).catch(error => {
@@ -27,12 +29,10 @@ const ByChapter = () => {
                     })
             })
         }
-    }, [id])
-
-    console.log("Chapters:", chapters)
+    }, [chapterId])
 
     return (
-        <div>           
+        <div>
             {chapters.length > 0 ? (
                 <>
                     {chapters.map(chapter => (
@@ -44,7 +44,7 @@ const ByChapter = () => {
                     ))}
                 </>
             ) : (
-                <p>Cargando capítulos...</p>
+                <p>No hay capitulos disponibles </p>
             )}
         </div>
     )

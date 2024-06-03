@@ -58,7 +58,7 @@ export const BookArtTable: React.FC<BookArtTableProps> = ({
                 />
             </div>
             <div className="flex-1 ml-5 content-center">
-                <Link key={book.id} href={`/historias/${book.id}`}>
+                <Link key={book.id} href={`/historias/${book.id}/chapters`}>
                     <h3 className="font-medium leading-none text-black dark:text-emerald-400 hover:underline p-2">{book.title}</h3>
                 </Link>
                 {book.status && (

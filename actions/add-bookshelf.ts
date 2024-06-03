@@ -1,9 +1,25 @@
 "use server"
 
 import { getBookFromBookshelfById } from "@/data/book"
+import { getUserById } from "@/data/user"
+import { currentUser } from "@/lib/auth"
 import { db } from "@/lib/db"
 
 export const addBookShelf = async (bookId: string, userId: string) => {
+
+    const user = await currentUser()
+
+    if (!user) {
+        return { error: "Usuario no ha iniciado sesión" }
+    }
+
+    const dbUser = await getUserById(user.id)
+
+    if (!dbUser) {
+        return { error: "Usuario no ha iniciado sesión" }
+    }
+
+
     try {
         const existingBook = await getBookFromBookshelfById(bookId, userId)
 

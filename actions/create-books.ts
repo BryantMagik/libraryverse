@@ -42,6 +42,6 @@ export const createBook = async (values: z.infer<typeof BookSchema>) => {
     })
 
     return {
-        success: "¡Has creado tu propio libro con éxito! 📚✨"
+        success: "¡Has creado tu propio libro con éxito!"
     }
 }

@@ -17,8 +17,8 @@ import {
 import { useTransition } from "react"
 import toast, { Toaster } from "react-hot-toast"
 import Tiptap from "./Tiptap"
-import { create } from "domain"
 import { createChapter } from "@/actions/create-chapter"
+import { useCurrentUser } from "@/hook/use-current-user"
 
 interface NewChapterProps extends React.HTMLAttributes<HTMLDivElement> {
     chapter?: Partial<Chapter>
@@ -27,6 +27,7 @@ interface NewChapterProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const NewChapterForm: React.FC<NewChapterProps> = ({ bookIdfetch }) => {
 
+    const user = useCurrentUser()
     const [isPending, startTransition] = useTransition()
 
     const form = useForm<z.infer<typeof ChapterSchema>>({
@@ -36,6 +37,7 @@ export const NewChapterForm: React.FC<NewChapterProps> = ({ bookIdfetch }) => {
             title: "",
             content: "",
             bookId: bookIdfetch,
+            userId: user.session?.id,
             order: "",
             status: "DRAFT",
         },

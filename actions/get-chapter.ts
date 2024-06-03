@@ -3,33 +3,34 @@
 import { db } from "@/lib/db"
 import { Chapter } from "@prisma/client"
 
-export const listChapter = async (bookId: string): Promise<Chapter[]> => {
+export const getChapter = async (bookId: string, chapterId: string): Promise<Chapter[]> => {
     try {
-        const chapters = await db.chapter.findMany({
-            where: { bookId },
+        const chapter = await db.chapter.findUnique({
+            where: {
+                id: chapterId,
+                bookId: bookId
+            },
             include: {
                 book: {
-                    select: { 
+                    select: {
                         id: true,
-                        title: true, 
+                        title: true,
                         author: {
                             select: {
-                                id: true,
                                 name: true
                             }
                         }
                     }
-                },
-                
-                
+                }
             }
         })
 
-        if (!chapters) {
+
+        if (!chapter) {
             throw new Error("Chapters not found.")
         }
 
-        return chapters
+        return [chapter]
     } catch (error) {
         console.error("Error fetching chapters:", error)
         throw error

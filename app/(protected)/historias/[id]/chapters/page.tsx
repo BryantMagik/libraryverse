@@ -1,11 +1,10 @@
 "use client"
 
 import { bookDetails } from "@/actions/book-details"
-import { listChapter } from "@/actions/list-chapter"
 import MyChaptersAll from "@/app/(protected)/_componets/historys/my-chapter-all"
 import { NewChapterForm } from "@/app/(protected)/_componets/historys/new-chapter-form"
 import { TitlePage } from "@/app/(protected)/_componets/title-page"
-import { Book, Chapter } from "@/app/types/typesModels"
+import { Book } from "@/app/types/typesModels"
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
