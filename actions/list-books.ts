@@ -18,5 +18,13 @@ export const listBooks = async () => {
         return { error: "Usuario no ha iniciado sesión" }
     }
 
-    await db.book.findMany({})
+    const books = await db.book.findMany({
+        where: {
+            status: 'PUBLISHED'
+        },
+        include: {
+            author: true
+        }
+    })
+    return books
 }

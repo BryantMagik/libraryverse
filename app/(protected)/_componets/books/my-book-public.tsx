@@ -74,7 +74,7 @@ const MyBooksPublic: React.FC = () => {
                             removeBook={removeBookHandler}
                             editBook={() => editBookHandler(book)}
                             cancelPublication={cancelPublicBookHandler}
-                            aria-label={`Actions for ${book.title}`}
+                            aria-label={`Actions para ${book.title}`}
                         />
                     ))}
                 </div>
@@ -86,7 +86,7 @@ const MyBooksPublic: React.FC = () => {
                 placement="top-center"
             >
                 <ModalContent>
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<div>Cargando...</div>}>
                         <ModalBody>
                             {selectedBook && <BookFormUpdate onUpdate={updateBookList} book={selectedBook} />}
                         </ModalBody>

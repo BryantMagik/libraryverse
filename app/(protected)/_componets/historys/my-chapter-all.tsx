@@ -8,6 +8,7 @@ import { HistoryArtTable } from '@/app/(protected)/_componets/historys/historyAr
 import { listChapter } from '@/actions/list-chapter'
 import { deleteChapter } from '@/actions/delete-chapter'
 import toaster, { Toaster } from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 const MyChaptersAll: React.FC = () => {
 
@@ -15,6 +16,7 @@ const MyChaptersAll: React.FC = () => {
     const { id } = useParams()
     const bookId = Array.isArray(id) ? id[0] : id
     const [selectedChapter, setSelectedChapter] = useState<Chapter | null>(null)
+    const router = useRouter()
 
     useEffect(() => {
         listChapter(bookId)
@@ -41,7 +43,7 @@ const MyChaptersAll: React.FC = () => {
 
     const editChapterHandler = async(chapter: Chapter) => {
         setSelectedChapter(chapter)
-        // router.push()
+        router.push(`/edit/${chapter.id}?bookId=${bookId}`)
     }
 
     return (

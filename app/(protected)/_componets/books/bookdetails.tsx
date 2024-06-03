@@ -30,10 +30,10 @@ const BookDetailsComponent: React.FC<BookDetailsProps> = ({ handleViewChapters }
                 if (fetchBook !== null) {
                     setBook(fetchBook)
                 } else {
-                    console.error("El libro no fue encontrado")
+                    return { error: "Error al cargar detalles del libro" }
                 }
             }).catch(error => {
-                console.error("Error en server actions bookdetails:", error)
+                return { error: "Error al cargar detalles del libro" }
             })
     }, [])
 
@@ -66,8 +66,8 @@ const BookDetailsComponent: React.FC<BookDetailsProps> = ({ handleViewChapters }
                     <div className='text-center'>
                         <Image src={book.coverImage ?? '/dashboard/book-placeholder.jpg'} width="350" height="20" alt="a" className="mx-auto" />
                         <div className='flex flex-row justify-center space-x-3 mt-10'>
-                            <Button className='dark:bg-emerald-700 dark:hover:bg-emerald-400' onClick={handleViewChapters}>Leer</Button>
-                            <Button className='dark:bg-emerald-700 dark:hover:bg-emerald-400' onClick={addBookshelf} >Agregar al Bookshelf</Button>
+                            <Button className='dark:bg-emerald-700 dark:hover:bg-emerald-400 bg-library-400 text-white' onClick={handleViewChapters}>Leer</Button>
+                            <Button className='dark:bg-emerald-700 dark:hover:bg-emerald-400 bg-library-400 text-white' onClick={addBookshelf} >Agregar al Bookshelf</Button>
                         </div>
                     </div>
                     <div className='md:mt-2 lg:mt-0'>

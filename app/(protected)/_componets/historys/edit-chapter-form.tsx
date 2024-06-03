@@ -7,25 +7,22 @@ import { ChapterSchema } from "@/schemas"
 import { useForm } from "react-hook-form"
 import { useTransition } from "react"
 import toast from "react-hot-toast"
-import { createChapter } from "@/actions/create-chapter"
 import { useCurrentUser } from "@/hook/use-current-user"
 import { ChapterForm } from "./chapter-form"
 import { editChapter } from "@/actions/edit-chapter"
 
 interface UpdateChapterProps extends React.HTMLAttributes<HTMLDivElement> {
     chapter: Partial<Chapter>
-    onUpdate: (updatedBook: Chapter) => void
     chapterId: string
 }
 
-export const UpdateChapterForm: React.FC<UpdateChapterProps> = ({ chapter, chapterId, onUpdate }) => {
+export const UpdateChapterForm: React.FC<UpdateChapterProps> = ({ chapter, chapterId }) => {
 
     const user = useCurrentUser()
     const [isPending, startTransition] = useTransition()
 
     const form = useForm<z.infer<typeof ChapterSchema>>({
         resolver: zodResolver(ChapterSchema),
-        mode: "onChange",
         defaultValues: {
             title: chapter.title,
             content: chapter.content,
@@ -39,7 +36,7 @@ export const UpdateChapterForm: React.FC<UpdateChapterProps> = ({ chapter, chapt
     const onSubmit = (values: z.infer<typeof ChapterSchema>) => {
 
         startTransition(() => {
-            editChapter(chapter.id ?? "", values)
+            editChapter(chapter?.id ?? "", values)
                 .then((data) => {
                     if (data?.error) {
                         toast.error(data.error)
@@ -47,7 +44,6 @@ export const UpdateChapterForm: React.FC<UpdateChapterProps> = ({ chapter, chapt
                     if (data?.success) {
                         toast.success(data.success)
                         //@ts-ignore
-                        onUpdate({ ...chapter, ...values })
                     }
                 })
         })

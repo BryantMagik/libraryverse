@@ -1,7 +1,7 @@
 "use client"
 
 import { startTransition, useEffect, useState } from 'react'
-import { Book, Chapter } from '@/app/types/typesModels'
+import { Chapter } from '@/app/types/typesModels'
 import { useParams } from 'next/navigation'
 import { ChapterContent } from '@/app/(protected)/_componets/historys/chapter-content'
 import { TitlePage } from '../title-page'
@@ -10,26 +10,26 @@ import { getChapter } from '@/actions/get-chapter'
 const ByChapter = () => {
 
     const [chapters, setChapters] = useState<Chapter[]>([])
-    const { chapterId, bookId } = useParams()
-
-
+    const { id, bookId } = useParams()
+    
     useEffect(() => {
-        if (chapterId) {
+        if (id) {
             startTransition(() => {
                 const bookIdString = Array.isArray(bookId) ? bookId[0] : bookId
-                const idChapterString = Array.isArray(chapterId) ? chapterId[0] : chapterId
+                const idChapterString = Array.isArray(id) ? id[0] : id
 
                 getChapter(bookIdString, idChapterString,)
                     .then((fetchedChapters) => {
                         //@ts-ignore
                         setChapters(fetchedChapters)
+                        console.log(fetchedChapters)
 
                     }).catch(error => {
                         console.error("Error en server actions de listChapter:", error)
                     })
             })
         }
-    }, [chapterId])
+    }, [id])
 
     return (
         <div>

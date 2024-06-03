@@ -10,7 +10,7 @@ import { SlOptions } from "react-icons/sl"
 import { TbEyeShare } from "react-icons/tb"
 import { CiEdit } from "react-icons/ci"
 import { FaRegEyeSlash } from "react-icons/fa"
-import { useParams, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { VscBook } from "react-icons/vsc"
 interface BookArtTableProps extends React.HTMLAttributes<HTMLDivElement> {
     book: Partial<Book>

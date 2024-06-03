@@ -9,10 +9,25 @@ import { Book } from '@/app/types/typesModels'
 import { lastBooks } from '@/actions/last-books'
 import Link from 'next/link'
 import { TitlePage } from '@/app/(protected)/_componets/title-page'
+import { listBooks } from '@/actions/list-books'
+import { useEffect, useState } from 'react'
 
 const BooksView: React.FC = () => {
 
     const { data: books, error } = useSWR('lastBooks', lastBooks, {})
+
+    const [allBooks, setAllBooks] = useState<Book[]>([])
+
+    useEffect(() => {
+        listBooks()
+            .then((listbooks) => {
+                //@ts-ignore
+                setAllBooks(listbooks)
+            })
+
+    }, [])
+
+
     if (error) return <div>Error al cargar los libros: {error}</div>
 
     if (books && 'error' in books) {
@@ -25,7 +40,7 @@ const BooksView: React.FC = () => {
 
     return (
         <>
-            <TitlePage title={'Historias Actualizadas Recientemente'} subtitle={'Descubre las últimas actualizaciones...'}/>
+            <TitlePage title={'Historias Actualizadas Recientemente'} subtitle={'Descubre las últimas actualizaciones...'} />
             <Separator className="my-4" />
             <div className="relative">
                 <ScrollArea>
@@ -38,18 +53,10 @@ const BooksView: React.FC = () => {
                     </div>
                     <ScrollBar orientation="horizontal" />
                 </ScrollArea>
-                <div className='mt-6 space-y-1'>
-                    <h2 className="text-2xl font-semibold text-custom-gray border-almond-300 border-b-4  dark:text-emerald-600 dark:border-emerald-400">
-                        Más populares
-                    </h2>
-                    <p className='text-sm text-muted-foreground dark:text-white'>
-                        Descubre las historias más populares...
-                    </p>
-                </div>
-                <Separator className='my-4' />
+                <TitlePage title={'Explora Todas las Historias Publicadas'} subtitle={'Sumérgete en las historias creadas por nuestra talentosa comunidad...'} />                <Separator className='my-4' />
                 <ScrollArea>
                     <div className="flex space-x-4 pb-4">
-                        {books.map((book) => (
+                        {allBooks.map((book) => (
                             <Link key={book.id} href={`/dashboard/${book.id}`}>
                                 <BookArtwork key={book.id.toString()} book={book} width={300} height={300} />
                             </Link>

@@ -32,7 +32,7 @@ export const BookArtTableBookshelf: React.FC<BookArtTableProps> = ({
     }
 
     if (book.id === undefined) {
-        console.log("book.id is undefined")
+        return null
     }
 
     const AuthorName = book.author?.name || 'Nombre no disponible'

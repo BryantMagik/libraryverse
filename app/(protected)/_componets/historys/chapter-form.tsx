@@ -97,7 +97,6 @@ export const ChapterForm: React.FC<ChapterFormProps> = ({
                     >
                         {buttonLabel}
                     </Button>
-                    <Toaster />
                 </div>
             </form>
         </Form>
