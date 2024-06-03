@@ -67,7 +67,7 @@ export const BookForm: React.FC<BookFormProps> = ({
                                 <CldUploadWidget
                                     options={{
                                         sources: ['local', 'url'],
-                                        maxImageFileSize: 1500000,
+                                        maxImageFileSize: 2500000,
                                         maxFiles: 1,
                                         clientAllowedFormats: ['jpeg', 'png', 'jpg', 'webp'],
                                         minImageWidth: 250,
