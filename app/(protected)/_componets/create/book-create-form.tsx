@@ -51,7 +51,7 @@ export const BookFormCreate = () => {
                         form.reset()
                         setSuccess(data.success)
                         toast.success(data.success)
-                        router.refresh()
+                        router.push(`/historias/`)
                     }
                 })
         })
