@@ -92,10 +92,12 @@ export const BookArtTable: React.FC<BookArtTableProps> = ({
                             </DropdownSection>
                             {book.status === 'PUBLISHED' ? (
                                 <DropdownSection>
-                                    <DropdownItem key="cancel" textValue="Cancel Publication" onClick={() => book.id && cancelPublication && cancelPublication(book.id)}>
-                                        <span className="flex flex-row">
-                                            <FaRegEyeSlash size={18} /><span className="ml-1">Anular Publicación</span>
-                                        </span>
+                                    <DropdownItem key="cancel" textValue="Cancel Publication">
+                                        <Button onClick={() => book.id && cancelPublication && cancelPublication(book.id)}>
+                                            <span className="flex flex-row">
+                                                <FaRegEyeSlash size={18} /><span className="ml-1">Anular Publicación</span>
+                                            </span>
+                                        </Button>
                                     </DropdownItem>
                                 </DropdownSection>
                             ) : (

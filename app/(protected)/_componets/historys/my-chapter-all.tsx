@@ -14,6 +14,7 @@ const MyChaptersAll: React.FC = () => {
     const [chapters, setChapters] = useState<Chapter[]>([])
     const { id } = useParams()
     const bookId = Array.isArray(id) ? id[0] : id
+    const [selectedChapter, setSelectedChapter] = useState<Chapter | null>(null)
 
     useEffect(() => {
         listChapter(bookId)
@@ -38,13 +39,20 @@ const MyChaptersAll: React.FC = () => {
             })
     }
 
+    const editChapterHandler = async(chapter: Chapter) => {
+        setSelectedChapter(chapter)
+        // router.push()
+    }
+
     return (
         <>
             {chapters.map((chapter: Chapter) => (
                 <HistoryArtTable
                     key={chapter.id}
                     chapter={chapter}
-                    removeChapter={removeChapterHandler} />
+                    removeChapter={removeChapterHandler} 
+                    editChapter={() => editChapterHandler(chapter)}
+                    />
             ))}
             <Toaster />
         </>

@@ -10,13 +10,15 @@ import toast from "react-hot-toast"
 import { createChapter } from "@/actions/create-chapter"
 import { useCurrentUser } from "@/hook/use-current-user"
 import { ChapterForm } from "./chapter-form"
+import { editChapter } from "@/actions/edit-chapter"
 
-interface NewChapterProps extends React.HTMLAttributes<HTMLDivElement> {
-    chapter?: Partial<Chapter>
-    bookIdfetch: string
+interface UpdateChapterProps extends React.HTMLAttributes<HTMLDivElement> {
+    chapter: Partial<Chapter>
+    onUpdate: (updatedBook: Chapter) => void
+    chapterId: string
 }
 
-export const NewChapterForm: React.FC<NewChapterProps> = ({ bookIdfetch }) => {
+export const UpdateChapterForm: React.FC<UpdateChapterProps> = ({ chapter, chapterId, onUpdate }) => {
 
     const user = useCurrentUser()
     const [isPending, startTransition] = useTransition()
@@ -25,37 +27,39 @@ export const NewChapterForm: React.FC<NewChapterProps> = ({ bookIdfetch }) => {
         resolver: zodResolver(ChapterSchema),
         mode: "onChange",
         defaultValues: {
-            title: "",
-            content: "",
-            bookId: bookIdfetch,
+            title: chapter.title,
+            content: chapter.content,
+            bookId: chapter.id,
             userId: user.session?.id,
-            order: "",
-            status: "DRAFT",
+            order: chapter.order,
+            status: chapter.status,
         },
     })
 
     const onSubmit = (values: z.infer<typeof ChapterSchema>) => {
 
         startTransition(() => {
-            createChapter(bookIdfetch, values)
+            editChapter(chapter.id ?? "", values)
                 .then((data) => {
                     if (data?.error) {
                         toast.error(data.error)
                     }
                     if (data?.success) {
                         toast.success(data.success)
+                        //@ts-ignore
+                        onUpdate({ ...chapter, ...values })
                     }
                 })
         })
     }
 
-    return (
-        <ChapterForm
+    return(
+        <ChapterForm 
             form={form}
-            bookIdfetch={bookIdfetch}
+            bookIdfetch={chapterId}
             onSubmit={onSubmit}
             isPending={isPending}
-            buttonLabel="Crear capítulo"
+            buttonLabel="Actualizar capítulo"
         />
     )
 }

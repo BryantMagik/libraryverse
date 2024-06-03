@@ -66,7 +66,7 @@ export interface Book {
 }
 
 export interface Chapter {
-  book: any;
+  book: any
   id: string
   title: string
   content: string
@@ -74,4 +74,5 @@ export interface Chapter {
   createdAt: Date
   updatedAt: Date
   order: string
+  status: $Enums.ChapterStatus
 }
