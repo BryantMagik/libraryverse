@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { FaMoon } from "react-icons/fa"
 import { BsSunFill } from "react-icons/bs"
 import toast, { Toaster } from "react-hot-toast"
+import { Meteors } from "@/components/ui/meteors"
 
 export const ThemeToggle = () => {
 
@@ -45,6 +46,7 @@ export const ThemeToggle = () => {
                 </div>
                 <BsSunFill className="ml-auto text-yellow-400" size={18} />
             </div>
+            {darkMode && <Meteors number={20} />}
         </>
     )
 }

@@ -19,13 +19,18 @@ import { ExtendedUser } from "@/next-auth"
 interface UserInfoProps {
     user?: ExtendedUser
 }
-
 export const UserButton = ({ user }: UserInfoProps) => {
-
     return (
         <>
-            <h3 className="text-sm font-semibold text-muted-foreground">
-                ¡Te damos la bienvenida, <span className="dark:text-emerald-500 text-library-600">{user?.name}!</span>
+            <h3 className="relative text-sm font-semibold text-muted-foreground">
+                ¡Te damos la bienvenida,
+                <span className="dark:text-emerald-500 text-library-600 fade-in relative z-10">
+                    {user?.name}!
+                    <div className="relative inset-x-20 top-0 bg-gradient-to-r from-transparent dark:via-emerald-500 via-library-500 to-transparent h-[2px] w-3/4 blur-sm" />
+                    <div className="relative inset-x-20 top-0 bg-gradient-to-r from-transparent dark:via-emerald-500 via-library-500 to-transparent h-px w-3/4" />
+                    <div className="relative inset-x-40 bottom-1 bg-gradient-to-r from-transparent dark:via-emerald-500 via-library-500 to-transparent h-[4px] w-1/4 blur-sm" />
+                    <div className="relative inset-x-40 bottom-1 bg-gradient-to-r from-transparent dark:via-emerald-500 via-library-500 to-transparent h-px w-1/4" />
+                </span>
             </h3>
             <DropdownMenu>
                 <DropdownMenuTrigger>

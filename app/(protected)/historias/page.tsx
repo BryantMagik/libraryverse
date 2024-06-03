@@ -23,7 +23,6 @@ const MyHistorys = () => {
                         </CardBody>
                     </Card>
                 </Tab>
-
             </Tabs>
         </div>
     )

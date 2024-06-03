@@ -19,6 +19,7 @@ import { Card, CardBody, Image } from "@nextui-org/react"
 import { GenreEnumESP } from "@/app/types/typesModels"
 import { Toaster } from "react-hot-toast"
 import { Separator } from "@radix-ui/react-dropdown-menu"
+import { WavyBackground } from "@/components/ui/wavy-background";
 
 interface BookFormProps extends React.HTMLAttributes<HTMLDivElement> {
     title: string,
@@ -43,6 +44,7 @@ export const BookForm: React.FC<BookFormProps> = ({
 }) => {
 
     return (
+
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
