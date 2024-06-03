@@ -44,6 +44,7 @@ export const NewChapterForm: React.FC<NewChapterProps> = ({ bookIdfetch }) => {
                     }
                     if (data?.success) {
                         toast.success(data.success)
+                        form.reset()
                     }
                 })
         })
