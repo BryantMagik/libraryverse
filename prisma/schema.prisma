@@ -1,7 +1,9 @@
 generator client {
   provider = "prisma-client-js"
 }
-
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -10,6 +12,10 @@ datasource db {
 model User {
   id                    String                 @id @default(cuid())
   name                  String?
+  lastName              String?
+  nickName              String?
+  dateOfBirth           String?
+  country               Country?
   email                 String                 @unique
   image                 String?
   emailVerified         DateTime?
@@ -146,6 +152,7 @@ enum UserRole {
   USER
 }
 
+
 enum Genre {
   FICTION
   NONFICTION
@@ -176,6 +183,42 @@ enum Genre {
   COMPUTERS
   BIOGRAPHY_AUTOBIOGRAPHY
   YOUNG_ADULT_FICTION
+}
+
+enum Country {
+  ARGENTINA
+  BOLIVIA
+  CHILE
+  COLOMBIA
+  COSTA_RICA
+  CUBA
+  ECUADOR
+  EL_SALVADOR
+  SPAIN
+  GUATEMALA
+  HONDURAS
+  MEXICO
+  NICARAGUA
+  PANAMA
+  PARAGUAY
+  PERU
+  PUERTO_RICO
+  DOMINICAN_REPUBLIC
+  URUGUAY
+  VENEZUELA
+  UNITED_STATES
+  CANADA
+  UNITED_KINGDOM
+  AUSTRALIA
+  FRANCE
+  GERMANY
+  ITALY
+  JAPAN
+  CHINA
+  INDIA
+  BRAZIL
+  RUSSIA
+  SOUTH_AFRICA
 }
 
 enum BookStatus {

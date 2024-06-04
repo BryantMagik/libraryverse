@@ -2,14 +2,13 @@
 //// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 //// ------------------------------------------------------
 
-Project "Project Name" {
-  database_type: 'PostgreSQL'
-  Note: 'Test project description'
-}
-
 Table User {
   id String [pk]
   name String
+  lastName String
+  nickName String
+  dateOfBirth String
+  country Country
   email String [unique, not null]
   image String
   emailVerified DateTime
@@ -21,6 +20,8 @@ Table User {
   authoredBooks Book [not null]
   twoFactorConfirmation TwoFactorConfirmation
   bookshelf UserBook [not null]
+  chapterStatuses UserChapterStatus [not null]
+  chapters Chapter [not null]
 }
 
 Table Account {
@@ -110,19 +111,46 @@ Table UserBook {
   }
 }
 
+Table UserChapterStatus {
+  userId String [not null]
+  chapterId String [not null]
+  status ChapterUserStatus [not null]
+  user User [not null]
+  chapter Chapter [not null]
+
+  indexes {
+    (userId, chapterId) [pk]
+  }
+}
+
 Table Chapter {
   id String [pk]
   title String [not null]
   content String [not null]
-  order Int [not null]
+  status ChapterStatus [not null]
+  order String [not null]
   bookId String [not null]
+  userId String [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
   book Book [not null]
+  user User [not null]
+  userStatuses UserChapterStatus [not null]
 
   indexes {
     (bookId, order) [unique]
   }
+}
+
+Enum ChapterUserStatus {
+  READ
+  UNREAD
+}
+
+Enum ChapterStatus {
+  DRAFT
+  PUBLISHED
+  PAUSED
 }
 
 Enum UserRole {
@@ -162,6 +190,42 @@ Enum Genre {
   YOUNG_ADULT_FICTION
 }
 
+Enum Country {
+  ARGENTINA
+  BOLIVIA
+  CHILE
+  COLOMBIA
+  COSTA_RICA
+  CUBA
+  ECUADOR
+  EL_SALVADOR
+  SPAIN
+  GUATEMALA
+  HONDURAS
+  MEXICO
+  NICARAGUA
+  PANAMA
+  PARAGUAY
+  PERU
+  PUERTO_RICO
+  DOMINICAN_REPUBLIC
+  URUGUAY
+  VENEZUELA
+  UNITED_STATES
+  CANADA
+  UNITED_KINGDOM
+  AUSTRALIA
+  FRANCE
+  GERMANY
+  ITALY
+  JAPAN
+  CHINA
+  INDIA
+  BRAZIL
+  RUSSIA
+  SOUTH_AFRICA
+}
+
 Enum BookStatus {
   DRAFT
   PUBLISHED
@@ -178,4 +242,10 @@ Ref: UserBook.bookId > Book.id
 
 Ref: UserBook.userId > User.id
 
+Ref: UserChapterStatus.userId > User.id [delete: Cascade]
+
+Ref: UserChapterStatus.chapterId > Chapter.id [delete: Cascade]
+
 Ref: Chapter.bookId > Book.id
+
+Ref: Chapter.userId > User.id

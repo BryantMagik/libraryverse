@@ -21,7 +21,6 @@ const GbookArtsDetails: React.FC<GbookDestailsProps> = ({ gbook }) => {
     const categories = gbook.volumeInfo.categories?.join(', ')
     const authors = gbook.volumeInfo.authors?.join(', ')
     const publishedDate = gbook.volumeInfo.publishedDate
-    const description = gbook.volumeInfo.description
     const pageCount = gbook.volumeInfo.pageCount
     const language = gbook.volumeInfo.language
     const freeContet = gbook.accessInfo?.pdf?.isAvailable ? 'Si' : 'No'
@@ -48,14 +47,7 @@ const GbookArtsDetails: React.FC<GbookDestailsProps> = ({ gbook }) => {
                     </div>
                     <div className='mt-8'>
                         <h2 className='text-2xl mb-7 font-normal dark:text-emerald-400'>Descripción</h2>
-                        <ScrollShadow className="md:w-[500px] md:h-[200px] w-[350px] h-[200px] scrollbar-hide">
-                            <Card className="">
-                                <Separator />
-                                <CardBody>
-                                    <p className='text-justify'>{description}</p>
-                                </CardBody>
-                            </Card>
-                        </ScrollShadow>
+                        <div dangerouslySetInnerHTML={{ __html: gbook.volumeInfo.description }} />
                     </div>
                 </div>
             </div>
