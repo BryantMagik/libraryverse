@@ -70,6 +70,7 @@ model TwoFactorToken {
   @@unique([email, token])
 }
 
+
 model TwoFactorConfirmation {
   id     String @id @default(cuid())
   userId String @unique
