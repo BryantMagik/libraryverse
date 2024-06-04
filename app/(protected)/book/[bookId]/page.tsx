@@ -7,11 +7,13 @@ import BookDetailsComponent from '@/app/(protected)/_componets/books/bookdetails
 const BookDetailsPage = () => {
 
     const router = useRouter()
-    const { id } = useParams()
-    const bookId = Array.isArray(id) ? id[0] : id
-    
+    const { bookId } = useParams()
+    const normalizedBookId = Array.isArray(bookId) ? bookId[0] : bookId
+
+    console.log("BookId:", normalizedBookId)
+
     const handleViewChapters = () => {
-        router.push(`/book/${bookId}/chapters`)
+        router.push(`/book/${normalizedBookId}/chapters/`)
     }
 
     return (

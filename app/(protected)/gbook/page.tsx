@@ -42,8 +42,8 @@ const LibroPage = () => {
 
     return (
         <>
-        <TitlePage title="Buscar Libros" subtitle={'Encuentra tu libro favorito'} />
-        <Separator className="my-4" />
+            <TitlePage title="Buscar Libros" subtitle={'Encuentra tu libro favorito'} />
+            <Separator className="my-4" />
             <div className="flex items-center justify-between">
                 <div className="space-y-1">
                     <Search updateBooks={updateBooks} />

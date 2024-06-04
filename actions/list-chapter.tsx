@@ -42,12 +42,11 @@ export const listChapter = async (bookId: string): Promise<Chapter[]> => {
         })
 
         if (!chapters) {
-            throw new Error("Chapters not found.")
+            throw new Error("No se encontraron capítulos.")
         }
 
         return chapters
     } catch (error) {
-        console.error("Error fetching chapters:", error)
         throw error
     }
 }

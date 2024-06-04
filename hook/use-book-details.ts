@@ -8,11 +8,11 @@ import { useEffect, useState } from "react"
 export const useBookDetails = () => {
 
     const [book, setBook] = useState<Book>()
-    const { id } = useParams()
-    const bookId = Array.isArray(id) ? id[0] : id
+    const { bookId } = useParams()
+    const normalizedBookId = Array.isArray(bookId) ? bookId[0] : bookId
 
     useEffect(() => {
-        bookDetails(bookId)
+        bookDetails(normalizedBookId)
             .then((fetchBook) => {
                 if (fetchBook !== null) {
                     setBook(fetchBook)
@@ -20,7 +20,7 @@ export const useBookDetails = () => {
                     console.error("El libro no fue encontrado")
                 }
             })
-    }, [bookId])
+    }, [normalizedBookId])
 
     return book
 

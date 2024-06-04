@@ -3,9 +3,23 @@ import { es } from 'date-fns/locale'
 import Link from "next/link"
 import { formatDistanceToNow } from "date-fns/formatDistanceToNow"
 import { statusLabels } from "@/app/types/typesModels"
-import { Button, Image } from "@nextui-org/react"
+import { Image } from "@nextui-org/react"
+import { Button } from "@/components/ui/button"
 import { MdOutlineDelete } from "react-icons/md"
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownSection, DropdownItem } from "@nextui-org/dropdown"
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuPortal,
+    DropdownMenuSeparator,
+    DropdownMenuShortcut,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { SlOptions } from "react-icons/sl"
 import { TbEyeShare } from "react-icons/tb"
 import { CiEdit } from "react-icons/ci"
@@ -67,58 +81,48 @@ export const BookArtTable: React.FC<BookArtTableProps> = ({
                 <p className="text-xs text-muted-foreground p-2">Actualizada {formattedDate}</p>
             </div>
             <div className="flex flex-col place-content-center">
-                <>
-                    <Dropdown>
-                        <DropdownTrigger>
-                            <Button aria-label="Options" className="hover:bg-library-600 dark:hover:bg-emerald-600 hover:text-white p-2 mb-2 mx-auto rounded-tr-large bg-library-300 text-white dark:bg-emerald-400">
-                                <SlOptions size={25} />
-                            </Button>
-                        </DropdownTrigger>
-                        <DropdownMenu aria-label="Book actions">
-                            <DropdownSection>
-                                <DropdownItem key="view" textValue="View chapters" onClick={handleViewChapters}>
-                                    <span className="flex flex-row">
-                                        <VscBook size={18} />
-                                        <span className="ml-1">Mostrar capítulos</span>
-                                    </span>
-                                </DropdownItem>
-                            </DropdownSection>
-                            <DropdownSection>
-                                <DropdownItem key="edit" textValue="Edit Book" onClick={() => book.id && editBook(book.id)}>
-                                    <span className="flex flex-row">
-                                        <CiEdit size={18} /><span className="ml-1">Editar Libro</span>
-                                    </span>
-                                </DropdownItem>
-                            </DropdownSection>
-                            {book.status === 'PUBLISHED' ? (
-                                <DropdownSection>
-                                    <DropdownItem key="cancel" textValue="Cancel Publication">
-                                        <Button onClick={() => book.id && cancelPublication && cancelPublication(book.id)}>
-                                            <span className="flex flex-row">
-                                                <FaRegEyeSlash size={18} /><span className="ml-1">Anular Publicación</span>
-                                            </span>
-                                        </Button>
-                                    </DropdownItem>
-                                </DropdownSection>
-                            ) : (
-                                <DropdownSection>
-                                    <DropdownItem key="add" textValue="Publish Book" onClick={() => book.id && publicBook && publicBook(book.id)}>
-                                        <span className="flex flex-row">
-                                            <TbEyeShare size={18} /><span className="ml-1">Publicar Historia</span>
-                                        </span>
-                                    </DropdownItem>
-                                </DropdownSection>
-                            )}
-                            <DropdownSection>
-                                <DropdownItem key="delete" textValue="Delete Book" onClick={() => book.id && removeBook(book.id)}>
-                                    <span className="flex flex-row">
-                                        <MdOutlineDelete size={18} /><span className="ml-1">Eliminar Libro</span>
-                                    </span>
-                                </DropdownItem>
-                            </DropdownSection>
-                        </DropdownMenu>
-                    </Dropdown>
-                </>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button aria-label="Options" className="hover:bg-library-600 dark:hover:bg-emerald-600 hover:text-white p-2 mb-2 mx-auto rounded-tr-large bg-library-300 text-white dark:bg-emerald-400">
+                            <SlOptions size={25} />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuItem key="vie" textValue="View Chapter" onClick={handleViewChapters}>
+                            <span className="flex flex-row">
+                                <VscBook size={18} />
+                                <span className="ml-1">Mostrar capítulos</span>
+                            </span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem key="edit" textValue="Edit Book" onClick={() => book.id && editBook(book.id)}>
+                            <span className="flex flex-row">
+                                <CiEdit size={18} />
+                                <span className="ml-1">Editar Libro</span>
+                            </span>
+                        </DropdownMenuItem>
+                        {book.status === 'PUBLISHED' ? (
+                            <DropdownMenuItem key="cancel" textValue="Cancel Publication" onClick={() => book.id && cancelPublication && cancelPublication(book.id)}>
+                                <span className="flex flex-row">
+                                    <FaRegEyeSlash size={18} />
+                                    <span className="ml-1">Anular Publicación</span>
+                                </span>
+                            </DropdownMenuItem>
+                        ) : (
+                            <DropdownMenuItem key="add" textValue="Publish Book" onClick={() => book.id && publicBook && publicBook(book.id)}>
+                                <span className="flex flex-row">
+                                    <TbEyeShare size={18} />
+                                    <span className="ml-1">Publicar Historia</span>
+                                </span>
+                            </DropdownMenuItem>
+                        )}
+                        <DropdownMenuItem key="delete" textValue="Delete Book" onClick={() => book.id && removeBook(book.id)}>
+                            <span className="flex flex-row">
+                                <MdOutlineDelete size={18} />
+                                <span className="ml-1">Eliminar Libro</span>
+                            </span>
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
         </div>
     )
