@@ -5,10 +5,7 @@ import toast, { Toaster } from "react-hot-toast"
 import { Meteors } from "@/components/ui/meteors"
 
 export const ThemeToggle = () => {
-    const [darkMode, setDarkMode] = useState(() => {
-        const storedTheme = localStorage.getItem("theme")
-        return storedTheme === "dark"
-    })
+    const [darkMode, setDarkMode] = useState(false)
 
     useEffect(() => {
         if (darkMode) {
@@ -29,8 +26,8 @@ export const ThemeToggle = () => {
                 icon: '🔆',
                 style: {
                     borderRadius: '10px',
-                    background: '#f3f4f6',
-                    color: '#000'
+                    background: 'bg-library-300',
+                    color: 'black'
                 },
             })
         }
