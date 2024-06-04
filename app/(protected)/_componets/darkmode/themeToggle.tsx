@@ -6,14 +6,14 @@ import { Meteors } from "@/components/ui/meteors"
 
 export const ThemeToggle = () => {
     const [darkMode, setDarkMode] = useState(() => {
-        const storedTheme = sessionStorage.getItem("theme")
+        const storedTheme = localStorage.getItem("theme")
         return storedTheme === "dark"
     })
 
     useEffect(() => {
         if (darkMode) {
             document.documentElement.classList.add('dark')
-            sessionStorage.setItem("theme", "dark")
+            localStorage.setItem("theme", "dark")
             toast('Modo oscuro activado!', {
                 icon: '🌕',
                 style: {
@@ -24,7 +24,7 @@ export const ThemeToggle = () => {
             })
         } else {
             document.documentElement.classList.remove('dark')
-            sessionStorage.setItem("theme", "light")
+            localStorage.setItem("theme", "light")
             toast('Modo oscuro desactivado!', {
                 icon: '🔆',
                 style: {
