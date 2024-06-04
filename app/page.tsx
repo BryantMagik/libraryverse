@@ -24,7 +24,7 @@ export default function Home() {
             <div className="flex flex-row w-full h-full bg-almond-50 justify-center items-center">
               <div className="flex flex-col justify-center items-center align-middle m-20">
                 <h1 className="text-left text-almond-500 text-3xl p-4 font-semibold">Hola, Bienvenido a LibraryVerse.</h1>
-                <h3 className="text-center text-almond-600 p-2 font-semibold">La comunidad narrativa más prometedora del mundo.</h3>
+                <h3 className="text-center text-almond-600 p-2 font-semibold">La comunidad narrativa más prometedora del mundo. </h3>
                 <p className="w-[370px] text-justify mb-6">
                   Invitamos a una nueva generación de narradores y fanáticos a unirse a nosotros,
                   descubriendo y compartiendo historias originales que cautivan e inspiran.
