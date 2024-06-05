@@ -14,6 +14,7 @@ import { useDisclosure } from '@nextui-org/react'
 import { myBooksAll } from '@/actions/my-books-all'
 import { unpublishBook } from '@/actions/unpublish-book'
 import { myBooksPublished } from '@/actions/my-books-published'
+import toast from 'react-hot-toast'
 
 
 const MyBooksPublic: React.FC = () => {
@@ -37,6 +38,7 @@ const MyBooksPublic: React.FC = () => {
         deleteBook(bookId)
             .then((data) => {
                 if (data?.success) {
+                    toast.success('Libro eliminado exitosamente')
                     setBooks(prevBooks => prevBooks.filter((book) => book.id !== bookId))
                 }
             })
@@ -55,6 +57,7 @@ const MyBooksPublic: React.FC = () => {
         unpublishBook(bookId)
             .then((data) => {
                 if (data?.success) {
+                    toast.success('Libro despublicado')
                     setBooks((prevBooks) => prevBooks.filter((book) => book.id !== bookId))
                 }
             })

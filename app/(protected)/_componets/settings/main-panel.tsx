@@ -71,7 +71,6 @@ export const SettingsMainpanel = () => {
     }
     return (
         <>
-       
             <TitlePage title={'Ajustes de cuenta'} subtitle={'Configuración del usuario...'} />
             <Separator className="dark:bg-slate-800 bg-gray-300" />
             <Toaster />

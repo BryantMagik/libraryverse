@@ -10,6 +10,7 @@ import { useCurrentUser } from "@/hook/use-current-user"
 import toast from "react-hot-toast"
 import { createBook } from "@/actions/create-books"
 import { BookForm } from "./book-form"
+import { Loading } from "../loading/loading"
 
 export const BookFormCreate = () => {
     const user = useCurrentUser()
@@ -58,15 +59,18 @@ export const BookFormCreate = () => {
     }
 
     return (
-        <BookForm
-            title="Crear un nuevo libro"
-            subtitle="Completa los campos para crear un nuevo libro"
-            buttonAction="Crear"
-            form={form}
-            onSubmit={onSubmit}
-            isPending={isPending}
-            resource={resource}
-            setResource={setResource}
-        />
+        <>
+            {isPending && <Loading label="Cargando formulario de creación de libro" />}
+            <BookForm
+                title="Crear un nuevo libro"
+                subtitle="Completa los campos para crear un nuevo libro"
+                buttonAction="Crear"
+                form={form}
+                onSubmit={onSubmit}
+                isPending={isPending}
+                resource={resource}
+                setResource={setResource}
+            />
+        </>
     )
 }

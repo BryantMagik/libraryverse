@@ -69,13 +69,11 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update,
                 session.user.country = token.country
                 session.user.dateOfBirth = token.dateOfBirth as string
             }
-            console.log("Session:", session.user.name)
             return session
 
         },
         async jwt({ token }) {
 
-            console.log("Token:", token.name)
 
             if (!token.sub) return token
 

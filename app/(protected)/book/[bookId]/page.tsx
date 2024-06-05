@@ -10,8 +10,6 @@ const BookDetailsPage = () => {
     const { bookId } = useParams()
     const normalizedBookId = Array.isArray(bookId) ? bookId[0] : bookId
 
-    console.log("BookId:", normalizedBookId)
-
     const handleViewChapters = () => {
         router.push(`/book/${normalizedBookId}/chapters/`)
     }

@@ -6,16 +6,15 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { BookArtwork } from '../books/bookArtwork'
 import { Book } from '@/app/types/typesModels'
-import { lastBooks } from '@/actions/last-books'
 import Link from 'next/link'
 import { TitlePage } from '@/app/(protected)/_componets/title-page'
 import { listBooks } from '@/actions/list-books'
 import { useEffect, useState } from 'react'
-import DashboardSkeleton from '../esqueleto/dashboardSkeleton'
+import { Loading } from '../loading/loading'
 
 const BooksView: React.FC = () => {
 
-    const { data: books, error } = useSWR('lastBooks', listBooks, {})
+    const { data: books, error } = useSWR('lastBooks', listBooks, {refreshInterval: 1000 * 60 * 60 * 24})
 
     const [allBooks, setAllBooks] = useState<Book[]>([])
 
@@ -28,7 +27,6 @@ const BooksView: React.FC = () => {
 
     }, [])
 
-
     if (error) return <div>Error al cargar los libros: {error}</div>
 
     if (books && 'error' in books) {
@@ -36,7 +34,7 @@ const BooksView: React.FC = () => {
     }
 
     if (!books) {
-        return <div><DashboardSkeleton /></div >
+        return <div><Loading label='Poniendo en marcha los libros'/></div >
     }
 
 return (

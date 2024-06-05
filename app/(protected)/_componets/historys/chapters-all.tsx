@@ -9,7 +9,7 @@ import { listChapter } from '@/actions/list-chapter'
 import { ChapterUserStatus } from '@prisma/client'
 import { updateChapterStatus } from '@/actions/user-chapter-status'
 import toast from 'react-hot-toast'
-import { Spinner } from '@nextui-org/react'
+import { Loading } from '../loading/loading'
 
 export const ChaptersAll: React.FC = () => {
 
@@ -47,7 +47,7 @@ export const ChaptersAll: React.FC = () => {
     }
 
     if (loading) {
-        return <div className="flex items-center justify-center h-screen"><Spinner size="lg" color='success' /> </div>
+        <Loading label='Cargando capítulos del libro' />
     }
 
 
