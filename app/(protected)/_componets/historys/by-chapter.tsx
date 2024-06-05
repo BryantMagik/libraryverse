@@ -6,47 +6,82 @@ import { useParams } from 'next/navigation'
 import { ChapterContent } from '@/app/(protected)/_componets/historys/chapter-content'
 import { TitlePage } from '../title-page'
 import { getChapter } from '@/actions/get-chapter'
+import { DropdownMenuChapters } from './dropdowBookList'
+import { useRouter } from 'next/navigation'
+import { useBookDetails } from '@/hook/use-book-details'
+import { getStatusChapter } from '@/actions/getStatusChapter'
+import { ChapterUserStatus } from '@prisma/client'
+import { updateChapterStatus } from '@/actions/user-chapter-status'
+import { Spinner, Switch } from '@nextui-org/react'
+
 
 const ByChapter = () => {
 
-    const [chapters, setChapters] = useState<Chapter[]>([])
-    const { id, bookId } = useParams()
-    
+    const [chapter, setChapter] = useState<Chapter[]>([])
+    const [readStatus, setReadStatus] = useState<ChapterUserStatus | null>(null)
+
+    const { bookId, chapterId } = useParams()
+    const normalizedChapterId = Array.isArray(chapterId) ? chapterId[0] : chapterId
+
+    console.log("Capitulo id:", chapterId)
+    console.log("bookId:", bookId)
+    const router = useRouter()
+
     useEffect(() => {
-        if (id) {
+        if (chapterId) {
             startTransition(() => {
                 const bookIdString = Array.isArray(bookId) ? bookId[0] : bookId
-                const idChapterString = Array.isArray(id) ? id[0] : id
-
-                getChapter(bookIdString, idChapterString,)
-                    .then((fetchedChapters) => {
+                const idChapterString = Array.isArray(chapterId) ? chapterId[0] : chapterId
+                getChapter(idChapterString)
+                    .then((fetchedChapter) => {
                         //@ts-ignore
-                        setChapters(fetchedChapters)
-                        console.log(fetchedChapters)
+                        setChapter(fetchedChapter)
+                        return getStatusChapter(idChapterString)
 
                     }).catch(error => {
                         console.error("Error en server actions de listChapter:", error)
                     })
+                getStatusChapter(normalizedChapterId)
+                    .then((status) => {
+                        setReadStatus(status)
+                    }).catch(error => {
+                        console.error("Error en server actions de getStatusChapter:", error)
+                    })
             })
         }
-    }, [id])
+
+    }, [chapterId])
+
+    const bookDetails = useBookDetails()
+
+    if (!bookDetails) {
+        return <div className="flex items-center justify-center h-screen"><Spinner size="lg" color='success' /> </div>
+    }
 
     return (
         <div>
-            {chapters.length > 0 ? (
+            {chapter.length > 0 ? (
                 <>
-                    {chapters.map(chapter => (
+                    {chapter.map(chapter => (
                         <div key={chapter.id}>
-                            <TitlePage title={`Estas leyendo ${chapter?.book?.title}`} subtitle={`Escrito por ${chapter?.book?.author.name}`} />
-                            <h1 className='text-center italic text-2xl'>Capitulo: {chapter.order} {chapter.title}</h1>
-                            <ChapterContent content={chapter.content} />
+                            <div key={chapter.id} className='pb-10'>
+                                <TitlePage title={`Estas leyendo ${chapter?.book?.title}`} subtitle={`Escrito por ${chapter?.book?.author.name}`} />
+
+                                <h1 className='text-center italic text-2xl pb-5'>Capitulo: {chapter.order} {chapter.title}</h1>
+
+                                <ChapterContent content={chapter.content} />
+                            </div>
+                            <div>
+                                <DropdownMenuChapters chapterId={chapter.id} book={bookDetails} />
+                            </div>
                         </div>
                     ))}
                 </>
             ) : (
-                <p>No hay capitulos disponibles </p>
-            )}
-        </div>
+                <div className="flex items-center justify-center h-screen"><Spinner size="lg" color='danger' /> </div>
+            )
+            }
+        </div >
     )
 }
 

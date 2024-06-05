@@ -5,7 +5,7 @@ import { ChapterUserStatus } from "@prisma/client"
 import { getUserById } from "@/data/user"
 import { currentUser } from "@/lib/auth"
 
-export const updateChapterStatus = async (chapterId: string, status: ChapterUserStatus): Promise<ChapterUserStatus> => {
+export const updateChapterStatus = async (chapterId: string, status: ChapterUserStatus = 'UNREAD'): Promise<ChapterUserStatus> => {
 
     const user = await currentUser()
 
@@ -18,7 +18,6 @@ export const updateChapterStatus = async (chapterId: string, status: ChapterUser
     if (!dbUser) {
         throw new Error("Usuario no encontrado.")
     }
-
 
     try {
         const existingStatus = await db.userChapterStatus.findUnique({
@@ -42,8 +41,9 @@ export const updateChapterStatus = async (chapterId: string, status: ChapterUser
                     status,
                 }
             })
+            return existingStatus.status
         } else {
-            await db.userChapterStatus.create({
+            const createdStatus = await db.userChapterStatus.create({
                 data: {
                     userId: dbUser.id,
                     chapterId,
@@ -53,14 +53,9 @@ export const updateChapterStatus = async (chapterId: string, status: ChapterUser
                     status: true
                 }
             })
+            return createdStatus.status
         }
 
-        if (!existingStatus) {
-            throw new Error("No se pudo encontrar el estado del capítulo.")
-        }
-
-        return existingStatus.status
-        
     } catch (error) {
         console.error("Error al actualizar el estado.", error)
         throw error

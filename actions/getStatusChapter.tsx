@@ -7,7 +7,6 @@ import { ChapterUserStatus } from "@prisma/client"
 
 export const getStatusChapter = async (chapterId: string): Promise<ChapterUserStatus> => {
 
-
     const user = await currentUser()
 
     if (!user) {
@@ -32,7 +31,7 @@ export const getStatusChapter = async (chapterId: string): Promise<ChapterUserSt
         })
 
         if (!data) {
-            throw new Error("No se encontró el estado del capítulo.")
+            return 'UNREAD'
         }
 
         return data.status
@@ -41,4 +40,3 @@ export const getStatusChapter = async (chapterId: string): Promise<ChapterUserSt
         throw error
     }
 }
-

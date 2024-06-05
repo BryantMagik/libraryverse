@@ -9,3 +9,16 @@ export const getChapterById = async (id?: string) => {
     }
 }
 
+export const getChapterFromBookId = async (chapterId?: string) => {
+    try {
+        const bookIdChapter = await db.chapter.findUnique(
+            { where: { id: chapterId } }
+        )
+        const bookId = bookIdChapter?.bookId
+
+        return bookId as string
+    } catch (error) {
+        return null
+    }
+}
+

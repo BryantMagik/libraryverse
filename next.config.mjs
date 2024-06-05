@@ -42,6 +42,14 @@ const nextConfig = {
             {
                 protocol: "https",
                 hostname: "cdn-icons-png.flaticon.com"
+            },
+            {
+                protocol: "https",
+                hostname: "image.tmdb.org"
+            },
+            {
+                protocol: "https",
+                hostname: "books.google.com"
             }
         ],
     },

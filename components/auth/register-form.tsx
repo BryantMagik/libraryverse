@@ -37,6 +37,9 @@ export const RegisterForm = () => {
             email: "",
             password: "",
             name: "",
+            nickName: "",
+            lastName: "",
+            dateOfBirth: "",
         },
     })
 
@@ -74,7 +77,7 @@ export const RegisterForm = () => {
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="space-y-6"
                 >
-                    <div className="space-y-4">
+                    <div className="grid grid-cols-2">
                         <FormField
                             control={form.control}
                             name="name"
@@ -82,11 +85,66 @@ export const RegisterForm = () => {
                                 <FormItem>
                                     <FormControl>
                                         <Input
+                                            className=""
                                             isRequired
                                             variant="underlined"
                                             label="Nombre"
                                             {...field}
                                             disabled={isPending}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="lastName"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormControl>
+                                        <Input
+                                            isRequired
+                                            variant="underlined"
+                                            label="Apellidos"
+                                            {...field}
+                                            disabled={isPending}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="nickName"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormControl>
+                                        <Input
+                                            isRequired
+                                            variant="underlined"
+                                            label="Nombre de usuario"
+                                            {...field}
+                                            disabled={isPending}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="dateOfBirth"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormControl>
+                                        <Input
+                                            {...field}
+                                            disabled={isPending}
+                                            type="date"
+                                            variant="underlined"
+                                            label="Fecha de nacimiento"
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -102,10 +160,9 @@ export const RegisterForm = () => {
                                         <Input
                                             isRequired
                                             variant="underlined"
-                                            label="Email"
+                                            label="Correo electrónico"
                                             {...field}
                                             disabled={isPending}
-                                            type="email"
                                         />
                                     </FormControl>
                                     <FormMessage />

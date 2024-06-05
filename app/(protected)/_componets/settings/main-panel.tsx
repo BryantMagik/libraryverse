@@ -22,6 +22,7 @@ import { SettingsSchema } from "@/schemas"
 import { settings } from "@/actions/settings"
 import { useCurrentUser } from "@/hook/use-current-user"
 import { useSession } from "next-auth/react"
+import { TitlePage } from "../title-page"
 
 export const SettingsMainpanel = () => {
 
@@ -35,6 +36,10 @@ export const SettingsMainpanel = () => {
         defaultValues: {
             name: user.session?.name || undefined,
             email: user.session?.email || undefined,
+            nickName: user.session?.nickname || undefined,
+            lastName: user.session?.lastname || undefined,
+            dateOfBirth: user.session?.dateOfBirth || undefined,
+            country: user.session?.country || undefined,
             password: undefined,
             newPassword: undefined,
             isTwoFactorEnabled: user.session?.twoFactorAuth || undefined,
@@ -65,13 +70,9 @@ export const SettingsMainpanel = () => {
         update()
     }
     return (
-        <div id="#start" className="overflow pl-4">
-            <div className="mb-2">
-                <h1 className="text-2xl font-bold">Ajustes de Cuenta</h1>
-                <p className="text-muted-foreground text-xs">
-                    Cambiar mensaje para produccion
-                </p>
-            </div>
+        <>
+       
+            <TitlePage title={'Ajustes de cuenta'} subtitle={'Configuración del usuario...'} />
             <Separator className="dark:bg-slate-800 bg-gray-300" />
             <Toaster />
             <div className="my-3">
@@ -80,69 +81,117 @@ export const SettingsMainpanel = () => {
                         <div className="space-y-5">
                             {/* Datos de usuario */}
                             <h2 className="mb-3 font-semibold text-gray-500">Cuenta de usuario</h2>
-                            <div className=" flex flex-row gap-5 mb-5">
-                                <div className="flex flex-col gap-5">
-                                    {/* Nombre */}
-                                    <FormField
-                                        control={form.control}
-                                        name="name"
-                                        render={({ field }) => (
-                                            <FormItem className="text-xs w-[400px]">
-                                                <FormLabel>Nombre</FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        className="dark:border-slate-800 w-full"
-                                                        {...field}
-                                                        placeholder="Bry Magik"
-                                                        disabled={isPending}
-                                                        type="text"
-                                                    />
-                                                </FormControl>
-                                            </FormItem>
-                                        )}
-                                    />
-
-                                    {/* Email */}
-                                    {user.session?.isOAuth === false && (
-                                        <>
-                                            <FormField
-                                                control={form.control}
-                                                name="email"
-                                                render={({ field }) => (
-                                                    <FormItem className="text-xs w-[400px]">
-                                                        <FormLabel>Email</FormLabel>
-                                                        <FormControl>
-                                                            <Input
-                                                                className="dark:border-slate-800 w-full"
-                                                                {...field}
-                                                                placeholder="BryMagik@gmail.com"
-                                                                disabled={isPending}
-                                                                type="email"
-                                                            />
-                                                        </FormControl>
-                                                    </FormItem>
-                                                )}
-                                            />
-                                        </>
+                            <div className="grid md:grid-cols-3 sm:grid-cols-1 grid-cols-1 gap-4">
+                                {/* Nombre */}
+                                <FormField
+                                    control={form.control}
+                                    name="name"
+                                    render={({ field }) => (
+                                        <FormItem className="text-xs w-auto">
+                                            <FormLabel>Nombre</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    className="dark:border-slate-800 max-w-max"
+                                                    {...field}
+                                                    placeholder="Bry Magik"
+                                                    disabled={isPending}
+                                                    type="text"
+                                                />
+                                            </FormControl>
+                                        </FormItem>
                                     )}
-                                </div>
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="lastName"
+                                    render={({ field }) => (
+                                        <FormItem className="text-xs w-auto">
+                                            <FormLabel>Apellidos</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    className="dark:border-slate-800 max-w-max"
+                                                    {...field}
+                                                    placeholder="Bry Magik"
+                                                    disabled={isPending}
+                                                    type="text"
+                                                />
+                                            </FormControl>
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="nickName"
+                                    render={({ field }) => (
+                                        <FormItem className="text-xs w-auto">
+                                            <FormLabel>Nombre de usuario</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    className="dark:border-slate-800 max-w-max"
+                                                    {...field}
+                                                    placeholder="Bry Magik"
+                                                    disabled={isPending}
+                                                    type="text"
+                                                />
+                                            </FormControl>
+                                        </FormItem>
+                                    )}
+                                />
+                                {/* Email */}
+                                {user.session?.isOAuth === false && (
+                                    <>
+                                        <FormField
+                                            control={form.control}
+                                            name="email"
+                                            render={({ field }) => (
+                                                <FormItem className="text-xs w-auto">
+                                                    <FormLabel>Email</FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            className="dark:border-slate-800 w-full"
+                                                            {...field}
+                                                            placeholder="BryMagik@gmail.com"
+                                                            disabled={isPending}
+                                                            type="email"
+                                                        />
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="dateOfBirth"
+                                            render={({ field }) => (
+                                                <FormItem className="text-xs w-auto">
+                                                    <FormLabel>Año de nacimiento</FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            className="dark:border-slate-800 w-full"
+                                                            {...field}
+                                                            placeholder="BryMagik@gmail.com"
+                                                            disabled={isPending}
+                                                            type="date"
+                                                        />
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </>
+                                )}
                             </div>
-
                             <Separator className="dark:bg-slate-800 bg-gray-300 " />
-
                             {user.session?.isOAuth === false && (
                                 <>
                                     {/* Seguridad */}
                                     <h2 className="mb-3 font-semibold text-gray-500">
                                         Seguridad y privacidad
                                     </h2>
-                                    <div className="flex flex-row gap-5 mb-5">
-                                        <div className="flex flex-col gap-5">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 ">
                                             <FormField
                                                 control={form.control}
                                                 name="password"
                                                 render={({ field }) => (
-                                                    <FormItem className="text-xs w-[400px]">
+                                                    <FormItem className="text-xs w-auto">
                                                         <FormLabel>Contraseña Anterior</FormLabel>
                                                         <FormControl>
                                                             <Input
@@ -161,7 +210,7 @@ export const SettingsMainpanel = () => {
                                                 control={form.control}
                                                 name="newPassword"
                                                 render={({ field }) => (
-                                                    <FormItem className="text-xs w-[400px]">
+                                                    <FormItem className="text-xs w-auto">
                                                         <FormLabel>Nueva Contraseña</FormLabel>
                                                         <FormControl>
                                                             <Input
@@ -181,7 +230,7 @@ export const SettingsMainpanel = () => {
                                             control={form.control}
                                             name="isTwoFactorEnabled"
                                             render={({ field }) => (
-                                                <FormItem className="text-xs w-[400px] ">
+                                                <FormItem className="text-xs w-auto ">
                                                     <FormLabel>Autenticación de dos factores</FormLabel>
                                                     <div className="flex-between items-center">
                                                         <FormDescription className="pt-3">
@@ -200,22 +249,20 @@ export const SettingsMainpanel = () => {
                                                 </FormItem>
                                             )}
                                         />
-                                    </div>
                                     <Separator className="dark:bg-slate-800 bg-gray-300 " />
                                 </>
                             )}
                         </div>
-
                         <Button
                             disabled={isPending}
                             type="submit"
-                            className="variant_btn select-none"
+                            className="select-none bg-library-500 hover:bg-library-600 active:bg-library-700 text-white w-max"
                         >
                             Guardar Cambios
                         </Button>
                     </form>
                 </Form>
             </div>
-        </div>
-    );
-};
+        </>
+    )
+}

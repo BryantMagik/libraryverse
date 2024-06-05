@@ -61,9 +61,13 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update,
             }
 
             if (session.user) {
-                session.user.name = token.name
+                session.user.name = token.name as string
+                session.user.lastname = token.lastname as string
+                session.user.nickname = token.nickname as string
                 session.user.email = token.email as string
                 session.user.isOAuth = token.isOAuth as boolean
+                session.user.country = token.country
+                session.user.dateOfBirth = token.dateOfBirth as string
             }
             console.log("Session:", session.user.name)
             return session
@@ -84,6 +88,10 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update,
             token.isOAuth = !!existingAccount
             token.name = existingUser.name
             token.email = existingUser.email
+            token.nickname = existingUser.nickName
+            token.lastname = existingUser.lastName
+            token.dateOfBirth = existingUser.dateOfBirth
+            token.country = existingUser.country
             token.role = existingUser.role
             token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled
 

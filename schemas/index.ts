@@ -2,31 +2,60 @@ import * as z from "zod"
 
 //Validación de datos
 
+export const CountryEnum = z.enum([
+    'ARGENTINA', 'BOLIVIA', 'CHILE', 'COLOMBIA', 'COSTA_RICA', 'CUBA', 'ECUADOR', 'EL_SALVADOR', 'SPAIN', 'GUATEMALA', 'HONDURAS', 'MEXICO', 'NICARAGUA', 'PANAMA', 'PARAGUAY', 'PERU', 'PUERTO_RICO', 'DOMINICAN_REPUBLIC', 'URUGUAY', 'VENEZUELA', 'UNITED_STATES', 'CANADA', 'UNITED_KINGDOM', 'AUSTRALIA', 'FRANCE', 'GERMANY', 'ITALY', 'JAPAN', 'CHINA', 'INDIA', 'BRAZIL', 'RUSSIA', 'SOUTH_AFRICA'
+])
+export const BookStatusSchema = z.enum(['DRAFT', 'PUBLISHED', 'PAUSED'])
+
+export const GenreEnum = z.enum([
+    'FICTION', 'NONFICTION', 'MYSTERY', 'FANTASY', 'SCIFI', 'ROMANCE', 'HORROR',
+    'BIOGRAPHY', 'HISTORY', 'POETRY', 'OTHER',
+    'POLITICAL_SCIENCE', 'GRIEF',
+    'ADVENTURE', 'CHILDREN', 'THRILLER', 'CRIME', 'DRAMA', 'LITERARY_CRITICISM', 'FAMILY_RELATIONSHIPS',
+    'COMEDY', 'ACTION', 'SELF_HELP', 'ART', 'COOKING', 'JUVENILE_NONFICTION', 'COMPUTERS', 'BIOGRAPHY_AUTOBIOGRAPHY', 'YOUNG_ADULT_FICTION'
+])
+
 export const SettingsSchema = z.object({
     name: z.string().min(1, { message: "El nombre es obligatorio" }),
     email: z.optional(
         z.string().email({ message: "Introduce un email válido." })
     ),
     isTwoFactorEnabled: z.optional(z.boolean()),
+    lastName: z.string().min(1, {
+        message: "Por favor, introduce tu apellido."
+    }),
+
+    nickName: z.string()
+        .min(1, {
+            message: "Por favor, introduce tu nombre de usuario."
+        })
+        .max(20, {
+            message: "El nombre de usuario no puede tener más de 20 caracteres."
+        }),
+    dateOfBirth: z.string()
+        .min(1, {
+            message: "Por favor, introduce tu fecha de nacimiento."
+        }),
+    country: CountryEnum.optional(),
     password: z.optional(z.string().min(6, { message: "Contraseña minimo de 6 caracteres" })),
     newPassword: z.optional(z.string().min(6, { message: "La nueva contraseña debe tener al menos 6 caracteres." })),
 })
     .refine(
         (data) => {
             if (data.password && !data.newPassword) {
-                return false;
+                return false
             }
 
-            return true;
+            return true
         },
         { message: "La nueva contraseña es obligatoria cuando se proporciona una contraseña actual.", path: ["newPassword"] }
     )
     .refine((data) => {
         if (data.newPassword && !data.password) {
-            return false;
+            return false
         }
 
-        return true;
+        return true
     },
         { message: "La contraseña actual es obligatoria cuando se proporciona una nueva contraseña.", path: ["password"] }
     )
@@ -59,29 +88,41 @@ export const LoginSchema = z.object({
 // Esquema de registro
 
 export const RegisterSchema = z.object({
-    email: z.string().email({
-        message: "Por favor, introduce un correo electrónico válido.",
+    email: z.string()
+        .email({
+            message: "Por favor, introduce un correo electrónico válido."
+        }),
+
+    password: z.string()
+        .min(6, {
+            message: "La contraseña debe tener al menos 6 caracteres."
+        }),
+
+    name: z.string()
+        .min(1, {
+            message: "Por favor, introduce tu nombre."
+        }),
+    lastName: z.string().min(1, {
+        message: "Por favor, introduce tu apellido."
     }),
-    password: z.string().min(6, {
-        message: "La contraseña debe tener al menos 6 caracteres.",
-    }),
-    name: z.string().min(1, {
-        message: "Por favor, introduce tu nombre.",
-    }),
+
+    nickName: z.string()
+        .min(1, {
+            message: "Por favor, introduce tu nombre de usuario."
+        })
+        .max(20, {
+            message: "El nombre de usuario no puede tener más de 20 caracteres."
+        }),
+    dateOfBirth: z.string()
+        .min(1, {
+            message: "Por favor, introduce tu fecha de nacimiento."
+        }),
+
+    country: CountryEnum.optional(),
 })
 
 //Esquema de Status
 
-export const BookStatusSchema = z.enum(['DRAFT', 'PUBLISHED', 'PAUSED'])
-
-
-export const GenreEnum = z.enum([
-    'FICTION', 'NONFICTION', 'MYSTERY', 'FANTASY', 'SCIFI', 'ROMANCE', 'HORROR',
-    'BIOGRAPHY', 'HISTORY', 'POETRY', 'OTHER',
-    'POLITICAL_SCIENCE', 'GRIEF',
-    'ADVENTURE', 'CHILDREN', 'THRILLER', 'CRIME', 'DRAMA', 'LITERARY_CRITICISM', 'FAMILY_RELATIONSHIPS',
-    'COMEDY', 'ACTION', 'SELF_HELP', 'ART', 'COOKING', 'JUVENILE_NONFICTION', 'COMPUTERS', 'BIOGRAPHY_AUTOBIOGRAPHY', 'YOUNG_ADULT_FICTION'
-])
 
 // Esquema de creación de libros
 

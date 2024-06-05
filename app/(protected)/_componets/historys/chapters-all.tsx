@@ -9,44 +9,53 @@ import { listChapter } from '@/actions/list-chapter'
 import { ChapterUserStatus } from '@prisma/client'
 import { updateChapterStatus } from '@/actions/user-chapter-status'
 import toast from 'react-hot-toast'
+import { Spinner } from '@nextui-org/react'
 
 export const ChaptersAll: React.FC = () => {
 
     const [chapters, setChapters] = useState<Chapter[]>([])
-    const { id } = useParams()
-    const bookId = Array.isArray(id) ? id[0] : id
-    
+    const [loading, setLoading] = useState(true)
+    const { bookId, chapterId } = useParams()
+    const normalizedBookId = Array.isArray(bookId) ? bookId[0] : bookId
+    const normalizedChapterId = Array.isArray(chapterId) ? chapterId[0] : chapterId
+
+    console.log("IdLibro:", normalizedBookId)
     const router = useRouter()
 
     useEffect(() => {
-        listChapter(bookId)
+        listChapter(normalizedBookId)
             .then((fetchedChapters) => {
                 //@ts-ignore
                 setChapters(fetchedChapters)
+                setLoading(false)
             }).catch(error => {
                 console.error("Error en server actions de listChapter:", error)
+                setLoading(false)
             })
     }, [bookId])
 
     const readChapter = (chapterId: string) => {
-        router.push(`/chapters/${chapterId}?bookId=${bookId}`)
+        router.push(`/book/${normalizedBookId}/chapters/${chapterId}`)
     }
     const handleUpdateChapterStatus = async (chapterId: string, status: ChapterUserStatus) => {
 
         updateChapterStatus(chapterId, status)
             .then(() => {
-                toast.success('Has leido este capítulo')
-            }).catch(error => {
+                toast.success('Capitulo actualizado')
+                setLoading(false)
             })
     }
+
+    if (loading) {
+        return <div className="flex items-center justify-center h-screen"><Spinner size="lg" color='success' /> </div>
+    }
+
 
     return (
         <>
             {chapters.map((chapter: Chapter) => (
-                <HistoryArtTableAll key={chapter.id} chapter={chapter}  readChapter={readChapter} updateChapterStatus={handleUpdateChapterStatus}  />
+                <HistoryArtTableAll key={chapter.id} chapter={chapter} readChapter={readChapter} updateChapterStatus={handleUpdateChapterStatus} />
             ))}
         </>
-
     )
-
 }

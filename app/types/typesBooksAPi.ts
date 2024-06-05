@@ -4,6 +4,10 @@ export interface GBooks {
     items: GBook[]
 }
 
+export const BOOKS_PATH = 'books/v1/volumes/'
+export const BOOKS_IMAGE_PATH = 'https://books.google.com/books/publisher/content/images/frontcover/'
+export const BOOKS_IMAGE_SIZE = '?fife=w480-h690'
+export const BOOKS_IMAGE_DEFAULT = '/dashboard/book-placeholder.jpg'
 export interface GBook {
     kind: Kind
     id: string

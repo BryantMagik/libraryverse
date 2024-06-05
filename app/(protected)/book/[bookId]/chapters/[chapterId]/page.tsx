@@ -1,6 +1,6 @@
 "use client"
 
-import ByChapter from "../../_componets/historys/by-chapter"
+import ByChapter from "../../../../_componets/historys/by-chapter"
 
 const ChapterPage = () => {
 

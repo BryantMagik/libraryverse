@@ -4,7 +4,7 @@ import { Button } from "@nextui-org/button"
 import { GBook } from '@/app/types/typesBooksAPi'
 import { Select, SelectItem } from "@nextui-org/select"
 import { GenreEnum } from '@/schemas'
-import { GenreEnumESP } from '@/app/types/typesModels'
+import { Book, GenreEnumESP } from '@/app/types/typesModels'
 
 interface SearchProps {
     updateBooks: (books: GBook[], query: string, totalItems: number) => void
@@ -13,13 +13,13 @@ interface SearchProps {
 const Search: React.FC<SearchProps> = ({ updateBooks }) => {
     const [searchTerm, setSearchTerm] = useState<string>('')
     const [category, setCategory] = useState<string>('')
-    const [books, setBooks] = useState<GBook[]>([])
+    const [books, setBooks] = useState<(GBook | Book)[]>([])
     const [page, setPage] = useState<number>(0)
     const [totalPages, setTotalPages] = useState<number>(0)
     const [searchMode, setSearchMode] = useState<'all' | 'title' | 'author' | 'category' | 'publisher'>('title')
 
     const maxResults = 10
-
+    
     const searchBooks = async () => {
         let searchQuery = ''
 
@@ -67,7 +67,6 @@ const Search: React.FC<SearchProps> = ({ updateBooks }) => {
             books: fetchedBooks,
             totalItems: data.totalItems || 0
         }))
-
     }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -129,31 +128,31 @@ const Search: React.FC<SearchProps> = ({ updateBooks }) => {
             <div className="flex justify-around mb-4">
                 <Button
                     onClick={() => handleSearchModeChange('all')}
-                    className={searchMode === 'all' ? 'active' : ''}
+                    className={`bg-library-300 text-white ${searchMode === 'all' ? 'active:bg-library-600 text-white' : ''}`}
                 >
                     Todos
                 </Button>
                 <Button
                     onClick={() => handleSearchModeChange('title')}
-                    className={searchMode === 'title' ? 'active' : ''}
+                    className={`bg-library-300 text-white ${searchMode === 'title' ? 'active:bg-library-600 text-white' : ''}`}
                 >
                     Por Titulo
                 </Button>
                 <Button
                     onClick={() => handleSearchModeChange('author')}
-                    className={searchMode === 'author' ? 'active' : ''}
+                    className={`bg-library-300 text-white ${searchMode === 'author' ? 'active:bg-library-700 text-white' : ''}`}
                 >
                     Por Autor
                 </Button>
                 <Button
                     onClick={() => handleSearchModeChange('category')}
-                    className={searchMode === 'category' ? 'active' : ''}
+                    className={`bg-library-300 text-white ${searchMode === 'category' ? 'active:bg-library-600 text-white' : ''}`}
                 >
                     Por Categoria
                 </Button>
                 <Button
                     onClick={() => handleSearchModeChange('publisher')}
-                    className={searchMode === 'publisher' ? 'active' : ''}
+                    className={`bg-library-300 text-white ${searchMode === 'publisher' ? 'active:bg-library-600 text-white' : ''}`}
                 >
                     Por Editora
                 </Button>

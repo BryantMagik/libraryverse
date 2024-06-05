@@ -3,12 +3,11 @@
 import { db } from "@/lib/db"
 import { Chapter } from "@prisma/client"
 
-export const getChapter = async (bookId: string, chapterId: string): Promise<Chapter[]> => {
+export const getChapter = async (chapterId: string): Promise<Chapter[]> => {
     try {
         const chapter = await db.chapter.findUnique({
             where: {
                 id: chapterId,
-                bookId: bookId
             },
             include: {
                 book: {

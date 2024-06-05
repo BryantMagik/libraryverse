@@ -5,15 +5,12 @@ import toast, { Toaster } from "react-hot-toast"
 import { Meteors } from "@/components/ui/meteors"
 
 export const ThemeToggle = () => {
-    const [darkMode, setDarkMode] = useState(() => {
-        const storedTheme = sessionStorage.getItem("theme")
-        return storedTheme === "dark"
-    })
+    const [darkMode, setDarkMode] = useState(false)
 
     useEffect(() => {
         if (darkMode) {
             document.documentElement.classList.add('dark')
-            sessionStorage.setItem("theme", "dark")
+            localStorage.setItem("theme", "dark")
             toast('Modo oscuro activado!', {
                 icon: '🌕',
                 style: {
@@ -24,13 +21,13 @@ export const ThemeToggle = () => {
             })
         } else {
             document.documentElement.classList.remove('dark')
-            sessionStorage.setItem("theme", "light")
+            localStorage.setItem("theme", "light")
             toast('Modo oscuro desactivado!', {
                 icon: '🔆',
                 style: {
                     borderRadius: '10px',
-                    background: '#f3f4f6',
-                    color: '#000'
+                    background: 'bg-library-300',
+                    color: 'black'
                 },
             })
         }

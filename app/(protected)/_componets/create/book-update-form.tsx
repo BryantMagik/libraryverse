@@ -10,6 +10,7 @@ import { Book } from '@/app/types/typesModels'
 import { editBooks } from "@/actions/edit-books"
 import toast from "react-hot-toast"
 import { BookForm } from "./book-form"
+import { TitlePage } from "../title-page"
 
 interface BookFormUpdateProps extends React.HTMLAttributes<HTMLDivElement> {
     book: Partial<Book>
@@ -57,15 +58,17 @@ export const BookFormUpdate: React.FC<BookFormUpdateProps> = ({ book, onUpdate }
     }
 
     return (
-        <BookForm
-            title="Editar libro"
-            subtitle="Edita los datos de tu libro"
-            buttonAction="Actualizar"
-            form={form}
-            onSubmit={onSubmit}
-            isPending={isPending}
-            resource={resource}
-            setResource={setResource}
-        />
+        <>
+            <BookForm
+                title="Editar libro"
+                subtitle="Edita los datos de tu libro"
+                buttonAction="Actualizar"
+                form={form}
+                onSubmit={onSubmit}
+                isPending={isPending}
+                resource={resource}
+                setResource={setResource}
+            />
+        </>
     )
 }

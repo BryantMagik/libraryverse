@@ -11,6 +11,8 @@ import { addBookShelf } from '@/actions/add-bookshelf'
 import { useCurrentUser } from "@/hook/use-current-user"
 import { useParams } from 'next/navigation'
 import { bookDetails } from '@/actions/book-details'
+import { Spinner } from '@nextui-org/react'
+import { TitlePage } from '../title-page'
 
 interface BookDetailsProps {
     handleViewChapters: () => void
@@ -18,14 +20,14 @@ interface BookDetailsProps {
 
 const BookDetailsComponent: React.FC<BookDetailsProps> = ({ handleViewChapters }) => {
     const [book, setBook] = useState<Book | null>(null)
-    const { id } = useParams()
-    const bookId = Array.isArray(id) ? id[0] : id
+    const { bookId } = useParams()
+    const bookIdNormalize = Array.isArray(bookId) ? bookId[0] : bookId
     const user = useCurrentUser()
     const fechaCreacion = book && book.createdAt ? new Date(book.createdAt).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : ''
     const fechaActualizacion = book && book.updatedAt ? new Date(book.updatedAt).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : ''
 
     useEffect(() => {
-        bookDetails(bookId)
+        bookDetails(bookIdNormalize)
             .then((fetchBook) => {
                 if (fetchBook !== null) {
                     setBook(fetchBook)
@@ -38,11 +40,11 @@ const BookDetailsComponent: React.FC<BookDetailsProps> = ({ handleViewChapters }
     }, [])
 
     const addBookshelf = async () => {
-        
+
         if (book) {
             try {
                 if (user.session?.id) {
-                    addBookShelf(bookId, user.session?.id)
+                    addBookShelf(bookIdNormalize, user.session?.id)
                         .then((data) => {
                             if (data?.success) {
                                 toast.success('Libro agregado exitosamente')
@@ -62,6 +64,10 @@ const BookDetailsComponent: React.FC<BookDetailsProps> = ({ handleViewChapters }
     return (
         <>
             {book ? (
+                <div>
+                    <div className='mb-10'>
+                    <TitlePage  title={'Detalles del Libro'} subtitle={'Descubre más sobre esta historia...'} />
+                    </div>
                 <div className='grid sm:grid-cols-1 md:grid-cols-2 gap-1 grid-cols-1'>
                     <div className='text-center'>
                         <Image src={book.coverImage ?? '/dashboard/book-placeholder.jpg'} width="350" height="20" alt="a" className="mx-auto" />
@@ -94,8 +100,9 @@ const BookDetailsComponent: React.FC<BookDetailsProps> = ({ handleViewChapters }
                         </div>
                     </div>
                 </div>
+            </div>
             ) : (
-                <p>Cargando detalles del libro...</p>
+                <div className="flex items-center justify-center h-screen"><Spinner size="lg" color='success' />  </div>
             )}
         </>
     )

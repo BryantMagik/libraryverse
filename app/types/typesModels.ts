@@ -32,6 +32,11 @@ export const GenreEnumESP = {
   YOUNG_ADULT_FICTION: 'Ficción para jóvenes adultos'
 }
 
+export const GenderEnumESP = {
+  MALE: 'Hombre',
+  FEMALE: 'Mujer',
+}
+
 
 export const statusLabels = {
   DRAFT: "Borrador",
@@ -40,8 +45,12 @@ export const statusLabels = {
 }
 
 export type User = {
-  id: string;
+  id: string
   name: string | null
+  lastname: string | null
+  nickname: string | null
+  dateOfBirth: string | null
+  country: $Enums.Country | null
   email: string;
   image: string | null
   emailVerified: Date | null

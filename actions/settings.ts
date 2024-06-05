@@ -36,7 +36,6 @@ export const settings = async (
         validatedValues.data.password = undefined
         validatedValues.data.newPassword = undefined
         validatedValues.data.isTwoFactorEnabled = undefined
-
         return
     }
 
@@ -65,15 +64,15 @@ export const settings = async (
         validatedValues.data.newPassword &&
         dbUser.password
     ) {
-        const hashedPassword = await bcrypt.hash(validatedValues.data.password, validatedValues.data.newPassword)
-        const matchPassword = await bcrypt.compare(validatedValues.data.newPassword, dbUser.password)
+        const matchCurrentPassword = await bcrypt.compare(validatedValues.data.password, dbUser.password)
 
-        if (!matchPassword) {
-            return { error: "La contraseña no es igual" }
+        if (!matchCurrentPassword) {
+            return { error: "La contraseña actual no es correcta" }
         }
+        const hashedNewPassword = await bcrypt.hash(validatedValues.data.newPassword, 10)
 
-        validatedValues.data.password = hashedPassword;
-        validatedValues.data.newPassword = undefined;
+        validatedValues.data.password = hashedNewPassword
+        validatedValues.data.newPassword = undefined
     }
 
     await db.user.update({
