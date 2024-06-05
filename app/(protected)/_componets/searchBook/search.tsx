@@ -19,7 +19,7 @@ const Search: React.FC<SearchProps> = ({ updateBooks }) => {
     const [searchMode, setSearchMode] = useState<'all' | 'title' | 'author' | 'category' | 'publisher'>('title')
 
     const maxResults = 10
-    
+
     const searchBooks = async () => {
         let searchQuery = ''
 
@@ -96,63 +96,65 @@ const Search: React.FC<SearchProps> = ({ updateBooks }) => {
     }
 
     return (
-        <div className="relative flex flex-1 flex-shrink-0 flex-col">
-            {searchMode !== 'category' && (
-                <Input
-                    placeholder={
-                        searchMode === 'title' ? "Buscar por título..." :
-                            searchMode === 'author' ? "Buscar por autor..." :
-                                searchMode === 'publisher' ? "Buscar por editorial..." :
-                                    "Buscar..."
-                    }
-                    onChange={handleInputChange}
-                    value={searchTerm}
-                />
-            )}
-            {searchMode === 'category' && (
-                <div className="flex flex-col items-center">
-                    <Select
-                        label="Categoría"
-                        value={category}
-                        onChange={handleSelectChange}
-                        className="max-w-xs"
-                    >
-                        {GenreEnum.options.map((genre) => (
-                            <SelectItem key={genre} value={genre}>
-                                {GenreEnumESP[genre]}
-                            </SelectItem>
-                        ))}
-                    </Select>
-                </div>
-            )}
-            <div className="flex justify-around mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-5">
+            <div>
+                {searchMode !== 'category' && (
+                    <Input
+                        placeholder={
+                            searchMode === 'title' ? "Buscar por título..." :
+                                searchMode === 'author' ? "Buscar por autor..." :
+                                    searchMode === 'publisher' ? "Buscar por editorial..." :
+                                        "Buscar..."
+                        }
+                        onChange={handleInputChange}
+                        value={searchTerm}
+                    />
+                )}
+                {searchMode === 'category' && (
+                    <div className="">
+                        <Select
+                            label="Categoría"
+                            value={category}
+                            onChange={handleSelectChange}
+                            className="max-w-xs"
+                        >
+                            {GenreEnum.options.map((genre) => (
+                                <SelectItem key={genre} value={genre}>
+                                    {GenreEnumESP[genre]}
+                                </SelectItem>
+                            ))}
+                        </Select>
+                    </div>
+                )}
+            </div>
+            <div className="grid grid-cols-3 gap-5">
                 <Button
                     onClick={() => handleSearchModeChange('all')}
-                    className={`bg-library-300 text-white ${searchMode === 'all' ? 'active:bg-library-600 text-white' : ''}`}
+                    className={`bg-library-300 dark:bg-emerald-400 dark:hover:bg-emerald-600 text-white ${searchMode === 'all' ? 'active:bg-library-600 text-white' : ''}`}
                 >
                     Todos
                 </Button>
                 <Button
                     onClick={() => handleSearchModeChange('title')}
-                    className={`bg-library-300 text-white ${searchMode === 'title' ? 'active:bg-library-600 text-white' : ''}`}
+                    className={`bg-library-300 dark:bg-emerald-400 dark:hover:bg-emerald-600 text-white ${searchMode === 'title' ? 'active:bg-library-600 text-white' : ''}`}
                 >
                     Por Titulo
                 </Button>
                 <Button
                     onClick={() => handleSearchModeChange('author')}
-                    className={`bg-library-300 text-white ${searchMode === 'author' ? 'active:bg-library-700 text-white' : ''}`}
+                    className={`bg-library-300 dark:bg-emerald-400 dark:hover:bg-emerald-600 text-white ${searchMode === 'author' ? 'active:bg-library-700 text-white' : ''}`}
                 >
                     Por Autor
                 </Button>
                 <Button
                     onClick={() => handleSearchModeChange('category')}
-                    className={`bg-library-300 text-white ${searchMode === 'category' ? 'active:bg-library-600 text-white' : ''}`}
+                    className={`bg-library-300 dark:bg-emerald-400 dark:hover:bg-emerald-600 text-white ${searchMode === 'category' ? 'active:bg-library-600 text-white' : ''}`}
                 >
                     Por Categoria
                 </Button>
                 <Button
                     onClick={() => handleSearchModeChange('publisher')}
-                    className={`bg-library-300 text-white ${searchMode === 'publisher' ? 'active:bg-library-600 text-white' : ''}`}
+                    className={`bg-library-300 dark:bg-emerald-400 dark:hover:bg-emerald-600 text-white ${searchMode === 'publisher' ? 'active:bg-library-600 text-white' : ''}`}
                 >
                     Por Editora
                 </Button>

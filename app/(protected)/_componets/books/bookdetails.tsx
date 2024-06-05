@@ -13,7 +13,7 @@ import { useParams } from 'next/navigation'
 import { bookDetails } from '@/actions/book-details'
 import { Spinner } from '@nextui-org/react'
 import { TitlePage } from '../title-page'
-
+import { Loading } from '../loading/loading'
 interface BookDetailsProps {
     handleViewChapters: () => void
 }
@@ -102,7 +102,7 @@ const BookDetailsComponent: React.FC<BookDetailsProps> = ({ handleViewChapters }
                 </div>
             </div>
             ) : (
-                <div className="flex items-center justify-center h-screen"><Spinner size="lg" color='success' />  </div>
+                <Loading label='Cargando detalles del libro' />
             )}
         </>
     )

@@ -1,9 +1,11 @@
 generator client {
   provider = "prisma-client-js"
 }
+
 generator dbml {
   provider = "prisma-dbml-generator"
 }
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -76,7 +78,6 @@ model TwoFactorToken {
   @@unique([email, token])
 }
 
-
 model TwoFactorConfirmation {
   id     String @id @default(cuid())
   userId String @unique
@@ -120,13 +121,13 @@ model UserChapterStatus {
 }
 
 model Chapter {
-  id      String        @id @default(cuid())
-  title   String
-  content String
-  status  ChapterStatus
-  order   String
-  bookId  String
-  userId String
+  id           String              @id @default(cuid())
+  title        String
+  content      String
+  status       ChapterStatus
+  order        String
+  bookId       String
+  userId       String
   createdAt    DateTime            @default(now())
   updatedAt    DateTime            @updatedAt
   book         Book                @relation(fields: [bookId], references: [id])
@@ -151,7 +152,6 @@ enum UserRole {
   ADMIN
   USER
 }
-
 
 enum Genre {
   FICTION

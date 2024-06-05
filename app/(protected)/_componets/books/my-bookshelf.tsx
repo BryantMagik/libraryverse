@@ -9,11 +9,13 @@ import { removeBookshelf } from '@/actions/remove-bookshelf'
 import { useCurrentUser } from '@/hook/use-current-user'
 import toast from 'react-hot-toast'
 import { TitlePage } from '@/app/(protected)/_componets/title-page'
+import { Loading } from '../loading/loading'
 
 const MyBookShelf: React.FC = () => {
 
     const [books, setBooks] = useState<Book[]>([])
     const user = useCurrentUser()
+    const [loading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
         myBookShelf()
@@ -26,8 +28,13 @@ const MyBookShelf: React.FC = () => {
                     }))
                     setBooks(extractedBooks)
                 }
+                setLoading(false)
             })
     }, [])
+
+    if(loading){
+        return <div><Loading label='Cargando tus libros favoritos'/></div>
+    }
 
     const removeBookHandler = async (bookId: string) => {
         if (user.session?.id) {

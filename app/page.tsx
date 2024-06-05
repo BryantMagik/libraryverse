@@ -21,7 +21,7 @@ export default function Home() {
         {loadingComplete && (
           <>
             <NavbarHome />
-            <div className="flex flex-row w-full h-full bg-almond-50 justify-center items-center">
+            {/* <div className="flex flex-row w-full h-full bg-almond-50 justify-center items-center">
               <div className="flex flex-col justify-center items-center align-middle m-20">
                 <h1 className="text-left text-almond-500 text-3xl p-4 font-semibold">Hola, Bienvenido a LibraryVerse.</h1>
                 <h3 className="text-center text-almond-600 p-2 font-semibold">La comunidad narrativa más prometedora del mundo. </h3>
@@ -68,7 +68,7 @@ export default function Home() {
                   priority
                 />
               </div>
-            </div>
+            </div> */}
           </>
         )}
       </div>

@@ -11,8 +11,8 @@ import { useRouter } from 'next/navigation'
 import { useBookDetails } from '@/hook/use-book-details'
 import { getStatusChapter } from '@/actions/getStatusChapter'
 import { ChapterUserStatus } from '@prisma/client'
-import { updateChapterStatus } from '@/actions/user-chapter-status'
-import { Spinner, Switch } from '@nextui-org/react'
+import { Spinner } from '@nextui-org/react'
+import { Loading } from '../loading/loading'
 
 
 const ByChapter = () => {
@@ -55,7 +55,7 @@ const ByChapter = () => {
     const bookDetails = useBookDetails()
 
     if (!bookDetails) {
-        return <div className="flex items-center justify-center h-screen"><Spinner size="lg" color='success' /> </div>
+        <Loading label='Cargando contenido del libro' />
     }
 
     return (
@@ -72,7 +72,7 @@ const ByChapter = () => {
                                 <ChapterContent content={chapter.content} />
                             </div>
                             <div>
-                                <DropdownMenuChapters chapterId={chapter.id} book={bookDetails} />
+                                {bookDetails && <DropdownMenuChapters chapterId={chapter.id} book={bookDetails} />}
                             </div>
                         </div>
                     ))}

@@ -27,7 +27,7 @@ export default function NavbarHome() {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     return (
-        <Navbar onMenuOpenChange={setIsMenuOpen} className="h-[110px] z-2">
+        <Navbar onMenuOpenChange={setIsMenuOpen} className="h-[110px] z-2 static">
             <NavbarContent>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
