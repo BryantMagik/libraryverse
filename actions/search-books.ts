@@ -8,10 +8,12 @@ export const searchBooksdb = async (query: string): Promise<Book[]> => {
     const results = await db.book.findMany({
         where: {
             OR: [
-                { title: { contains: query } },
+                { title: { contains: query, mode: 'insensitive' } },
             ],
         }
     })
+
+
 
     if (results.length > 0) {
         return results

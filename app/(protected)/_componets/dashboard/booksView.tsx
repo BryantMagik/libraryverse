@@ -14,7 +14,7 @@ import { Loading } from '../loading/loading'
 
 const BooksView: React.FC = () => {
 
-    const { data: books, error } = useSWR('lastBooks', listBooks, {refreshInterval: 1000 * 60 * 60 * 24})
+    const { data: books, error } = useSWR('lastBooks', listBooks, { refreshInterval: 100000 })
 
     const [allBooks, setAllBooks] = useState<Book[]>([])
 
@@ -34,38 +34,39 @@ const BooksView: React.FC = () => {
     }
 
     if (!books) {
-        return <div><Loading label='Poniendo en marcha los libros'/></div >
+        return <div><Loading label='Poniendo en marcha los libros' /></div >
     }
 
-return (
-    <>
-        <TitlePage title={'Historias Actualizadas Recientemente'} subtitle={'Descubre las últimas actualizaciones...'} />
-        <Separator className="my-4" />
-        <div className="relative">
-            <ScrollArea>
-                <div className="flex space-x-4 pb-4">
-                    {books.map((book: Book) => (
-                        <Link key={book.id} href={`/book/${book.id}`}>
-                            <BookArtwork key={book.id.toString()} className="w-[250px]" book={book} width={250} height={330} aspectRatio='portrait' />
-                        </Link>
-                    ))}
-                </div>
-                <ScrollBar orientation="horizontal" />
-            </ScrollArea>
-            <TitlePage title={'Explora Todas las Historias Publicadas'} subtitle={'Sumérgete en las historias creadas por nuestra talentosa comunidad...'} />                <Separator className='my-4' />
-            <ScrollArea>
-                <div className="flex space-x-4 pb-4">
-                    {allBooks.map((book) => (
-                        <Link key={book.id} href={`/book/${book.id}`}>
-                            <BookArtwork key={book.id.toString()} book={book} width={300} height={300} />
-                        </Link>
-                    ))}
-                </div>
-                <ScrollBar orientation='horizontal' />
-            </ScrollArea>
-        </div>
-    </>
-)
+    return (
+        <>
+            <TitlePage title={'Historias Actualizadas Recientemente'} subtitle={'Descubre las últimas actualizaciones...'} />
+            <Separator className="my-4" />
+            <div className="relative">
+                <ScrollArea>
+                    <div className="flex space-x-4 pb-4">
+                        {books.map((book: Book) => (
+                            <Link key={book.id} href={`/book/${book.id}`}>
+                                <BookArtwork key={book.id.toString()} className="w-[250px]" book={book} width={250} height={330} aspectRatio='portrait' />
+                            </Link>
+                        ))}
+                    </div>
+                    <ScrollBar orientation="horizontal" />
+                </ScrollArea>
+                <TitlePage title={'Explora Todas las Historias Publicadas'} subtitle={'Sumérgete en las historias creadas por nuestra talentosa comunidad...'} />
+                <Separator className='my-4' />
+                <ScrollArea>
+                    <div className="flex space-x-4 pb-4">
+                        {allBooks.map((book) => (
+                            <Link key={book.id} href={`/book/${book.id}`}>
+                                <BookArtwork key={book.id.toString()} book={book} width={300} height={300} />
+                            </Link>
+                        ))}
+                    </div>
+                    <ScrollBar orientation='horizontal' />
+                </ScrollArea>
+            </div>
+        </>
+    )
 }
 
 export default BooksView

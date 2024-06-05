@@ -34,10 +34,6 @@ const EditChapterPage = () => {
 
     }, [id])
 
-    console.log('CAPITULO PARA EDITAR', chapter)
-    console.log('ID DEL CAPITULO', chapterId)
-    console.log('ID DEL LIBRO', bookIdfetch)
-
     if (!chapter || !chapterId) {
         return <div>Cargando...</div>
     }
