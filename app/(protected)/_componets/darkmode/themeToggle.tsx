@@ -35,7 +35,6 @@ export const ThemeToggle = () => {
 
     return (
         <>
-            <Toaster />
             <div className="relative w-16 h-8 flex items-center dark:bg-gray-900 bg-library-300 cursor-pointer rounded-full p-1"
                 onClick={() => setDarkMode(!darkMode)}
             >

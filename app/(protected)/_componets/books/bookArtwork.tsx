@@ -12,7 +12,7 @@ interface BookArtworkProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 export const BookArtwork: React.FC<BookArtworkProps> = ({
     book,
-    aspectRatio = 'square',
+    aspectRatio = 'portrait',
     width = 300,
     height = 300,
     className,
