@@ -4,7 +4,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
-
+import { ThemeToggle } from "@/app/(protected)/_componets/darkmode/themeToggle"
 import { FaUser } from "react-icons/fa"
 import { ExitIcon, PersonIcon } from "@radix-ui/react-icons"
 import {
@@ -15,6 +15,7 @@ import {
 import { LogoutButton } from "@/components/auth/logout-button"
 import { SettingsButton } from "@/components/auth/settings-button"
 import { ExtendedUser } from "@/next-auth"
+import { Toaster } from "react-hot-toast"
 
 interface UserInfoProps {
     user?: ExtendedUser
@@ -22,8 +23,11 @@ interface UserInfoProps {
 export const UserButton = ({ user }: UserInfoProps) => {
     return (
         <>
+            <Toaster />
             <h3 className="relative text-sm font-semibold text-muted-foreground">
+                <span className="hidden md:inline">
                 ¡Te damos la bienvenida,
+                </span>
                 <span className="dark:text-emerald-500 text-library-600 fade-in relative z-10">
                     {user?.name}!
                     <div className="relative inset-x-20 top-0 bg-gradient-to-r from-transparent dark:via-emerald-500 via-library-500 to-transparent h-[2px] w-3/4 blur-sm" />
@@ -42,10 +46,15 @@ export const UserButton = ({ user }: UserInfoProps) => {
                     </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-40" align="end">
+                    {/* <div className="hidden">
+                        <DropdownMenuItem>
+                            <ThemeToggle />
+                        </DropdownMenuItem>
+                    </div> */}
                     <SettingsButton>
                         <DropdownMenuItem>
                             <PersonIcon className="h-4 w-4 mr-2" />
-                            Cuenta
+                            Editar perfil
                         </DropdownMenuItem>
                     </SettingsButton>
                     <LogoutButton>

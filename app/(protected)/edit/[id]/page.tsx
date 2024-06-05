@@ -2,10 +2,9 @@
 
 import { Chapter } from "@/app/types/typesModels"
 import { UpdateChapterForm } from "../../_componets/historys/edit-chapter-form"
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from 'next/navigation'
-import { getOneChapter } from "@/actions/test"
-import { getChapter } from "@/actions/get-chapter"
+import { getOneChapter } from "@/actions/getOneChapter"
 
 const EditChapterPage = () => {
 
@@ -34,10 +33,6 @@ const EditChapterPage = () => {
         
 
     }, [id])
-
-    console.log('CAPITULO PARA EDITAR', chapter)
-    console.log('ID DEL CAPITULO', chapterId)
-    console.log('ID DEL LIBRO', bookIdfetch)
 
     if (!chapter || !chapterId) {
         return <div>Cargando...</div>

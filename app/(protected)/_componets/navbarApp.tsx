@@ -5,15 +5,19 @@ import { ThemeToggle } from "./darkmode/themeToggle"
 import { UserButton } from "@/app/(protected)/_componets/user-button"
 import { useSession } from "next-auth/react"
 import { FlipWords } from "@/components/ui/flip-words"
+import SearchModal from "./searchModal"
 
 export default function NavbarApp() {
     const { data: session } = useSession()
     const words = ["LibraryVerse", "Lee", "Escribe", "Comparte"]
 
     return (
-        <nav className="grid grid-cols-1 md:grid-cols-2 justify-between items-center w-full px-4 text-library-600 dark:bg-black nav dark:text-emerald-400 bg-library-200 sm:flex-none ">
+        <nav className="grid grid-cols-1 md:grid-cols-3 justify-between items-center w-full px-4 text-library-600 dark:bg-black nav dark:text-emerald-400 bg-library-200 sm:flex-none ">
             <div className="flex h-20 items-center md:place-content-start place-content-center px-3">
                 <h1 className={`${poppins.className} text-lg font-semibold`}><FlipWords words={words} /></h1>
+            </div>
+            <div className="place-content-center">
+                <SearchModal placeholder='Busca historias...' />
             </div>
             <div className="flex items-center space-x-6 place-content-end">
                 <ThemeToggle />

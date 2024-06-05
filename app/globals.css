@@ -63,7 +63,7 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    
+
   }
 }
 
@@ -76,6 +76,7 @@
     @apply bg-background text-foreground;
   }
 }
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -103,4 +104,25 @@
   float: left;
   height: 0;
   pointer-events: none;
+}
+
+.underline-animation {
+  position: relative;
+  text-decoration: none;
+}
+
+.underline-animation::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #904e45;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.underline-animation:hover::after {
+  transform: scaleX(1);
 }

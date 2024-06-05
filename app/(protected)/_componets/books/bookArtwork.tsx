@@ -12,9 +12,9 @@ interface BookArtworkProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 export const BookArtwork: React.FC<BookArtworkProps> = ({
     book,
-    aspectRatio = 'square',
-    width = 300,
-    height = 300,
+    aspectRatio,
+    width,
+    height,
     className,
     ...props
 }) => {
@@ -41,7 +41,7 @@ export const BookArtwork: React.FC<BookArtworkProps> = ({
             </ContextMenu>
             <div className="space-y-1 text-sm">
                 <h3 className="font-medium leading-none text-library-500 dark:text-emerald-400">{book.title}</h3>
-                <p className="text-xs text-muted-foreground">{book.author?.name ?? "Nombre no disponible"}</p>
+                <p className="text-xs text-muted-foreground">{book.author?.name}</p>
             </div>
         </div>
     )

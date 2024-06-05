@@ -78,7 +78,7 @@ const ByChapter = () => {
                     ))}
                 </>
             ) : (
-                <div className="flex items-center justify-center h-screen"><Spinner size="lg" color='danger' /> </div>
+                <Loading label='Cargando contenido del capitulo' />
             )
             }
         </div >
