@@ -2,12 +2,10 @@ import { Book } from '../../../types/typesModels'
 import React from 'react'
 import Image from 'next/image'
 
-
 interface BookArtMiniProps extends React.HTMLAttributes<HTMLDivElement> {
     book: Partial<Book>
 }
 export const BookArtMini: React.FC<BookArtMiniProps> = ({ book }) => {
-
 
     return (
         <div>

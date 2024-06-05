@@ -7,14 +7,15 @@ import NavbarHome from "@/components/home/navbar-homepage"
 import Image from "next/image"
 import { useState } from "react"
 import { Vibes } from "next/font/google"
+import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card"
 
 const sourceFont = Vibes({
   subsets: ['latin'],
   weight: ['400']
 })
+
 export default function Home() {
   const [loadingComplete, setLoadingComplete] = useState(false)
-
   return (
     <>
       <div className="flex flex-col min-h-screen">
@@ -22,26 +23,62 @@ export default function Home() {
         {loadingComplete && (
           <>
             <NavbarHome />
-            {/* <div className="flex flex-row w-full h-full bg-almond-50 justify-center items-center">
+            <div className="flex flex-row w-full h-full bg-library-50 justify-center items-center">
               <div className="flex flex-col justify-center items-center align-middle m-20">
-                <h1 className="text-left text-almond-500 text-3xl p-4 font-semibold">Hola, Bienvenido a LibraryVerse.</h1>
-                <h3 className="text-center text-almond-600 p-2 font-semibold">La comunidad narrativa más prometedora del mundo. </h3>
-                <p className="w-[370px] text-justify mb-6">
-                  Invitamos a una nueva generación de narradores y fanáticos a unirse a nosotros,
-                  descubriendo y compartiendo historias originales que cautivan e inspiran.
-                  Tu voz y creatividad son bienvenidas aquí. ¡Dale una oportunidad y
-                  sé parte de nuestra humilde y emocionante comunidad en desarrollo!</p>
-                <AuthButton mode="modal" formType="login" asChild>
-                  <Button className="bg-white outline outline-1 rounded-none text-almond-500 outline-almond-500 hover:bg-almond-700 hover:text-white " size="lg">
-                    Iniciar Sesión
-                  </Button>
-                </AuthButton>
-                <h1 className={sourceFont.className + "text-center p-4 text-almond-500 text-3xl italic"}>O</h1>
-                <AuthButton mode="modal" formType="register" asChild>
-                  <Button className="bg-white outline outline-1 rounded-none text-almond-500 outline-almond-500 hover:bg-almond-700 hover:text-white" size="lg">
-                    Registro
-                  </Button>
-                </AuthButton>
+                <CardContainer className="inter-var">
+                  <CardBody className="bg-library-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-20 sm:w-[30rem] h-auto rounded-xl p-6 ">
+                    <CardItem
+                      translateZ="50"
+                      className="text-xl font-bold text-neutral-600 dark:text-white"
+                    >
+                      <h1 className="text-center text-library-500 text-3xl p-4 font-semibold">Hola, Bienvenido a LibraryVerse.</h1>
+                    </CardItem>
+                    <CardItem
+                      translateZ="100"
+                      className="w-full mt-4"
+                    >
+                      <Image
+                        src="/dashboard/back1.png"
+                        height="1000"
+                        width="1000"
+                        className=" w-full object-cover mx-auto hidden md:none"
+                        alt="libraryverse"
+                        priority
+                      />
+                    </CardItem>
+                    <CardItem
+                      translateZ="100"
+                      className="text-lg text-neutral-700 dark:text-white"
+                    >
+                      <h3 className="text-center text-library-600 font-semibold">La comunidad narrativa más prometedora del mundo. </h3>
+                    </CardItem>
+                    <CardItem
+                      as="p"
+
+                      translateZ="20"
+                      className="text-lg text-neutral-700 dark:text-white"
+                    >
+                      <p className="w-[500px] text-justify mb-6">
+                        Invitamos a una nueva generación de narradores y fanáticos a unirse a nosotros,
+                        descubriendo y compartiendo historias originales que cautivan e inspiran.
+                        Tu voz y creatividad son bienvenidas aquí. ¡Dale una oportunidad y
+                        sé parte de nuestra humilde y emocionante comunidad en desarrollo!
+                      </p>
+                    </CardItem>
+                    <CardItem
+                      translateZ="20"
+                      className="text-lg text-neutral-700 dark:text-white"
+                    >
+                      <AuthButton mode="modal" formType="register" asChild>
+                        <Button className="text-white bg-library-500 hover:bg-library-700 hover:text-white" size="lg">
+                          ¡Registrate ya!
+                        </Button>
+                      </AuthButton>
+                    </CardItem>
+
+
+                  </CardBody>
+                </CardContainer>
               </div>
               <div className="flex flex-row justify-center items-center w-auto">
                 <Image
@@ -69,7 +106,25 @@ export default function Home() {
                   priority
                 />
               </div>
-            </div> */}
+            </div>
+            <footer className="py-6 md:px-8 md:py-0">
+              <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+                <p className="text-balance text-center text-sm leading-loose text-muted-foreground md:text-left">
+                  LibraryVerse es un proyecto de Bryan Edward
+
+                  . El codigo del proyecto esta disponible en{" "}
+                  <a
+                    href="https://github.com/BryantMagik/libraryverse"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-medium underline underline-offset-4"
+                  >
+                    GitHub
+                  </a>
+                  .
+                </p>
+              </div>
+            </footer>
           </>
         )}
       </div>
