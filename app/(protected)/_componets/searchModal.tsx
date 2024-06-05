@@ -37,7 +37,7 @@ export default function SearchModal({ placeholder }: { placeholder: string }) {
     return (
         <div className="relative flex flex-1 flex-shrink-0">
             <input
-                className="w-auto rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="w-[160px] md:w-auto rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                 placeholder={placeholder}
                 onChange={(e) => handleSearch(e.target.value)}
                 onFocus={() => setShowResults(true)}

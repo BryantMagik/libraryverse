@@ -46,11 +46,6 @@ export const UserButton = ({ user }: UserInfoProps) => {
                     </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-40" align="end">
-                    {/* <div className="hidden">
-                        <DropdownMenuItem>
-                            <ThemeToggle />
-                        </DropdownMenuItem>
-                    </div> */}
                     <SettingsButton>
                         <DropdownMenuItem>
                             <PersonIcon className="h-4 w-4 mr-2" />
