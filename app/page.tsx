@@ -16,6 +16,7 @@ export default function Home() {
   const [loadingComplete, setLoadingComplete] = useState(false)
 
   return (
+    <>
       <div className="flex flex-col min-h-screen">
         <Loading onLoadingComplete={() => setLoadingComplete(true)} />
         {loadingComplete && (
@@ -72,5 +73,6 @@ export default function Home() {
           </>
         )}
       </div>
+    </>
   )
 }
