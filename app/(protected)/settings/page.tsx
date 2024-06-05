@@ -24,7 +24,7 @@ const SettingsPage = () => {
 
   return (
     <div className="max-h-max">
-      <div className="container rounded-xl dark:bg-slate-950 bg-white w-full p-3 h-[87vh] ">
+      <div className="container rounded-xl dark:bg-slate-950 bg-white w-full p-3 max-h-max ">
         <SettingsMainpanel />
       </div>
     </div>
