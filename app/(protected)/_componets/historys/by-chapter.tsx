@@ -11,8 +11,9 @@ import { useRouter } from 'next/navigation'
 import { useBookDetails } from '@/hook/use-book-details'
 import { getStatusChapter } from '@/actions/getStatusChapter'
 import { ChapterUserStatus } from '@prisma/client'
-import { Spinner } from '@nextui-org/react'
+import { GrFormNextLink } from "react-icons/gr"
 import { Loading } from '../loading/loading'
+import { Button } from '@/components/ui/button'
 
 
 const ByChapter = () => {
@@ -22,9 +23,8 @@ const ByChapter = () => {
 
     const { bookId, chapterId } = useParams()
     const normalizedChapterId = Array.isArray(chapterId) ? chapterId[0] : chapterId
+    const normalizedbookId = Array.isArray(bookId) ? bookId[0] : bookId
 
-    console.log("Capitulo id:", chapterId)
-    console.log("bookId:", bookId)
     const router = useRouter()
 
     useEffect(() => {
@@ -71,8 +71,15 @@ const ByChapter = () => {
 
                                 <ChapterContent content={chapter.content} />
                             </div>
-                            <div>
-                                {bookDetails && <DropdownMenuChapters chapterId={chapter.id} book={bookDetails} />}
+                            <div className='grid grid-cols-1  place-content-center'>
+                                {bookDetails &&
+                                    <>
+                                        <div className='mx-auto place-content-center'>
+                                            <DropdownMenuChapters chapterId={chapter.id} book={bookDetails} />
+                                        </div>
+
+                                    </>
+                                }
                             </div>
                         </div>
                     ))}

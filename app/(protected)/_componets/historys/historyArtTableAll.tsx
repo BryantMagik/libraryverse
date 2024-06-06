@@ -1,5 +1,5 @@
 import { Chapter } from "@/app/types/typesModels"
-import { Button, Switch } from "@nextui-org/react"
+import { Button, Link, Switch } from "@nextui-org/react"
 import { BsBookHalf } from "react-icons/bs"
 import { ChapterUserStatus } from "@prisma/client"
 import { Chip } from "@nextui-org/chip"
@@ -32,46 +32,41 @@ export const HistoryArtTableAll: React.FC<HistoryArtTableProps> = ({
     }, [chapter])
 
     const toggleReadStatus = () => {
-        setLoadingStatus(true) 
+        setLoadingStatus(true)
         const newStatus = readStatus === 'READ' ? 'UNREAD' : 'READ'
 
         if (updateChapterStatus) {
             updateChapterStatus(chapter.id || '', newStatus)
             setReadStatus(newStatus)
             setLoadingStatus(false)
-        } 
+        }
     }
     return (
-        <div className="flex flex-row md:pt-2 pt-2">
-            <div className="content-center">
-            </div>
-            <div className="ml-5 content-center">
-                <h3 className="font-medium leading-none text-black dark:text-emerald-400 hover:underline p-2">
-                    Capitulo {chapter.order}:
+        <div className="flex flex-col">
+            <div className="flex flex-row md:space-x-2 space-x-1 ">
+                <h3 className="font-medium hover:default place-self-center leading-none text-black dark:text-emerald-400 p-0">
+                    <span className="hidden md:inline">Capitulo:</span><span>{chapter.order}</span>
                 </h3>
-            </div>
-            <h3 className="flex-1 content-center font-medium leading-none italic text-black dark:text-emerald-400 hover:underline p-2">
-                {chapter.title}
-            </h3>
-            <div className="flex-1 content-center items-start">
-                {readStatus === "READ" ? <Chip color="success" size="sm">
+                <h3 className="grow hover:cursor-pointer font-medium place-content-center mx-auto leading-none italic text-black dark:text-emerald-400">
+                    <Link className="" onClick={() => chapter.id && readChapter && readChapter(chapter.id)}>
+                        {chapter.title}</Link>
+                </h3>
+                {readStatus === "READ" ? <Chip className="hidden md:inline" color="success" size="sm">
                     Leido
-                </Chip> : <Chip color="danger" size="sm">
+                </Chip> : <Chip className="hidden md:inline" color="danger" size="sm">
                     No leido
                 </Chip>}
-            </div>
-            <Button
+                <Button
                     size="sm"
                     onClick={toggleReadStatus}
                     disabled={loadingStatus}
-                    className="relative w-[20px] hover:bg-library-600 dark:hover:bg-emerald-600 hover:text-white p-0 h-8 mx-auto rounded-full bg-library-300 text-white dark:bg-emerald-400">
-                    {loadingStatus ? "Cargando..." : (readStatus === 'READ' ? <CiCircleCheck size={20}/> : <MdOutlineRadioButtonUnchecked size={20}/>)}
+                    className="relative hover:bg-library-600 dark:hover:bg-emerald-600 hover:text-white p-0 h-8 mx-auto rounded-full bg-library-300 text-white dark:bg-emerald-400">
+                    {loadingStatus ? "Cargando..." : (readStatus === 'READ' ? <CiCircleCheck size={20} /> : <MdOutlineRadioButtonUnchecked size={20} />)}
                 </Button>
-            <div className="flex flex-col items-center">
                 <Button
                     size="sm"
                     onClick={() => chapter.id && readChapter && readChapter(chapter.id)}
-                    aria-label="Options" className="relative w-[20px] rouded hover:bg-library-600 dark:hover:bg-emerald-600 hover:text-white p-0 h-8 mx-auto rounded-full bg-library-300 text-white dark:bg-emerald-400">
+                    aria-label="Options" className="relative rouded hover:bg-library-600 dark:hover:bg-emerald-600 hover:text-white p-0 h-8 mx-auto rounded-full bg-library-300 text-white dark:bg-emerald-400">
                     <BsBookHalf size={18} />
                 </Button>
             </div>

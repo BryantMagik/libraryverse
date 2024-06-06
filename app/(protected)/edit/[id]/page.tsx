@@ -5,6 +5,7 @@ import { UpdateChapterForm } from "../../_componets/historys/edit-chapter-form"
 import { useEffect, useState } from "react"
 import { useParams } from 'next/navigation'
 import { getOneChapter } from "@/actions/getOneChapter"
+import { Loading } from "../../_componets/loading/loading"
 
 const EditChapterPage = () => {
 
@@ -35,7 +36,7 @@ const EditChapterPage = () => {
     }, [id])
 
     if (!chapter || !chapterId) {
-        return <div>Cargando...</div>
+        return <div><Loading label="Preparando todo para editar el capítulo" /></div>
     }
     
     return (

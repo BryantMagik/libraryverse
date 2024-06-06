@@ -101,10 +101,14 @@ export const RegisterSchema = z.object({
     name: z.string()
         .min(1, {
             message: "Por favor, introduce tu nombre."
-        }),
-    lastName: z.string().min(1, {
-        message: "Por favor, introduce tu apellido."
-    }),
+        })
+        .max(30,
+            { message: "El nombre no puede tener más de 30 caracteres." }),
+    lastName: z.string()
+        .min(1,
+            { message: "Por favor, introduce tu apellido." })
+        .max(100,
+            { message: "El apellido no puede tener más de 30 caracteres." }),
 
     nickName: z.string()
         .min(1, {
@@ -127,12 +131,16 @@ export const RegisterSchema = z.object({
 // Esquema de creación de libros
 
 export const BookSchema = z.object({
-    title: z.string().min(1, {
-        message: "Por favor, proporciona un título válido."
-    }),
-    description: z.string().min(1, {
-        message: "La descripción no puede estar vacía."
-    }),
+    title: z.string()
+        .min(1, { message: "Por favor, proporciona un título válido." })
+        .max(255, {
+            message: "El título no puede exceder los 255 caracteres."
+        }),
+    description: z.string()
+        .min(1, { message: "La descripción no puede estar vacía." })
+        .max(5000, {
+            message: "La descripción no puede exceder los 5000 caracteres."
+        }),
     coverImage: z.string().optional(),
     genre: GenreEnum.optional(),
     // tags: z.array(z.string()).optional(),
@@ -146,10 +154,19 @@ export const BookSchema = z.object({
 export const ChapterStatusSchema = z.enum(['DRAFT', 'PUBLISHED', 'PAUSED'])
 
 export const ChapterSchema = z.object({
-    title: z.string().min(1, {
-        message: "Por favor, introduce un título"
-    }),
-    content: z.string().min(1, {}),
+    title: z.string()
+        .min(1, {
+            message: "Por favor, introduce un título"
+        })
+        .max(255, {
+            message: "El título no puede exceder los 255 caracteres."
+        }),
+    content: z.string().min(1, {
+        message: "Por favor, introduce el contenido del capítulo."
+    })
+        .max(20000, {
+            message: "El contenido no puede exceder los 20000 caracteres."
+        }),
     order: z.string().regex(/^\d+$/, {
         message: "El orden del capítulo debe ser un número positivo"
     }),

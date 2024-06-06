@@ -12,9 +12,10 @@ export default function NavbarApp() {
     const words = ["LibraryVerse", "Lee", "Escribe", "Comparte"]
 
     return (
-        <nav className="grid grid-cols-1 md:grid-cols-3 items-center w-full px-4 text-library-600 dark:bg-black nav dark:text-emerald-400 bg-library-200 sm:flex-none">
+        <nav className="grid grid-cols-2 md:grid-cols-3 items-center w-full px-4 text-library-600 dark:bg-black nav dark:text-emerald-400 bg-library-200 sm:flex-none">
             <div className="flex h-20 items-center md:justify-start justify-center px-3">
-                <h1 className={`${poppins.className} text-lg font-semibold`}><FlipWords words={words} /></h1>
+                <h1 className={`${poppins.className} text-lg font-semibold hidden md:inline`}><FlipWords words={words} /></h1>
+                <h1 className={`${poppins.className} text-lg font-semibold md:hidden inline `}>LibraryVerse</h1>
             </div>
             <div className="flex justify-center md:justify-end md:col-span-2 w-full">
                 <div className="flex space-x-10 items-center">

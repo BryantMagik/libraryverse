@@ -19,7 +19,6 @@ export const ChaptersAll: React.FC = () => {
     const normalizedBookId = Array.isArray(bookId) ? bookId[0] : bookId
     const normalizedChapterId = Array.isArray(chapterId) ? chapterId[0] : chapterId
 
-    console.log("IdLibro:", normalizedBookId)
     const router = useRouter()
 
     useEffect(() => {

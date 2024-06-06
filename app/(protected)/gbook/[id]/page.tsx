@@ -16,7 +16,6 @@ const GbookDestails = () => {
             const fetchGbook = async () => {
                 const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${normalizedBookId}`)
                 const data = await response.json()
-                console.log(data)
                 setGbook(data)
             }
             fetchGbook()

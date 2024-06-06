@@ -72,6 +72,7 @@ export interface Book {
   createdAt: Date
   updatedAt: Date
   author?: Partial<User> | null
+  chapters?: Chapter[]
 }
 
 export interface Chapter {

@@ -2,6 +2,8 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
 import { FaUser } from "react-icons/fa"
@@ -23,9 +25,9 @@ export const UserButton = ({ user }: UserInfoProps) => {
     return (
         <>
             <Toaster />
-            <h3 className="relative text-sm font-semibold text-muted-foreground">
-                <span className="hidden md:inline">
-                ¡Te damos la bienvenida,
+            <h3 className="relative text-sm font-semibold text-muted-foreground hidden md:inline">
+                <span className="">
+                    ¡Te damos la bienvenida,
                 </span>
                 <span className="dark:text-emerald-500 text-library-600 fade-in relative z-10">
                     {user?.name}!
@@ -45,6 +47,8 @@ export const UserButton = ({ user }: UserInfoProps) => {
                     </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-40" align="end">
+                    <DropdownMenuLabel className="text-center">{user?.name}!</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
                     <SettingsButton>
                         <DropdownMenuItem>
                             <PersonIcon className="h-4 w-4 mr-2" />
