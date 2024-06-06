@@ -17,7 +17,7 @@ export default function NavbarApp() {
                 <h1 className={`${poppins.className} text-lg font-semibold`}><FlipWords words={words} /></h1>
             </div>
             <div className="flex justify-center md:justify-end md:col-span-2 w-full">
-                <div className="flex space-x-4 items-center">
+                <div className="flex space-x-10 items-center">
                     <SearchModal placeholder='Busca historias...' />
                     <ThemeToggle />
                     {session ? (

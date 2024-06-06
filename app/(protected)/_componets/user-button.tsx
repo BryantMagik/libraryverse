@@ -4,7 +4,6 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
-import { ThemeToggle } from "@/app/(protected)/_componets/darkmode/themeToggle"
 import { FaUser } from "react-icons/fa"
 import { ExitIcon, PersonIcon } from "@radix-ui/react-icons"
 import {
@@ -30,10 +29,10 @@ export const UserButton = ({ user }: UserInfoProps) => {
                 </span>
                 <span className="dark:text-emerald-500 text-library-600 fade-in relative z-10">
                     {user?.name}!
-                    <div className="relative inset-x-20 top-0 bg-gradient-to-r from-transparent dark:via-emerald-500 via-library-500 to-transparent h-[2px] w-3/4 blur-sm" />
-                    <div className="relative inset-x-20 top-0 bg-gradient-to-r from-transparent dark:via-emerald-500 via-library-500 to-transparent h-px w-3/4" />
-                    <div className="relative inset-x-40 bottom-1 bg-gradient-to-r from-transparent dark:via-emerald-500 via-library-500 to-transparent h-[4px] w-1/4 blur-sm" />
-                    <div className="relative inset-x-40 bottom-1 bg-gradient-to-r from-transparent dark:via-emerald-500 via-library-500 to-transparent h-px w-1/4" />
+                    <div className="relative inset-x-20 top-0 bg-gradient-to-r from-transparent dark:via-emerald-500 via-library-500 to-transparent h-[2px] w-3/4 blur-sm hidden md:block" />
+                    <div className="relative inset-x-20 top-0 bg-gradient-to-r from-transparent dark:via-emerald-500 via-library-500 to-transparent h-px w-3/4 hidden md:block" />
+                    <div className="relative inset-x-40 bottom-1 bg-gradient-to-r from-transparent dark:via-emerald-500 via-library-500 to-transparent h-[4px] w-1/4 blur-sm hidden md:block" />
+                    <div className="relative inset-x-40 bottom-1 bg-gradient-to-r from-transparent dark:via-emerald-500 via-library-500 to-transparent h-px w-1/4 hidden md:block" />
                 </span>
             </h3>
             <DropdownMenu>
