@@ -12,10 +12,10 @@ import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 const sourceFont = Vibes({
   subsets: ["latin"],
   weight: ["400"],
-});
+})
 
 export default function Home() {
-  const [loadingComplete, setLoadingComplete] = useState(false);
+  const [loadingComplete, setLoadingComplete] = useState(false)
 
   return (
     <>

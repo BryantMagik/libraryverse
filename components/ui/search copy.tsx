@@ -32,7 +32,6 @@ const Search: React.FC<SearchProps> = ({ updateBooks }) => {
         const fetchedBooks: GBook[] = data.items || []
         setBooks(fetchedBooks)
         updateBooks(fetchedBooks, `${title} - ${category}`);
-        console.log(fetchedBooks)
     }
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

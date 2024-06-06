@@ -26,8 +26,6 @@ const MyBookChaptersPage = () => {
             })
     }, [bookId])
 
-    console.log("Book:", book)
-
     return (
         <Tabs aria-label="Opciones">
             <Tab key="chapter" title="Todos los capítulos">

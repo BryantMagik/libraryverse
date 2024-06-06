@@ -9,7 +9,6 @@ export const useCurrentName = () => {
 
     useEffect(() => {
         if (session.data) {
-            console.log("Nombre actual:", session.data.user.name);
         }
 
     }, [])

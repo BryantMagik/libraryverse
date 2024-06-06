@@ -8,21 +8,22 @@ import { BookArtwork } from '../books/bookArtwork'
 import { Book } from '@/app/types/typesModels'
 import Link from 'next/link'
 import { TitlePage } from '@/app/(protected)/_componets/title-page'
-import { listBooks } from '@/actions/list-books'
 import { useEffect, useState } from 'react'
 import { Loading } from '../loading/loading'
+import { lastBooks } from '@/actions/last-books'
+
 
 const BooksView: React.FC = () => {
 
-    const { data: books, error } = useSWR('lastBooks', listBooks, { refreshInterval: 100000 })
+    const { data: books, error } = useSWR('lastBooks', lastBooks, { refreshInterval: 30000 })
 
     const [allBooks, setAllBooks] = useState<Book[]>([])
 
     useEffect(() => {
-        listBooks()
-            .then((listbooks) => {
+        lastBooks()
+            .then((lastbook) => {
                 //@ts-ignore
-                setAllBooks(listbooks)
+                setAllBooks(lastbook)
             })
 
     }, [])

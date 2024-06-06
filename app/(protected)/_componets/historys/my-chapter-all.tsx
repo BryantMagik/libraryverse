@@ -21,7 +21,6 @@ const MyChaptersAll: React.FC = () => {
     useEffect(() => {
         listChapter(bookId)
             .then((fetchedChapters) => {
-                console.log("Fetched Chapters:", fetchedChapters)
                 //@ts-ignore
                 setChapters(fetchedChapters)
             }).catch(error => {
