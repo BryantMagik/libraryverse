@@ -9,7 +9,7 @@ export const sendTwoFactortTokenEmail = async (
     token: string,
 ) => {
     await resend.emails.send({
-        from: "mail@libraryverse.brys.es",
+        from: "mail@libraryversemail.brys.es",
         to: email,
         subject: "2FA código",
         html: getTwoFactorTokenEmailHtml(token)
@@ -24,7 +24,7 @@ export const sendPasswordResetEmail = async (
     const resetLink = `${domain}/auth/new-password?token=${token}`
 
     await resend.emails.send({
-        from: "mail@libraryverse.brys.es",
+        from: "mail@libraryversemail.brys.es",
         to: email,
         subject: "Restablecer contraseña",
         html: getPasswordResetEmailHtml(resetLink),
@@ -39,7 +39,7 @@ export const sendVerificationEmail = async (
     const confirmLink = `${domain}/auth/new-verification?token=${token}`
 
     await resend.emails.send({
-        from: "mail@libraryverse.brys.es",
+        from: "mail@libraryversemail.brys.es",
         to: email,
         subject: "Confirmar tu correo electrónico",
         html: getVerificationEmailHtml(confirmLink),
