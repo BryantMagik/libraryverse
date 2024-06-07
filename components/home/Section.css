@@ -1,0 +1,19 @@
+.section {
+    opacity: 0;
+}
+
+.appear-from-left {
+    animation: appearFromLeft 1s forwards;
+}
+
+@keyframes appearFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
