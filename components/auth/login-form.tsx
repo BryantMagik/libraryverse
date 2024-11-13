@@ -72,8 +72,8 @@ export const LoginForm = () => {
 
     const loginAsTestUser = () => {
         const testUser = {
-            email: "test@reclutador.com",
-            password: "password123",
+            email: "testlibraryverse@gmail.com",
+            password: "12345678",
         }
         form.setValue("email", testUser.email)
         form.setValue("password", testUser.password)
