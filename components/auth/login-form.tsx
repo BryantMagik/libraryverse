@@ -70,6 +70,16 @@ export const LoginForm = () => {
         })
     }
 
+    const loginAsTestUser = () => {
+        const testUser = {
+            email: "testlibraryverse@gmail.com",
+            password: "12345678",
+        }
+        form.setValue("email", testUser.email)
+        form.setValue("password", testUser.password)
+        onSubmit(testUser)
+    }
+
     return (
         <CardWrapper
             headerLabel="Inicia sesión"
@@ -171,6 +181,13 @@ export const LoginForm = () => {
                         className="w-full text-white bg-library-500 hover:bg-library-600 active:bg-library-700"
                     >
                         Iniciar Sesión
+                    </Button>
+                    <Button
+                        type="button"
+                        onClick={loginAsTestUser}
+                        className="w-full mt-4 text-white bg-gray-500 hover:bg-gray-600 active:bg-gray-700"
+                    >
+                        Iniciar Sesión como Usuario de Prueba
                     </Button>
                 </form>
             </Form>

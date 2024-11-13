@@ -1,5 +1,4 @@
 import { getVerificationTokenByEmail } from "@/data/verification-token"
-import { getPasswordResetTokenByEmail } from "@/data/password-reset-token"
 import { v4 as uuidv4 } from "uuid"
 import cryto from "crypto"
 import { db } from "@/lib/db"
