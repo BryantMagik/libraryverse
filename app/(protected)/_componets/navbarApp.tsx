@@ -6,6 +6,8 @@ import { UserButton } from "@/app/(protected)/_componets/user-button"
 import { useSession } from "next-auth/react"
 import { FlipWords } from "@/components/ui/flip-words"
 import SearchModal from "./searchModal"
+import { CiLogin } from "react-icons/ci"
+import { AuthButton } from "@/components/auth/auth-button"
 
 export default function NavbarApp() {
     const { data: session } = useSession()
@@ -24,9 +26,11 @@ export default function NavbarApp() {
                     {session ? (
                         <UserButton user={session.user} />
                     ) : (
-                        <button className="px-4 py-2 bg-blue-500 text-white rounded">
-                            Login
-                        </button>
+                        <AuthButton mode="modal" formType="login" asChild>
+                            <button className="flex px-2 py-2 rounded-full bg-white text-library-400 items-center justify-center transform transition-transform duration-400 hover:scale-125 dark:bg-emerald-400 dark:text-white">
+                                <CiLogin size={40} className="m-auto" />
+                            </button>
+                        </AuthButton>
                     )}
                 </div>
             </div>

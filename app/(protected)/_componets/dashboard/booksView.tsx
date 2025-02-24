@@ -22,17 +22,12 @@ const BooksView: React.FC = () => {
     useEffect(() => {
         lastBooks()
             .then((lastbook) => {
-                //@ts-ignore
                 setAllBooks(lastbook)
             })
 
     }, [])
 
     if (error) return <div>Error al cargar los libros: {error}</div>
-
-    if (books && 'error' in books) {
-        return <div>Error al obtener los libros: {books.error} </div>
-    }
 
     if (!books) {
         return <div><Loading label='Poniendo en marcha los libros' /></div >

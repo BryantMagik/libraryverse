@@ -24,8 +24,13 @@ import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { PiEye } from "react-icons/pi"
 import { PiEyeClosed } from "react-icons/pi"
+import { useRouter } from "next/navigation"
+import router from "next/router"
 
 export const LoginForm = () => {
+
+    const router = useRouter()
+    const [isClient, setIsClient] = useState(false)
     const searchParams = useSearchParams()
     const callbackUrl = searchParams.get("callbackUrl")
     const urlError = searchParams.get("error") ===
@@ -38,6 +43,7 @@ export const LoginForm = () => {
     const [isPending, startTransition] = useTransition()
     const [isVisible, setIsVisible] = useState(false)
     const toggleVisibility = () => setIsVisible(!isVisible)
+    
 
     const form = useForm<z.infer<typeof LoginSchema>>({
         resolver: zodResolver(LoginSchema),
@@ -61,6 +67,8 @@ export const LoginForm = () => {
                     if (data?.success) {
                         form.reset()
                         setSuccess(data?.success)
+                        window.location.href = '/dashboard'
+
                     }
                     if (data?.twoFactor) {
                         setShowTwoFactor(true)
@@ -70,14 +78,23 @@ export const LoginForm = () => {
         })
     }
 
-    const loginAsTestUser = () => {
+    const loginAsTestUser = async () => {
         const testUser = {
             email: "testlibraryverse@gmail.com",
             password: "12345678",
         }
         form.setValue("email", testUser.email)
         form.setValue("password", testUser.password)
-        onSubmit(testUser)
+        const isValid = await form.trigger()
+
+        if (isValid) {
+            onSubmit(testUser)
+            if (isClient) {
+                window.location.href = '/dashboard'
+            }
+        } else {
+            setError("Por favor, revisa los campos del formulario.")
+        }
     }
 
     return (
@@ -184,6 +201,7 @@ export const LoginForm = () => {
                     </Button>
                     <Button
                         type="button"
+                        disabled={isPending}
                         onClick={loginAsTestUser}
                         className="w-full mt-4 text-white bg-gray-500 hover:bg-gray-600 active:bg-gray-700"
                     >

@@ -7,13 +7,13 @@ interface LogoutButtonProps {
 }
 
 export const LogoutButton = ({ children }: LogoutButtonProps) => {
-
-
     const onClick = () => {
         localStorage.clear()
         sessionStorage.clear()
     
-        logout()
+        logout().then(() => {
+            window.location.href = "/dashboard" 
+        })
     }
 
     return (
