@@ -3,7 +3,7 @@ import { Book } from "@/app/types/typesModels"
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu"
 import {Image} from "@nextui-org/react"
 
-interface BookArtworkProps extends React.HTMLAttributes<HTMLDivElement> {
+interface BookArtworkProps {
     book: Partial<Book>
     aspectRatio?: 'portrait' | 'square'
     width?: number
@@ -40,8 +40,8 @@ export const BookArtwork: React.FC<BookArtworkProps> = ({
                 </ContextMenuTrigger>
             </ContextMenu>
             <div className="space-y-1 text-sm">
-                <h3 className="font-medium leading-none text-library-500 dark:text-emerald-400">{book.title}</h3>
-                <p className="text-xs text-muted-foreground">{book.author?.name}</p>
+                <h3 className="font-medium leading-none text-library-500 dark:text-emerald-400">{ book.title }</h3>
+                <p className="text-xs text-muted-foreground">{ book.author?.name }</p>
             </div>
         </div>
     )

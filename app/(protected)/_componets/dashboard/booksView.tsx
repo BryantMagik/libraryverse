@@ -54,7 +54,7 @@ const BooksView: React.FC = () => {
                     <div className="flex space-x-4 pb-4">
                         {allBooks.map((book) => (
                             <Link key={book.id} href={`/book/${book.id}`}>
-                                <BookArtwork key={book.id.toString()} book={book} width={300} height={300} />
+                                <BookArtwork key={book.id.toString()} book={book} width={200} height={300} />
                             </Link>
                         ))}
                     </div>
